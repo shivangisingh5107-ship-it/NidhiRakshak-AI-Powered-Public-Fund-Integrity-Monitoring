@@ -1,0 +1,37 @@
+{
+  "source": "MPLADS eSAKSHI public dashboard",
+  "official_url": "https://mplads.mospi.gov.in/digigov/dashboard.html",
+  "captured_at": "2026-09-06",
+  "scope": "Public dashboard aggregate visible without login",
+  "current_web_snapshot": {
+    "works_recommended_crore": 3312.3,
+    "works_sanctioned_crore": 4466.38,
+    "works_completed_crore": 859.4,
+    "note": "The public HTML currently exposes the recommended figure with malformed formatting (\"3,3123 Cr\"); stored as 3312.3 Cr only as a dashboard snapshot, not a transaction ledger."
+  },
+  "supplied_screenshot_snapshots": {
+    "lok_sabha": {
+      "allocated_limit_crore": 8333.67,
+      "amount_consented_calamity_crore": 4.06,
+      "works_recommended_count": 107130,
+      "works_recommended_crore": 5735.65,
+      "works_sanctioned_count": 79225,
+      "works_sanctioned_crore": 4176.8,
+      "works_completed_count": 34450,
+      "works_completed_crore": 1686.57,
+      "expenditure_completed_ongoing_crore": 2778.82
+    },
+    "rajya_sabha": {
+      "allocated_limit_crore": 3363.85,
+      "amount_consented_calamity_crore": 10.45,
+      "works_recommended_count": 25253,
+      "works_recommended_crore": 2233.14,
+      "works_sanctioned_count": 19607,
+      "works_sanctioned_crore": 1714.95,
+      "works_completed_count": 9981,
+      "works_completed_crore": 771.82,
+      "expenditure_completed_ongoing_crore": 1243.76
+    }
+  },
+  "data_note": "Public aggregate snapshots only. No work-level transaction rows are inferred from these totals."
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MP Dashboard List — NidhiRakshak</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+<div id="app"></div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script>
+renderShell("mp.html", function(main){
+  main.innerHTML = `
+    <div class="topbar">
+      <div>
+        <div class="eyebrow">PARLIAMENTARY ROSTER</div>
+        <h1 class="page-title">MP Dashboard</h1>
+        <div class="queue-subtitle">Select an MP from this investigation-style list to open their dashboard on a separate page.</div>
+      </div>
+      <a class="btn" href="feedback.html">Open feedback log →</a>
+    </div>
+    <div class="panel queue-filters">
+      <div class="filter-label">FILTER MP DASHBOARDS</div>
+      <div class="filter-controls">
+        <select id="mpState" class="btn"><option value="">All states</option></select>
+        <input id="mpFilter" class="btn" placeholder="Search MP, constituency or state…" style="min-width:300px;cursor:text;">
+        <span class="muted" id="mpCount" style="margin-left:auto;font-size:12px;"></span>
+      </div>
+    </div>
+    <div class="panel">
+      <table class="ledger-table" id="mpDirectoryTable">
+        <thead><tr><th>MP</th><th>House</th><th>Constituency / Representation</th><th>State</th><th class="right">Allocated</th><th class="right">Works</th><th class="right">Flagged</th><th class="right">Risk</th><th>Dashboard</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="footnote"><b>Separate-page behavior:</b> clicking an MP row opens <span class="mono-id">mp-detail.html?id=…</span>. Your MP list stays here, while the selected member's data is shown on its own dashboard page.</div>
+  `;
+  const states = [...new Set(D.mps.map(m=>m.state))].sort();
+  document.getElementById("mpState").innerHTML += states.map(s=>`<option>${s}</option>`).join("");
+  function render(){
+    const q = document.getElementById("mpFilter").value.trim().toLowerCase();
+    const state = document.getElementById("mpState").value;
+    const rows = D.mps.filter(m=>{
+      if(state && m.state!==state) return false;
+      return !q || [m.mp_name,m.constituency,m.state].join(" ").toLowerCase().includes(q);
+    });
+    document.getElementById("mpCount").textContent = `${rows.length} of ${D.mps.length} MPs`;
+    document.querySelector("#mpDirectoryTable tbody").innerHTML = rows.map(m=>`
+      <tr class="rowbar-${riskBand(m.avg_risk)}" onclick="location.href='mp-detail.html?id=${m.mp_id}'">
+        <td><b>${m.mp_name}</b></td><td>${m.house || "—"}</td><td>${m.constituency || "—"}</td><td>${m.state}</td>
+        <td class="right nowrap">${m.allocated_limit == null ? "—" : fmtCr(m.allocated_limit)}</td><td class="right">${fmtNum(m.works)}</td>
+        <td class="right">${fmtNum(m.flagged)}</td><td class="right"><span class="badge ${riskBand(m.avg_risk)}">${m.avg_risk || "—"}</span></td>
+        <td><span class="btn table-link">Open dashboard →</span></td>
+      </tr>
+    `).join("") || `<tr><td colspan="9" class="empty-state">No MPs match this filter</td></tr>`;
+  }
+  document.getElementById("mpState").addEventListener("change",render);
+  document.getElementById("mpFilter").addEventListener("input",render);
+  render();
+});
+</script>
+</body>
+</html>

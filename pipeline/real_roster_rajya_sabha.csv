@@ -1,0 +1,232 @@
+mp_id,sr_no,house,state,mp_name,membership_type,tenure,constituency,allocated_limit,source
+RS001,1,Rajya Sabha,Telangana,Dr. Abhishek Manu Singhvi,Elected MP,2026-2032,Rajya Sabha — Telangana,73421449.0,REAL_GOVT_PDF
+RS002,2,Rajya Sabha,Maharashtra,Dr. Ajeet Madhavrao Gopchade,Elected MP,2024-2030,Rajya Sabha — Maharashtra,147000000.0,REAL_GOVT_PDF
+RS003,3,Rajya Sabha,Rajasthan,Dr. Alka Singh,Elected MP,2026-2032,Rajya Sabha — Rajasthan,49000000.0,REAL_GOVT_PDF
+RS004,4,Rajya Sabha,Tamil Nadu,Dr. Anbumani Ramadoss,Elected MP,2026-2032,Rajya Sabha — Tamil Nadu,49356476.5,REAL_GOVT_PDF
+RS005,5,Rajya Sabha,Maharashtra,Dr. Anil Sukhdeorao Bonde,Elected MP,2022-2028,Rajya Sabha — Maharashtra,196063957.11,REAL_GOVT_PDF
+RS006,6,Rajya Sabha,Punjab,Dr. Ashok Kumar Mittal,Elected MP,2022-2028,Rajya Sabha — Punjab,222487632.14,REAL_GOVT_PDF
+RS007,7,Rajya Sabha,Bihar,Dr. Bhim Singh,Elected MP,2024-2030,Rajya Sabha — Bihar,186200000.0,REAL_GOVT_PDF
+RS008,8,Rajya Sabha,Karnataka,Dr. Dharmasthala Veerendra Heggade,Nominated MP,2022-2028,Rajya Sabha — Karnataka,196063957.11,REAL_GOVT_PDF
+RS009,9,Rajya Sabha,Bihar,Dr. Dharmshila Gupta,Elected MP,2024-2030,Rajya Sabha — Bihar,186200000.0,REAL_GOVT_PDF
+RS010,10,Rajya Sabha,Uttar Pradesh,Dr. Dinesh Sharma,Elected MP,2023-2026,Rajya Sabha — Uttar Pradesh,147000000.0,REAL_GOVT_PDF
+RS011,11,Rajya Sabha,Bihar,Dr. Faiyaz Ahmad,Elected MP,2022-2028,Rajya Sabha — Bihar,235263957.11,REAL_GOVT_PDF
+RS012,12,Rajya Sabha,Kerala,Dr. John Brittas,Elected MP,2021-2027,Rajya Sabha — Kerala,245063957.11,REAL_GOVT_PDF
+RS013,13,Rajya Sabha,Maharashtra,Dr. Jyoti Nagnath Waghmare,Elected MP,2026-2032,Rajya Sabha — Maharashtra,49000000.0,REAL_GOVT_PDF
+RS014,14,Rajya Sabha,Uttar Pradesh,Dr. K. Laxman,Elected MP,2022-2028,Rajya Sabha — Uttar Pradesh,197637007.11,REAL_GOVT_PDF
+RS015,15,Rajya Sabha,Uttarakhand,Dr. Kalpana Saini,Elected MP,2022-2028,Rajya Sabha — Uttarakhand,200830405.8,REAL_GOVT_PDF
+RS016,16,Rajya Sabha,Madhya Pradesh,Dr. Kavita Patidar,Elected MP,2022-2028,Rajya Sabha — Madhya Pradesh,197118521.35000002,REAL_GOVT_PDF
+RS017,17,Rajya Sabha,Madhya Pradesh,Dr. L. Murugan,Elected MP,2024-2030,Rajya Sabha — Madhya Pradesh,147000000.0,REAL_GOVT_PDF
+RS018,18,Rajya Sabha,Uttar Pradesh,Dr. Laxmikant Bajpayee,Elected MP,2022-2028,Rajya Sabha — Uttar Pradesh,196000000.0,REAL_GOVT_PDF
+RS019,19,Rajya Sabha,Tamil Nadu,Dr. M. Dhanapal,Elected MP,2025-2031,Rajya Sabha — Tamil Nadu,89248285.42,REAL_GOVT_PDF
+RS020,20,Rajya Sabha,Tamil Nadu,Dr. M. Thambi Durai,Elected MP,2026-2032,Rajya Sabha — Tamil Nadu,49356476.5,REAL_GOVT_PDF
+RS021,21,Rajya Sabha,Maharashtra,Dr. Medha Vishram Kulkarni,Elected MP,2024-2030,Rajya Sabha — Maharashtra,147000000.0,REAL_GOVT_PDF
+RS022,22,Rajya Sabha,Delhi,Dr. Meenakshi Jain,Nominated MP,2025-2031,Rajya Sabha — Delhi,73500000.0,REAL_GOVT_PDF
+RS023,23,Rajya Sabha,Gujarat,Dr. Mukeshbhai J. Rathwa,Elected MP,2026-2032,Rajya Sabha — Gujarat,49000000.0,REAL_GOVT_PDF
+RS024,24,Rajya Sabha,Gujarat,Dr. Parmar Jashvantsinh Salamsinh,Elected MP,2024-2030,Rajya Sabha — Gujarat,147000000.0,REAL_GOVT_PDF
+RS025,25,Rajya Sabha,Uttar Pradesh,Dr. Radha Mohan Das Agrawal,Elected MP,2022-2028,Rajya Sabha — Uttar Pradesh,203626524.67000002,REAL_GOVT_PDF
+RS026,26,Rajya Sabha,Punjab,Dr. Sandeep Kumar Pathak,Elected MP,2022-2028,Rajya Sabha — Punjab,232203454.24,REAL_GOVT_PDF
+RS027,27,Rajya Sabha,Uttar Pradesh,Dr. Sangeeta Balwant,Elected MP,2024-2030,Rajya Sabha — Uttar Pradesh,147000000.0,REAL_GOVT_PDF
+RS028,28,Rajya Sabha,Odisha,Dr. Santrupt Misra,Elected MP,2026-2032,Rajya Sabha — Odisha,49000000.0,REAL_GOVT_PDF
+RS029,29,Rajya Sabha,Jharkhand,Dr. Sarfraz Ahmad,Elected MP,2024-2030,Rajya Sabha — Jharkhand,178564551.09,REAL_GOVT_PDF
+RS030,30,Rajya Sabha,Odisha,Dr. Sasmit Patra,Elected MP,2022-2028,Rajya Sabha — Odisha,196063957.11,REAL_GOVT_PDF
+RS031,31,Rajya Sabha,Rajasthan,Dr. Satish Poonia,Elected MP,2026-2032,Rajya Sabha — Rajasthan,49000000.0,REAL_GOVT_PDF
+RS032,32,Rajya Sabha,Himachal Pradesh,Dr. Sikander Kumar,Elected MP,2022-2028,Rajya Sabha — Himachal Pradesh,207863957.11,REAL_GOVT_PDF
+RS033,33,Rajya Sabha,Uttar Pradesh,Dr. Sudhanshu Trivedi,Elected MP,2024-2030,Rajya Sabha — Uttar Pradesh,147000000.0,REAL_GOVT_PDF
+RS034,34,Rajya Sabha,Karnataka,Dr. Syed Naseer Hussain,Elected MP,2024-2030,Rajya Sabha — Karnataka,147000000.0,REAL_GOVT_PDF
+RS035,35,Rajya Sabha,Kerala,Dr. V. Sivadasan,Elected MP,2021-2027,Rajya Sabha — Kerala,276720323.27,REAL_GOVT_PDF
+RS036,36,Rajya Sabha,Punjab,Dr. Vikramjit Singh Sahney,Elected MP,2022-2028,Rajya Sabha — Punjab,198656208.57000002,REAL_GOVT_PDF
+RS037,37,Rajya Sabha,West Bengal,Ms. Dola Sen,Elected MP,2023-2029,Rajya Sabha — West Bengal,171500000.0,REAL_GOVT_PDF
+RS038,38,Rajya Sabha,Delhi,Ms. Swati Maliwal,Elected MP,2024-2030,Rajya Sabha — Delhi,147000000.0,REAL_GOVT_PDF
+RS039,39,Rajya Sabha,Bihar,Prof. Manoj Kumar Jha,Elected MP,2024-2030,Rajya Sabha — Bihar,191620112.11,REAL_GOVT_PDF
+RS040,40,Rajya Sabha,Uttar Pradesh,Prof. Ram Gopal Yadav,Elected MP,2020-2026,Rajya Sabha — Uttar Pradesh,221271395.11,REAL_GOVT_PDF
+RS041,41,Rajya Sabha,Kerala,Shri A. A. Rahim,Elected MP,2022-2028,Rajya Sabha — Kerala,220563957.11,REAL_GOVT_PDF
+RS042,42,Rajya Sabha,Kerala,Shri Abdul Wahab,Elected MP,2021-2027,Rajya Sabha — Kerala,310898953.29,REAL_GOVT_PDF
+RS043,43,Rajya Sabha,Jharkhand,Shri Aditya Prasad,Elected MP,2022-2028,Rajya Sabha — Jharkhand,227628508.2,REAL_GOVT_PDF
+RS044,44,Rajya Sabha,Karnataka,Shri Ajay Makan,Elected MP,2024-2030,Rajya Sabha — Karnataka,147000000.0,REAL_GOVT_PDF
+RS045,45,Rajya Sabha,Bihar,Shri Akhilesh Prasad Singh,Elected MP,2024-2030,Rajya Sabha — Bihar,186200000.0,REAL_GOVT_PDF
+RS046,46,Rajya Sabha,Uttar Pradesh,Shri Amar Pal Maurya,Elected MP,2024-2030,Rajya Sabha — Uttar Pradesh,147000000.0,REAL_GOVT_PDF
+RS047,47,Rajya Sabha,Telangana,Shri Anil Kumar Yadav Mandadi,Elected MP,2024-2030,Rajya Sabha — Telangana,147000000.0,REAL_GOVT_PDF
+RS048,48,Rajya Sabha,Himachal Pradesh,Shri Anurag Sharma,Elected MP,2026-2032,Rajya Sabha — Himachal Pradesh,49000000.0,REAL_GOVT_PDF
+RS049,49,Rajya Sabha,Uttar Pradesh,Shri Arun Singh,Elected MP,2020-2026,Rajya Sabha — Uttar Pradesh,223492764.11,REAL_GOVT_PDF
+RS050,50,Rajya Sabha,Madhya Pradesh,Shri Ashok Singh,Elected MP,2024-2030,Rajya Sabha — Madhya Pradesh,147000000.0,REAL_GOVT_PDF
+RS051,51,Rajya Sabha,Maharashtra,Shri Ashokrao Shankarrao Chavan,Elected MP,2024-2030,Rajya Sabha — Maharashtra,147000000.0,REAL_GOVT_PDF
+RS052,52,Rajya Sabha,Odisha,Shri Ashwini Vaishnaw,Elected MP,2024-2030,Rajya Sabha — Odisha,265563957.11,REAL_GOVT_PDF
+RS053,53,Rajya Sabha,Telangana,Shri B. Parthasaradhi Reddy,Elected MP,2022-2028,Rajya Sabha — Telangana,244365104.0,REAL_GOVT_PDF
+RS054,54,Rajya Sabha,Uttar Pradesh,Shri B.L. Verma,Elected MP,2020-2026,Rajya Sabha — Uttar Pradesh,196063957.11,REAL_GOVT_PDF
+RS055,55,Rajya Sabha,Gujarat,Shri Babubhai Jesangbhai Desai,Elected MP,2023-2029,Rajya Sabha — Gujarat,171500000.0,REAL_GOVT_PDF
+RS056,56,Rajya Sabha,Uttar Pradesh,Shri Baburam Nishad,Elected MP,2022-2028,Rajya Sabha — Uttar Pradesh,196063957.11,REAL_GOVT_PDF
+RS057,57,Rajya Sabha,Jharkhand,Shri Baidyanath Ram,Elected MP,2026-2032,Rajya Sabha — Jharkhand,49000000.0,REAL_GOVT_PDF
+RS058,58,Rajya Sabha,Madhya Pradesh,Shri Balyogi Umeshnath,Elected MP,2024-2030,Rajya Sabha — Madhya Pradesh,147000000.0,REAL_GOVT_PDF
+RS059,59,Rajya Sabha,Madhya Pradesh,Shri Banshilal Gurjar,Elected MP,2024-2030,Rajya Sabha — Madhya Pradesh,147000000.0,REAL_GOVT_PDF
+RS060,60,Rajya Sabha,Andhra Pradesh,Shri Bhashyam Rama Krishna,Elected MP,2026-2032,Rajya Sabha — Andhra Pradesh,49000000.0,REAL_GOVT_PDF
+RS061,61,Rajya Sabha,Assam,Shri Birendra Prasad Baishya,Elected MP,2025-2031,Rajya Sabha — Assam,98000000.0,REAL_GOVT_PDF
+RS062,62,Rajya Sabha,Uttar Pradesh,Shri Brij Lal,Elected MP,2020-2026,Rajya Sabha — Uttar Pradesh,196063957.11,REAL_GOVT_PDF
+RS063,63,Rajya Sabha,Kerala,Shri C. Sadanandan Master,Nominated MP,2025-2031,Rajya Sabha — Kerala,73500000.0,REAL_GOVT_PDF
+RS064,64,Rajya Sabha,Maharashtra,Shri Chandrakant Damodar Handore,Elected MP,2024-2030,Rajya Sabha — Maharashtra,147000000.0,REAL_GOVT_PDF
+RS065,65,Rajya Sabha,Jammu And Kashmir,Shri Chowdry Mohammad Ramzan,Elected MP,2025-2031,Rajya Sabha — Jammu And Kashmir,73500000.0,REAL_GOVT_PDF
+RS066,66,Rajya Sabha,Tamil Nadu,Shri Christopher Manickam,Elected MP,2026-2032,Rajya Sabha — Tamil Nadu,49356476.5,REAL_GOVT_PDF
+RS067,67,Rajya Sabha,Rajasthan,Shri Chunnilal Garasiya,Elected MP,2024-2030,Rajya Sabha — Rajasthan,147000000.0,REAL_GOVT_PDF
+RS068,68,Rajya Sabha,Tamil Nadu,Shri Constandine Ravindran,Elected MP,2026-2032,Rajya Sabha — Tamil Nadu,49356476.5,REAL_GOVT_PDF
+RS069,69,Rajya Sabha,Telangana,Shri Damodar Rao Divakonda,Elected MP,2022-2028,Rajya Sabha — Telangana,239919406.11,REAL_GOVT_PDF
+RS070,70,Rajya Sabha,Odisha,Shri Debashish Samantaray,Elected MP,2026-2030,Rajya Sabha — Odisha,23800006.0,REAL_GOVT_PDF
+RS071,71,Rajya Sabha,West Bengal,Shri Derek O' Brien,Elected MP,2023-2029,Rajya Sabha — West Bengal,171500000.0,REAL_GOVT_PDF
+RS072,72,Rajya Sabha,Chhattisgarh,Shri Devendra Pratap Singh,Elected MP,2024-2030,Rajya Sabha — Chhattisgarh,170837637.76,REAL_GOVT_PDF
+RS073,73,Rajya Sabha,Maharashtra,Shri Dhananjay Bhimrao Mahadik,Elected MP,2022-2028,Rajya Sabha — Maharashtra,220383643.11,REAL_GOVT_PDF
+RS074,74,Rajya Sabha,Odisha,Shri Dilip Kumar Ray,Elected MP,2026-2032,Rajya Sabha — Odisha,49000000.0,REAL_GOVT_PDF
+RS075,75,Rajya Sabha,Sikkim,Shri Dorjee Tshering Lepcha,Elected MP,2024-2030,Rajya Sabha — Sikkim,150170726.11,REAL_GOVT_PDF
+RS076,76,Rajya Sabha,Karnataka,Shri G.C. Chandrashekhar,Elected MP,2024-2030,Rajya Sabha — Karnataka,147000000.0,REAL_GOVT_PDF
+RS077,77,Rajya Sabha,Rajasthan,Shri Ghanshyam Tiwari,Elected MP,2022-2028,Rajya Sabha — Rajasthan,196063957.11,REAL_GOVT_PDF
+RS078,78,Rajya Sabha,Andhra Pradesh,Shri Golla Baburao,Elected MP,2024-2030,Rajya Sabha — Andhra Pradesh,147000000.0,REAL_GOVT_PDF
+RS079,79,Rajya Sabha,Gujarat,Shri Govindbhai Laljibhai Dholakia,Elected MP,2024-2030,Rajya Sabha — Gujarat,147000000.0,REAL_GOVT_PDF
+RS080,80,Rajya Sabha,Jammu And Kashmir,Shri Gulam Ali,Nominated MP,2022-2028,Rajya Sabha — Jammu And Kashmir,196063957.11,REAL_GOVT_PDF
+RS081,81,Rajya Sabha,Jammu And Kashmir,Shri Gurwinder Singh Oberoi,Elected MP,2025-2031,Rajya Sabha — Jammu And Kashmir,73500000.0,REAL_GOVT_PDF
+RS082,82,Rajya Sabha,Punjab,Shri Harbhajan Singh,Elected MP,2022-2028,Rajya Sabha — Punjab,220984094.27,REAL_GOVT_PDF
+RS083,83,Rajya Sabha,Uttar Pradesh,Shri Hardeep Singh Puri,Elected MP,2020-2026,Rajya Sabha — Uttar Pradesh,226801049.11,REAL_GOVT_PDF
+RS084,84,Rajya Sabha,Kerala,Shri Haris Beeran,Elected MP,2024-2030,Rajya Sabha — Kerala,122500000.0,REAL_GOVT_PDF
+RS085,85,Rajya Sabha,Himachal Pradesh,Shri Harsh Mahajan,Elected MP,2024-2030,Rajya Sabha — Himachal Pradesh,147000000.0,REAL_GOVT_PDF
+RS086,86,Rajya Sabha,West Bengal,Shri Harsh Vardhan Shringla,Nominated MP,2025-2031,Rajya Sabha — West Bengal,73500000.0,REAL_GOVT_PDF
+RS087,87,Rajya Sabha,Tamil Nadu,Shri I.S. Inbadurai,Elected MP,2025-2031,Rajya Sabha — Tamil Nadu,89248285.42,REAL_GOVT_PDF
+RS088,88,Rajya Sabha,Tamil Nadu,Shri Ilaiyaraaja,Nominated MP,2022-2028,Rajya Sabha — Tamil Nadu,220563957.11,REAL_GOVT_PDF
+RS089,89,Rajya Sabha,Maharashtra,Shri Imran Pratapgarhi,Elected MP,2022-2028,Rajya Sabha — Maharashtra,196000000.0,REAL_GOVT_PDF
+RS090,90,Rajya Sabha,Gujarat,Shri Jagat Prakash Nadda,Elected MP,2024-2030,Rajya Sabha — Gujarat,147000000.0,REAL_GOVT_PDF
+RS091,91,Rajya Sabha,Karnataka,Shri Jaggesh,Elected MP,2022-2028,Rajya Sabha — Karnataka,196063957.11,REAL_GOVT_PDF
+RS092,92,Rajya Sabha,Karnataka,Shri Jairam Ramesh,Elected MP,2022-2028,Rajya Sabha — Karnataka,220563957.11,REAL_GOVT_PDF
+RS093,93,Rajya Sabha,Meghalaya,Shri James Pangsang Kongkal Sangma,Elected MP,2026-2032,Rajya Sabha — Meghalaya,49000000.0,REAL_GOVT_PDF
+RS094,94,Rajya Sabha,Uttar Pradesh,Shri Javed Ali Khan,Elected MP,2022-2028,Rajya Sabha — Uttar Pradesh,196063957.11,REAL_GOVT_PDF
+RS095,95,Rajya Sabha,Uttar Pradesh,Shri Jayant Chaudhary,Elected MP,2022-2028,Rajya Sabha — Uttar Pradesh,214074707.67000002,REAL_GOVT_PDF
+RS096,96,Rajya Sabha,Assam,Shri Jogen Mohan,Elected MP,2026-2032,Rajya Sabha — Assam,49000000.0,REAL_GOVT_PDF
+RS097,97,Rajya Sabha,Kerala,Shri Jose K. Mani,Elected MP,2024-2030,Rajya Sabha — Kerala,122500000.0,REAL_GOVT_PDF
+RS098,98,Rajya Sabha,Tamil Nadu,Shri K.R.N. Rajeshkumar,Elected MP,2022-2028,Rajya Sabha — Tamil Nadu,238513975.53,REAL_GOVT_PDF
+RS099,99,Rajya Sabha,Tamil Nadu,Shri Kamal Haasan,Elected MP,2025-2031,Rajya Sabha — Tamil Nadu,89248285.42,REAL_GOVT_PDF
+RS100,100,Rajya Sabha,Assam,Shri Kanad Purkayastha,Elected MP,2025-2031,Rajya Sabha — Assam,98000000.0,REAL_GOVT_PDF
+RS101,101,Rajya Sabha,Uttar Pradesh,Shri Kapil Sibal,Elected MP,2022-2028,Rajya Sabha — Uttar Pradesh,196063957.11,REAL_GOVT_PDF
+RS102,102,Rajya Sabha,Haryana,Shri Karamvir Singh Singh Boudh,Elected MP,2026-2032,Rajya Sabha — Haryana,49000000.0,REAL_GOVT_PDF
+RS103,103,Rajya Sabha,Haryana,Shri Kartikeya Sharma,Elected MP,2022-2028,Rajya Sabha — Haryana,196000000.0,REAL_GOVT_PDF
+RS104,104,Rajya Sabha,Gujarat,Shri Kesridevsinh Jhala,Elected MP,2023-2029,Rajya Sabha — Gujarat,171500000.0,REAL_GOVT_PDF
+RS105,105,Rajya Sabha,Mizoram,Shri Khiangte Laltluangkima,Elected MP,2026-2032,Rajya Sabha — Mizoram,24500000.0,REAL_GOVT_PDF
+RS106,106,Rajya Sabha,Bihar,Shri Khiru Mahto,Elected MP,2022-2028,Rajya Sabha — Bihar,235770091.81,REAL_GOVT_PDF
+RS107,107,Rajya Sabha,Tamil Nadu,Shri L. K. Sudhish,Elected MP,2026-2032,Rajya Sabha — Tamil Nadu,49356476.5,REAL_GOVT_PDF
+RS108,108,Rajya Sabha,Karnataka,Shri Lahar Singh Siroya,Elected MP,2022-2028,Rajya Sabha — Karnataka,206278088.11,REAL_GOVT_PDF
+RS109,109,Rajya Sabha,Andhra Pradesh,Shri Lingamaneni Ramesh,Elected MP,2026-2032,Rajya Sabha — Andhra Pradesh,49000000.0,REAL_GOVT_PDF
+RS110,110,Rajya Sabha,Karnataka,Shri M. Nagaraja,Elected MP,2026-2032,Rajya Sabha — Karnataka,49000000.0,REAL_GOVT_PDF
+RS111,111,Rajya Sabha,Rajasthan,Shri Madan Rathore,Elected MP,2024-2030,Rajya Sabha — Rajasthan,147000000.0,REAL_GOVT_PDF
+RS112,112,Rajya Sabha,Uttarakhand,Shri Mahendra Bhatt,Elected MP,2024-2030,Rajya Sabha — Uttarakhand,147000000.0,REAL_GOVT_PDF
+RS113,113,Rajya Sabha,Madhya Pradesh,Shri Mahesh Kewat,Elected MP,2026-2032,Rajya Sabha — Madhya Pradesh,49000000.0,REAL_GOVT_PDF
+RS114,114,Rajya Sabha,Karnataka,Shri Mallikarjun Kharge,Elected MP,2026-2032,Rajya Sabha — Karnataka,49063957.11,REAL_GOVT_PDF
+RS115,115,Rajya Sabha,Bihar,Shri Manan Kumar Mishra,Elected MP,2024-2028,Rajya Sabha — Bihar,235263957.11,REAL_GOVT_PDF
+RS116,116,Rajya Sabha,Odisha,Shri Manas Ranjan Mangaraj,Elected MP,2022-2028,Rajya Sabha — Odisha,196063957.11,REAL_GOVT_PDF
+RS117,117,Rajya Sabha,Odisha,Shri Manmohan Samal,Elected MP,2026-2032,Rajya Sabha — Odisha,49000000.0,REAL_GOVT_PDF
+RS118,118,Rajya Sabha,Karnataka,Shri Mansoor Ali Khan,Elected MP,2026-2032,Rajya Sabha — Karnataka,49000000.0,REAL_GOVT_PDF
+RS119,119,Rajya Sabha,Andhra Pradesh,Shri Masthan Rao Yadav Beedha,Elected MP,2024-2028,Rajya Sabha — Andhra Pradesh,171296045.11,REAL_GOVT_PDF
+RS120,120,Rajya Sabha,Gujarat,Shri Mayankkumar Nayak,Elected MP,2024-2030,Rajya Sabha — Gujarat,147000000.0,REAL_GOVT_PDF
+RS121,121,Rajya Sabha,Andhra Pradesh,Shri Meda Raghunadha Reddy,Elected MP,2024-2030,Rajya Sabha — Andhra Pradesh,147000000.0,REAL_GOVT_PDF
+RS122,122,Rajya Sabha,Maharashtra,Shri Milind Murli Deora,Elected MP,2024-2030,Rajya Sabha — Maharashtra,147000000.0,REAL_GOVT_PDF
+RS123,123,Rajya Sabha,Uttar Pradesh,Shri Mithlesh Kumar,Elected MP,2022-2028,Rajya Sabha — Uttar Pradesh,196063957.11,REAL_GOVT_PDF
+RS124,124,Rajya Sabha,West Bengal,Shri Mohammed Nadimul Haque,Elected MP,2024-2030,Rajya Sabha — West Bengal,147000000.0,REAL_GOVT_PDF
+RS125,125,Rajya Sabha,Rajasthan,Shri Mukul Wasnik,Elected MP,2022-2028,Rajya Sabha — Rajasthan,196063957.11,REAL_GOVT_PDF
+RS126,126,Rajya Sabha,West Bengal,Shri Nagendra Ray,Elected MP,2023-2029,Rajya Sabha — West Bengal,171500000.0,REAL_GOVT_PDF
+RS127,127,Rajya Sabha,Delhi,Shri Narain Dass Gupta,Elected MP,2024-2030,Rajya Sabha — Delhi,160837070.0,REAL_GOVT_PDF
+RS128,128,Rajya Sabha,Karnataka,Shri Narayanasa K. Bhandage,Elected MP,2024-2030,Rajya Sabha — Karnataka,147450000.0,REAL_GOVT_PDF
+RS129,129,Rajya Sabha,Uttarakhand,Shri Naresh Bansal,Elected MP,2020-2026,Rajya Sabha — Uttarakhand,222043184.71,REAL_GOVT_PDF
+RS130,130,Rajya Sabha,Uttar Pradesh,Shri Naveen Jain,Elected MP,2024-2030,Rajya Sabha — Uttar Pradesh,147000000.0,REAL_GOVT_PDF
+RS131,131,Rajya Sabha,Rajasthan,Shri Neeraj Dangi,Elected MP,2026-2032,Rajya Sabha — Rajasthan,49000000.0,REAL_GOVT_PDF
+RS132,132,Rajya Sabha,Uttar Pradesh,Shri Neeraj Shekhar,Elected MP,2020-2026,Rajya Sabha — Uttar Pradesh,236483662.11,REAL_GOVT_PDF
+RS133,133,Rajya Sabha,Maharashtra,Shri Nitin Laxmanrao Jadhav Patil,Elected MP,2024-2028,Rajya Sabha — Maharashtra,122500000.0,REAL_GOVT_PDF
+RS134,134,Rajya Sabha,Bihar,Shri Nitin Nabin,Elected MP,2026-2032,Rajya Sabha — Bihar,49000000.0,REAL_GOVT_PDF
+RS135,135,Rajya Sabha,Tamil Nadu,Shri P. Chidambaram,Elected MP,2022-2028,Rajya Sabha — Tamil Nadu,236312242.52,REAL_GOVT_PDF
+RS136,136,Rajya Sabha,Kerala,Shri P. P. Suneer,Elected MP,2024-2030,Rajya Sabha — Kerala,122500000.0,REAL_GOVT_PDF
+RS137,137,Rajya Sabha,Tamil Nadu,Shri P. Wilson,Elected MP,2025-2031,Rajya Sabha — Tamil Nadu,89248285.42,REAL_GOVT_PDF
+RS138,138,Rajya Sabha,Assam,Shri Pabitra Margherita,Elected MP,2022-2028,Rajya Sabha — Assam,220563957.11,REAL_GOVT_PDF
+RS139,139,Rajya Sabha,Andhra Pradesh,Shri Paka Venkata Satyanarayana,Elected MP,2025-2028,Rajya Sabha — Andhra Pradesh,98000000.0,REAL_GOVT_PDF
+RS140,140,Rajya Sabha,Maharashtra,Shri Parth Ajit Pawar,Elected MP,2026-2032,Rajya Sabha — Maharashtra,49000000.0,REAL_GOVT_PDF
+RS141,141,Rajya Sabha,Karnataka,Shri Pawan Khera,Elected MP,2026-2032,Rajya Sabha — Karnataka,49000000.0,REAL_GOVT_PDF
+RS142,142,Rajya Sabha,Jharkhand,Shri Pradip Kumar Varma,Elected MP,2024-2030,Rajya Sabha — Jharkhand,178564551.09,REAL_GOVT_PDF
+RS143,143,Rajya Sabha,Maharashtra,Shri Praful Patel,Elected MP,2024-2030,Rajya Sabha — Maharashtra,147000000.0,REAL_GOVT_PDF
+RS144,144,Rajya Sabha,West Bengal,Shri Prakash Chik Baraik,Elected MP,2026-2029,Rajya Sabha — West Bengal,49662892.0,REAL_GOVT_PDF
+RS145,145,Rajya Sabha,Assam,Shri Pramod Boro,Elected MP,2026-2032,Rajya Sabha — Assam,49000000.0,REAL_GOVT_PDF
+RS146,146,Rajya Sabha,Rajasthan,Shri Pramod Tiwari,Elected MP,2022-2028,Rajya Sabha — Rajasthan,196063957.11,REAL_GOVT_PDF
+RS147,147,Rajya Sabha,Tamil Nadu,Shri Praveen Chakravarthy,Elected MP,2026-2028,Rajya Sabha — Tamil Nadu,49356476.5,REAL_GOVT_PDF
+RS148,148,Rajya Sabha,Tamil Nadu,Shri R. Dharmar,Elected MP,2022-2028,Rajya Sabha — Tamil Nadu,260812242.52,REAL_GOVT_PDF
+RS149,149,Rajya Sabha,Tamil Nadu,Shri R. Girirajan,Elected MP,2022-2028,Rajya Sabha — Tamil Nadu,236312242.52,REAL_GOVT_PDF
+RS150,150,Rajya Sabha,Punjab,Shri Raghav Chadha,Elected MP,2022-2028,Rajya Sabha — Punjab,237229207.25,REAL_GOVT_PDF
+RS151,151,Rajya Sabha,West Bengal,Shri Rajeev Kumar,Elected MP,2026-2032,Rajya Sabha — West Bengal,49000000.0,REAL_GOVT_PDF
+RS152,152,Rajya Sabha,Chhattisgarh,Shri Rajeev Shukla,Elected MP,2022-2028,Rajya Sabha — Chhattisgarh,271174394.23,REAL_GOVT_PDF
+RS153,153,Rajya Sabha,Gujarat,Shri Rajesh Parmanand Shukla,Elected MP,2026-2032,Rajya Sabha — Gujarat,49000000.0,REAL_GOVT_PDF
+RS154,154,Rajya Sabha,Tripura,Shri Rajib Bhattacharjee,Elected MP,2024-2028,Rajya Sabha — Tripura,122500000.0,REAL_GOVT_PDF
+RS155,155,Rajya Sabha,Punjab,Shri Rajinder Gupta,Elected MP,2025-2028,Rajya Sabha — Punjab,49000000.0,REAL_GOVT_PDF
+RS156,156,Rajya Sabha,Madhya Pradesh,Shri Rajneesh Kumar Agrawal,Elected MP,2026-2032,Rajya Sabha — Madhya Pradesh,49000000.0,REAL_GOVT_PDF
+RS157,157,Rajya Sabha,Bihar,Shri Ram Nath Thakur,Elected MP,2026-2032,Rajya Sabha — Bihar,65673638.730000004,REAL_GOVT_PDF
+RS158,158,Rajya Sabha,Maharashtra,Shri Ramdas Bandu Athawale,Elected MP,2026-2032,Rajya Sabha — Maharashtra,49000000.0,REAL_GOVT_PDF
+RS159,159,Rajya Sabha,Uttar Pradesh,Shri Ramji,Elected MP,2020-2026,Rajya Sabha — Uttar Pradesh,174518577.11,REAL_GOVT_PDF
+RS160,160,Rajya Sabha,Uttar Pradesh,Shri Ramji Lal Suman,Elected MP,2024-2030,Rajya Sabha — Uttar Pradesh,147000000.0,REAL_GOVT_PDF
+RS161,161,Rajya Sabha,Maharashtra,Shri Ramrao Sakharam Wadkute,Elected MP,2026-2032,Rajya Sabha — Maharashtra,49000000.0,REAL_GOVT_PDF
+RS162,162,Rajya Sabha,Rajasthan,Shri Randeep Singh Surjewala,Elected MP,2022-2028,Rajya Sabha — Rajasthan,196063957.11,REAL_GOVT_PDF
+RS163,163,Rajya Sabha,Uttar Pradesh,Shri Ratanjit Pratap Narain Singh,Elected MP,2024-2030,Rajya Sabha — Uttar Pradesh,147000000.0,REAL_GOVT_PDF
+RS164,164,Rajya Sabha,Telangana,Shri Ravi Chandra Vaddiraju,Elected MP,2024-2030,Rajya Sabha — Telangana,152732534.11,REAL_GOVT_PDF
+RS165,165,Rajya Sabha,Assam,Shri Rwngwra Narzary,Elected MP,2022-2028,Rajya Sabha — Assam,220563957.11,REAL_GOVT_PDF
+RS166,166,Rajya Sabha,Andhra Pradesh,Shri Ryaga Krishnaiah,Elected MP,2024-2028,Rajya Sabha — Andhra Pradesh,170413583.79,REAL_GOVT_PDF
+RS167,167,Rajya Sabha,Andhra Pradesh,Shri S Niranjan Reddy,Elected MP,2022-2028,Rajya Sabha — Andhra Pradesh,224621383.11,REAL_GOVT_PDF
+RS168,168,Rajya Sabha,Gujarat,Shri S. Jaishankar,Elected MP,2023-2029,Rajya Sabha — Gujarat,171500000.0,REAL_GOVT_PDF
+RS169,169,Rajya Sabha,Tamil Nadu,Shri S. Kalyanasundaram,Elected MP,2022-2028,Rajya Sabha — Tamil Nadu,239763792.52,REAL_GOVT_PDF
+RS170,170,Rajya Sabha,Puducherry,Shri S. Selvaganabathy,Elected MP,2021-2027,Rajya Sabha — Puducherry,292881856.49,REAL_GOVT_PDF
+RS171,171,Rajya Sabha,Tamil Nadu,Shri S.R. Sivalingam,Elected MP,2025-2031,Rajya Sabha — Tamil Nadu,89248285.42,REAL_GOVT_PDF
+RS172,172,Rajya Sabha,Goa,Shri Sadanand Mhalu Shet Tanavade,Elected MP,2023-2029,Rajya Sabha — Goa,171500000.0,REAL_GOVT_PDF
+RS173,173,Rajya Sabha,Jammu And Kashmir,Shri Sajjad Ahmad Kichloo,Elected MP,2025-2031,Rajya Sabha — Jammu And Kashmir,73500000.0,REAL_GOVT_PDF
+RS174,174,Rajya Sabha,West Bengal,Shri Samik Bhattacharya,Elected MP,2024-2030,Rajya Sabha — West Bengal,147000000.0,REAL_GOVT_PDF
+RS175,175,Rajya Sabha,West Bengal,Shri Samirul Islam,Elected MP,2023-2029,Rajya Sabha — West Bengal,171500000.0,REAL_GOVT_PDF
+RS176,176,Rajya Sabha,Andhra Pradesh,Shri Sana Sathish Babu,Elected MP,2026-2032,Rajya Sabha — Andhra Pradesh,49063978.0,REAL_GOVT_PDF
+RS177,177,Rajya Sabha,Kerala,Shri Sandosh Kumar P,Elected MP,2022-2028,Rajya Sabha — Kerala,220563957.11,REAL_GOVT_PDF
+RS178,178,Rajya Sabha,Haryana,Shri Sanjay Bhatia,Elected MP,2026-2032,Rajya Sabha — Haryana,49000000.0,REAL_GOVT_PDF
+RS179,179,Rajya Sabha,Bihar,Shri Sanjay Kumar Jha,Elected MP,2024-2030,Rajya Sabha — Bihar,186200000.0,REAL_GOVT_PDF
+RS180,180,Rajya Sabha,Maharashtra,Shri Sanjay Raut,Elected MP,2022-2028,Rajya Sabha — Maharashtra,196063957.11,REAL_GOVT_PDF
+RS181,181,Rajya Sabha,Uttar Pradesh,Shri Sanjay Seth,Elected MP,2024-2030,Rajya Sabha — Uttar Pradesh,147000000.0,REAL_GOVT_PDF
+RS182,182,Rajya Sabha,Delhi,Shri Sanjay Singh,Elected MP,2024-2030,Rajya Sabha — Delhi,184466426.11,REAL_GOVT_PDF
+RS183,183,Rajya Sabha,Bihar,Shri Sanjay Yadav,Elected MP,2024-2030,Rajya Sabha — Bihar,186200000.0,REAL_GOVT_PDF
+RS184,184,Rajya Sabha,Punjab,Shri Sant Balbir Singh,Elected MP,2022-2028,Rajya Sabha — Punjab,196359074.44000003,REAL_GOVT_PDF
+RS185,185,Rajya Sabha,Jammu And Kashmir,Shri Sat Paul Sharma,Elected MP,2025-2031,Rajya Sabha — Jammu And Kashmir,73500000.0,REAL_GOVT_PDF
+RS186,186,Rajya Sabha,Bihar,Shri Satish Chandra Dubey,Elected MP,2022-2028,Rajya Sabha — Bihar,235263957.11,REAL_GOVT_PDF
+RS187,187,Rajya Sabha,Chandigarh,Shri Satnam Singh Sandhu,Nominated MP,2024-2030,Rajya Sabha — Chandigarh,147000000.0,REAL_GOVT_PDF
+RS188,188,Rajya Sabha,Bihar,Shri Shambhu Sharan Patel,Elected MP,2022-2028,Rajya Sabha — Bihar,237168443.49,REAL_GOVT_PDF
+RS189,189,Rajya Sabha,Bihar,Shri Shivesh Kumar,Elected MP,2026-2032,Rajya Sabha — Bihar,49000000.0,REAL_GOVT_PDF
+RS190,190,Rajya Sabha,Haryana,Shri Subhash Barala,Elected MP,2024-2030,Rajya Sabha — Haryana,147000000.0,REAL_GOVT_PDF
+RS191,191,Rajya Sabha,Odisha,Shri Subhasish Khuntia,Elected MP,2024-2030,Rajya Sabha — Odisha,147000000.0,REAL_GOVT_PDF
+RS192,192,Rajya Sabha,Odisha,Shri Sujeet Kumar,Elected MP,2026-2032,Rajya Sabha — Odisha,49000000.0,REAL_GOVT_PDF
+RS193,193,Rajya Sabha,Uttar Pradesh,Shri Surendra Singh Nagar,Elected MP,2022-2028,Rajya Sabha — Uttar Pradesh,220563957.11,REAL_GOVT_PDF
+RS194,194,Rajya Sabha,Arunachal Pradesh,Shri Tai Tagak,Elected MP,2026-2032,Rajya Sabha — Arunachal Pradesh,49000000.0,REAL_GOVT_PDF
+RS195,195,Rajya Sabha,Madhya Pradesh,Shri Tarun Chugh,Elected MP,2026-2032,Rajya Sabha — Madhya Pradesh,49000000.0,REAL_GOVT_PDF
+RS196,196,Rajya Sabha,Uttar Pradesh,Shri Tejveer Singh,Elected MP,2024-2030,Rajya Sabha — Uttar Pradesh,147000000.0,REAL_GOVT_PDF
+RS197,197,Rajya Sabha,Assam,Shri Terash Gowalla,Elected MP,2026-2032,Rajya Sabha — Assam,49000000.0,REAL_GOVT_PDF
+RS198,198,Rajya Sabha,Tamil Nadu,Shri Tiruchi Siva,Elected MP,2026-2032,Rajya Sabha — Tamil Nadu,49356476.5,REAL_GOVT_PDF
+RS199,199,Rajya Sabha,Maharashtra,Shri Ujjwal Deorao Nikam,Nominated MP,2025-2031,Rajya Sabha — Maharashtra,73500000.0,REAL_GOVT_PDF
+RS200,200,Rajya Sabha,Bihar,Shri Upendra Kushwaha,Elected MP,2026-2032,Rajya Sabha — Bihar,49000000.0,REAL_GOVT_PDF
+RS201,201,Rajya Sabha,Andhra Pradesh,Shri V. Vijayendra Prasad,Nominated MP,2022-2028,Rajya Sabha — Andhra Pradesh,196063957.11,REAL_GOVT_PDF
+RS202,202,Rajya Sabha,Andhra Pradesh,Shri Vijay Chintakayala,Elected MP,2026-2032,Rajya Sabha — Andhra Pradesh,49000000.0,REAL_GOVT_PDF
+RS203,203,Rajya Sabha,Maharashtra,Shri Vinod Shridhar Tawde,Elected MP,2026-2032,Rajya Sabha — Maharashtra,49000000.0,REAL_GOVT_PDF
+RS204,204,Rajya Sabha,Madhya Pradesh,Shri Vivek K. Tankha,Elected MP,2022-2028,Rajya Sabha — Madhya Pradesh,220563957.11,REAL_GOVT_PDF
+RS205,205,Rajya Sabha,Andhra Pradesh,Shri Yerram Venkata Subba Reddy,Elected MP,2024-2030,Rajya Sabha — Andhra Pradesh,147000000.0,REAL_GOVT_PDF
+RS206,206,Rajya Sabha,Manipur,Smt. Adhikarimayum Sharda Devi,Elected MP,2026-2032,Rajya Sabha — Manipur,49000000.0,REAL_GOVT_PDF
+RS207,207,Rajya Sabha,Uttar Pradesh,Smt. Darshana Singh,Elected MP,2022-2028,Rajya Sabha — Uttar Pradesh,196994373.87,REAL_GOVT_PDF
+RS208,208,Rajya Sabha,Uttar Pradesh,Smt. Geeta alias Chandraprabha,Elected MP,2020-2026,Rajya Sabha — Uttar Pradesh,196063957.11,REAL_GOVT_PDF
+RS209,209,Rajya Sabha,Uttar Pradesh,Smt. Jaya Amitabh Bachchan,Elected MP,2024-2030,Rajya Sabha — Uttar Pradesh,147000000.0,REAL_GOVT_PDF
+RS210,210,Rajya Sabha,Kerala,Smt. Jebi Mather Hisham,Elected MP,2022-2028,Rajya Sabha — Kerala,220563957.11,REAL_GOVT_PDF
+RS211,211,Rajya Sabha,Chhattisgarh,Smt. Laxmi Verma,Elected MP,2026-2032,Rajya Sabha — Chhattisgarh,49000000.0,REAL_GOVT_PDF
+RS212,212,Rajya Sabha,Jharkhand,Smt. Mahua Maji,Elected MP,2022-2028,Rajya Sabha — Jharkhand,232524001.2,REAL_GOVT_PDF
+RS213,213,Rajya Sabha,West Bengal,Smt. Mamata Thakur,Elected MP,2024-2030,Rajya Sabha — West Bengal,147000000.0,REAL_GOVT_PDF
+RS214,214,Rajya Sabha,Maharashtra,Smt. Maya Chintaman Ivnate,Elected MP,2026-2032,Rajya Sabha — Maharashtra,49000000.0,REAL_GOVT_PDF
+RS215,215,Rajya Sabha,Madhya Pradesh,Smt. Maya Naroliya,Elected MP,2024-2030,Rajya Sabha — Madhya Pradesh,147000000.0,REAL_GOVT_PDF
+RS216,216,Rajya Sabha,Karnataka,Smt. Nirmala Sitharaman,Elected MP,2022-2028,Rajya Sabha — Karnataka,215972051.45,REAL_GOVT_PDF
+RS217,217,Rajya Sabha,Kerala,Smt. P. T. Usha,Nominated MP,2022-2028,Rajya Sabha — Kerala,196063957.11,REAL_GOVT_PDF
+RS218,218,Rajya Sabha,Chhattisgarh,Smt. Phulo Devi Netam,Elected MP,2026-2032,Rajya Sabha — Chhattisgarh,49000000.0,REAL_GOVT_PDF
+RS219,219,Rajya Sabha,Tamil Nadu,Smt. Rajathi,Elected MP,2025-2031,Rajya Sabha — Tamil Nadu,89248285.42,REAL_GOVT_PDF
+RS220,220,Rajya Sabha,Chhattisgarh,Smt. Ranjeet Ranjan,Elected MP,2022-2028,Rajya Sabha — Chhattisgarh,246780257.87,REAL_GOVT_PDF
+RS221,221,Rajya Sabha,Haryana,Smt. Rekha Sharma,Elected MP,2024-2028,Rajya Sabha — Haryana,98000000.0,REAL_GOVT_PDF
+RS222,222,Rajya Sabha,Telangana,Smt. Renuka Chowdhury,Elected MP,2024-2030,Rajya Sabha — Telangana,147000000.0,REAL_GOVT_PDF
+RS223,223,Rajya Sabha,Nagaland,Smt. S. Phangnon Konyak,Elected MP,2022-2028,Rajya Sabha — Nagaland,206563957.11,REAL_GOVT_PDF
+RS224,224,Rajya Sabha,Uttar Pradesh,Smt. Sadhna Singh,Elected MP,2024-2030,Rajya Sabha — Uttar Pradesh,147000000.0,REAL_GOVT_PDF
+RS225,225,Rajya Sabha,West Bengal,Smt. Sagarika Ghose,Elected MP,2024-2030,Rajya Sabha — West Bengal,147000000.0,REAL_GOVT_PDF
+RS226,226,Rajya Sabha,Uttar Pradesh,Smt. Sangeeta Yadav,Elected MP,2022-2028,Rajya Sabha — Uttar Pradesh,196063957.11,REAL_GOVT_PDF
+RS227,227,Rajya Sabha,Uttar Pradesh,Smt. Seema Dwivedi,Elected MP,2020-2026,Rajya Sabha — Uttar Pradesh,173830159.11,REAL_GOVT_PDF
+RS228,228,Rajya Sabha,Rajasthan,Smt. Sonia Gandhi,Elected MP,2024-2030,Rajya Sabha — Rajasthan,147000000.0,REAL_GOVT_PDF
+RS229,229,Rajya Sabha,Karnataka,Smt. Sudha Murty,Nominated MP,2024-2030,Rajya Sabha — Karnataka,147000000.0,REAL_GOVT_PDF
+RS230,230,Rajya Sabha,Odisha,Smt. Sulata Deo,Elected MP,2022-2028,Rajya Sabha — Odisha,196084721.4,REAL_GOVT_PDF
+RS231,231,Rajya Sabha,Madhya Pradesh,Smt. Sumitra Balmik,Elected MP,2022-2028,Rajya Sabha — Madhya Pradesh,196063957.11,REAL_GOVT_PDF

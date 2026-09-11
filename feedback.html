@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feedback Log — NidhiRakshak</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+<div id="app"></div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script>
+renderShell("feedback.html", function(main){
+  const source = RAW_DATA.worksAll || [];
+  main.innerHTML = `
+    <div class="topbar">
+      <div>
+        <div class="eyebrow">HUMAN-IN-THE-LOOP AUDIT TRAIL</div>
+        <h1 class="page-title">Feedback Log</h1>
+        <div class="queue-subtitle">Find projects marked Reviewed or False Positive. False positives are hidden from the active queue, not deleted.</div>
+      </div>
+      <a class="btn" href="investigation.html">Back to review queue →</a>
+    </div>
+    <div class="queue-summary">
+      <div class="queue-callout">
+        <div class="eyebrow">LABELLED PROJECTS</div>
+        <div class="queue-callout-title">A searchable record of every human decision.</div>
+        <div class="queue-callout-copy">These labels can become training examples for threshold calibration and false-positive reduction in a production model.</div>
+      </div>
+      <div class="stat-tile"><div class="sv" id="feedbackTotal">0</div><div class="sl">All labelled projects</div><div class="stat-accent green"></div></div>
+      <div class="stat-tile"><div class="sv" id="feedbackFalse">0</div><div class="sl">False positives</div><div class="stat-accent red"></div></div>
+      <div class="stat-tile"><div class="sv" id="feedbackReviewed">0</div><div class="sl">Marked reviewed</div><div class="stat-accent saffron"></div></div>
+    </div>
+    <div class="panel queue-filters">
+      <div class="filter-label">FILTER FEEDBACK LOG</div>
+      <div class="filter-controls">
+        <select id="feedbackFilter" class="btn"><option value="">All labels</option><option value="false_positive">False Positive</option><option value="reviewed">Reviewed</option></select>
+        <input id="feedbackSearch" class="btn" placeholder="Search project, MP, state or category…" style="min-width:280px;cursor:text;">
+        <span class="muted" id="feedbackCount" style="margin-left:auto;font-size:12px;"></span>
+      </div>
+    </div>
+    <div class="panel">
+      <table class="ledger-table" id="feedbackTable">
+        <thead><tr><th>Project</th><th>MP</th><th>State</th><th>Category</th><th class="right">Risk</th><th>Feedback status</th><th>Updated</th><th>Action</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  `;
+  function labelled(){
+    const feedback = getFeedback();
+    return source.filter(w=>feedback[w.work_id]);
+  }
+  function render(){
+    const filter = document.getElementById("feedbackFilter").value;
+    const q = document.getElementById("feedbackSearch").value.trim().toLowerCase();
+    const stats = feedbackStats();
+    document.getElementById("feedbackTotal").textContent = stats.total;
+    document.getElementById("feedbackFalse").textContent = stats.falsePositive;
+    document.getElementById("feedbackReviewed").textContent = stats.reviewed;
+    const rows = labelled().filter(w=>{
+      const fb = feedbackFor(w.work_id);
+      if(filter && fb.status!==filter) return false;
+      return !q || [w.work_id,w.mp_name,w.state,w.work_category].join(" ").toLowerCase().includes(q);
+    }).sort((a,b)=>feedbackFor(b.work_id).updated_at.localeCompare(feedbackFor(a.work_id).updated_at));
+    document.getElementById("feedbackCount").textContent = `${rows.length} labelled projects`;
+    document.querySelector("#feedbackTable tbody").innerHTML = rows.map(w=>{
+      const fb = feedbackFor(w.work_id);
+      return `<tr class="rowbar-${riskBand(w.risk_score)}" onclick="location.href='investigation.html?id=${w.work_id}'">
+        <td class="mono-id">${w.work_id}</td><td>${w.mp_name}</td><td>${w.state}</td><td>${w.work_category}</td>
+        <td class="right"><span class="badge ${riskBand(w.risk_score)}">${w.risk_score}</span></td>
+        <td>${fb.status==="false_positive" ? '<span class="feedback-badge false-positive">False Positive</span>' : '<span class="feedback-badge reviewed">Reviewed</span>'}</td>
+        <td class="muted">${fmtDate(fb.updated_at)}</td><td>${feedbackActions(w.work_id)}</td>
+      </tr>`;
+    }).join("") || `<tr><td colspan="8" class="empty-state">No feedback labels match this filter yet.</td></tr>`;
+  }
+  document.getElementById("feedbackFilter").addEventListener("change",render);
+  document.getElementById("feedbackSearch").addEventListener("input",render);
+  render();
+});
+</script>
+</body>
+</html>

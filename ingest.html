@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDF Ingestion — NidhiRakshak</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+<div id="app"></div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script>
+<script>
+const INGEST_QUEUE_KEY = "nidhirakshak-ingest-queue-v1";
+function getIngestQueue(){ try { return JSON.parse(localStorage.getItem(INGEST_QUEUE_KEY) || "[]"); } catch { return []; } }
+function saveIngestQueue(q){ localStorage.setItem(INGEST_QUEUE_KEY, JSON.stringify(q)); }
+
+const KNOWN_CATEGORIES = [...new Set((D.worksAll||[]).map(w=>w.work_category))];
+if(!KNOWN_CATEGORIES.length){
+  ["Community Hall Construction","Road Construction","Drinking Water Supply","Solar Street Lighting",
+   "Public Toilet Complex","School Infrastructure","Drainage Work","Health Sub-Centre Upgrade"].forEach(c=>KNOWN_CATEGORIES.push(c));
+}
+
+const SAMPLE_SUBMISSION = `STATE NODAL AGENCY — MPLADS WORK SUBMISSION (DEMO SAMPLE, NOT A REAL FILING)
+District: Hingoli District | Reporting month: July 2026
+
+1. Community Hall Construction, Hingoli District ward 9 — Sanctioned Rs. 9,17,799 — Agency: Zilla Parishad Agency 3
+2. Road Construction, Kalamnuri block — Sanctioned Rs. 12,40,000 — Agency: PWD Division 2
+3. General infrastructure improvement work as per requirement — Sanctioned Rs. 5,00,000 — Agency: Zilla Parishad Agency 3
+4. Solar Street Lighting, Sengaon — Sanctioned Rs. 8,80,000 — Agency: Rural Electrification Cell
+5. Drinking Water Supply scheme, Aundha Nagnath — Sanctioned Rs. 21,60,000 — Agency: Jal Jeevan Mission Cell`;
+
+renderShell("ingest.html", function(main){
+  const queue = getIngestQueue();
+  main.innerHTML = `
+    <div class="topbar">
+      <div>
+        <div class="eyebrow">DATA ACQUISITION</div>
+        <h1 class="page-title">Automated PDF Ingestion</h1>
+        <div class="queue-subtitle">Pull state nodal-agency work submissions straight from their PDF filings into the review queue.</div>
+      </div>
+      <a class="btn" href="data.html">Data sources →</a>
+    </div>
+
+    <div class="queue-callout" style="margin-bottom:18px;">
+      <div class="eyebrow">PROTOTYPE ENABLED · SIMULATED PIPELINE</div>
+      <div class="queue-callout-title">Upload a submission, watch it get staged for review.</div>
+      <div class="queue-callout-copy">This is a fully static demo, so extraction runs client-side in your browser (via pdf.js) rather than a backend ingestion service. It handles text-based PDFs well; scanned/photographed submissions would need an OCR step before this parser in a real deployment. No file leaves your browser.</div>
+    </div>
+
+    <div class="grid2">
+      <div class="panel">
+        <div class="panel-head"><div class="panel-title">1 · Upload a submission</div><div class="panel-note">.pdf or .txt</div></div>
+        <div class="ingest-dropzone" id="dropzone">
+          <svg class="ingest-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 15V4M12 4 7.5 8.5M12 4l4.5 4.5"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>
+          <h3>Drag a PDF here, or click to browse</h3>
+          <p>State nodal agency work-submission PDF, or a plain-text export</p>
+        </div>
+        <input type="file" id="fileInput" accept=".pdf,.txt" style="display:none;">
+        <div id="fileChip" style="margin-top:12px;"></div>
+        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn" id="sampleBtn">Load sample nodal-agency submission</button>
+          <button class="btn" id="clearQueueBtn" ${queue.length ? "" : "disabled"}>Clear staged queue</button>
+        </div>
+        <div class="ingest-progress"><div class="ingest-progress-bar" id="ingestProgressBar"></div></div>
+        <div class="ingest-steps" id="ingestSteps">
+          <div class="ingest-step" data-step="1"><b>1. Upload</b>File received</div>
+          <div class="ingest-step" data-step="2"><b>2. Extract</b>Text pulled from PDF</div>
+          <div class="ingest-step" data-step="3"><b>3. Parse</b>Rows matched to schema</div>
+          <div class="ingest-step" data-step="4"><b>4. Review</b>Staged for human sign-off</div>
+        </div>
+        <div id="ingestError"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><div class="panel-title">How the parser works</div><div class="panel-note">explainable, same spirit as the risk model</div></div>
+        <ul style="margin:0; padding-left:18px; color:var(--text-mid,#4a5568); font-size:13px; line-height:1.9;">
+          <li>Splits extracted text into lines and keeps ones containing a rupee amount.</li>
+          <li>Matches each line's wording against the known work-category vocabulary.</li>
+          <li>Pulls the implementing agency from nearby text (e.g. "Agency:", "Zilla Parishad", "PWD").</li>
+          <li>Flags low-confidence rows — vague wording or an unmatched category — for closer human review, the same way the risk model flags vague descriptions today.</li>
+          <li>Nothing is written to the live ledger automatically: every row needs an explicit Accept before it joins the staged queue below.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="panel" id="stagedPanel">
+      <div class="panel-head"><div class="panel-title">Extracted candidate rows</div><div class="panel-note" id="candidateCount"></div></div>
+      <div id="candidateArea" class="empty-state" style="padding:26px 0; text-align:center; color:var(--quiet,#6b7280);">Upload a submission or load the sample to see extracted rows here.</div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><div class="panel-title">Staged ingestion queue</div><div class="panel-note">accepted rows, this browser only</div></div>
+      <div id="queueArea"></div>
+      <div class="panel-note" style="margin-top:10px;">In production this queue would write into the same work-level schema shown on the Investigation and Methodology pages via an API, so accepted submissions flow straight into risk scoring — no manual re-entry.</div>
+    </div>
+  `;
+
+  function setStep(n, state){
+    const el = document.querySelector(`.ingest-step[data-step="${n}"]`);
+    if(!el) return;
+    el.classList.remove("active","done");
+    if(state) el.classList.add(state);
+  }
+  function resetSteps(){ [1,2,3,4].forEach(n=>setStep(n,null)); document.getElementById("ingestProgressBar").style.width = "0%"; }
+  function progressTo(pct){ document.getElementById("ingestProgressBar").style.width = pct + "%"; }
+
+  function guessCategory(line){
+    const lower = line.toLowerCase();
+    // prefer a full category-name match first (most specific), then fall back
+    // to a first-word match only if nothing matched exactly.
+    for(const cat of KNOWN_CATEGORIES){
+      if(lower.includes(cat.toLowerCase())) return cat;
+    }
+    for(const cat of KNOWN_CATEGORIES){
+      if(lower.includes(cat.toLowerCase().split(" ")[0])) return cat;
+    }
+    return null;
+  }
+  function parseSubmissionText(text){
+    const lines = text.split(/\r?\n/).map(l=>l.trim()).filter(Boolean);
+    const rows = [];
+    lines.forEach(line=>{
+      const amountRe = /(?:rs\.?|₹|inr)\s*([\d,]{4,}(?:\.\d+)?)/i;
+      const m = line.match(amountRe);
+      if(!m) return;
+      const cost = parseFloat(m[1].replace(/,/g,""));
+      if(!cost || cost < 1000) return;
+      const category = guessCategory(line);
+      const agencyMatch = line.match(/agency:\s*([^—\-|]+)/i) || line.match(/(zilla parishad[^,.—]*|pwd[^,.—]*|municipal[^,.—]*|jal jeevan[^,.—]*|rural electrification[^,.—]*)/i);
+      const agency = agencyMatch ? agencyMatch[1].trim() : null;
+      const vague = /general infrastructure|as per requirement|miscellaneous|basic amenity/i.test(line);
+      let confidence = 0.4;
+      if(category) confidence += 0.3;
+      if(agency) confidence += 0.2;
+      if(!vague) confidence += 0.1;
+      rows.push({
+        description: line.replace(/^\d+\.\s*/,""),
+        cost,
+        category: category || "Unmatched — needs manual categorisation",
+        agency: agency || "Not detected",
+        confidence: Math.min(0.95, confidence),
+        low_confidence: vague || !category || !agency,
+      });
+    });
+    return rows;
+  }
+
+  let currentCandidates = [];
+  function renderCandidates(rows){
+    currentCandidates = rows;
+    document.getElementById("candidateCount").textContent = `${rows.length} row${rows.length===1?"":"s"} extracted`;
+    if(!rows.length){
+      document.getElementById("candidateArea").innerHTML = `<div class="empty-state" style="padding:26px 0; text-align:center; color:var(--quiet,#6b7280);">No rupee-amount lines were found in this document. Try the sample submission, or a text export of the filing.</div>`;
+      return;
+    }
+    document.getElementById("candidateArea").innerHTML = `
+      <div class="roster-table-wrap">
+        <table class="ledger-table">
+          <thead><tr><th>Description</th><th>Category (detected)</th><th>Agency (detected)</th><th class="right">Cost</th><th>Confidence</th><th></th></tr></thead>
+          <tbody>
+            ${rows.map((r,i)=>`
+              <tr>
+                <td>${r.description}</td>
+                <td>${r.category}</td>
+                <td>${r.agency}</td>
+                <td class="right">${fmtRupee(r.cost)}</td>
+                <td><span class="badge ${r.low_confidence ? "med" : "low"}">${(r.confidence*100).toFixed(0)}%${r.low_confidence ? " · review" : ""}</span></td>
+                <td><button class="btn" onclick="window.acceptIngestRow(${i})">Accept →</button></td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      </div>`;
+  }
+  window.acceptIngestRow = function(i){
+    const row = currentCandidates[i];
+    if(!row) return;
+    const q = getIngestQueue();
+    q.unshift({...row, staged_at: new Date().toISOString(), record_source: "SIMULATED_PDF_INGEST"});
+    saveIngestQueue(q);
+    renderQueue();
+    document.getElementById("clearQueueBtn").disabled = false;
+  };
+  function renderQueue(){
+    const q = getIngestQueue();
+    if(!q.length){
+      document.getElementById("queueArea").innerHTML = `<div class="empty-state" style="padding:14px 0; color:var(--quiet,#6b7280);">No rows accepted yet.</div>`;
+      return;
+    }
+    document.getElementById("queueArea").innerHTML = `
+      <div class="roster-table-wrap">
+        <table class="ledger-table">
+          <thead><tr><th>Description</th><th>Category</th><th>Agency</th><th class="right">Cost</th><th>Staged</th></tr></thead>
+          <tbody>
+            ${q.map(r=>`
+              <tr>
+                <td>${r.description}</td>
+                <td>${r.category}</td>
+                <td>${r.agency}</td>
+                <td class="right">${fmtRupee(r.cost)}</td>
+                <td>${fmtDate(r.staged_at)}</td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      </div>`;
+  }
+  document.getElementById("clearQueueBtn").addEventListener("click", ()=>{
+    saveIngestQueue([]);
+    renderQueue();
+    document.getElementById("clearQueueBtn").disabled = true;
+  });
+
+  function showFileChip(name){
+    document.getElementById("fileChip").innerHTML = `<span class="ingest-file-chip">📄 ${name}</span>`;
+  }
+  function showError(msg){
+    document.getElementById("ingestError").innerHTML = msg ? `<div class="footnote" style="margin-top:12px;">${msg}</div>` : "";
+  }
+
+  async function extractPdfText(file){
+    if(!window.pdfjsLib){
+      throw new Error("pdf.js library unavailable (offline or CDN blocked) — try a .txt export or the sample submission instead.");
+    }
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+    const buf = await file.arrayBuffer();
+    const doc = await pdfjsLib.getDocument({data: buf}).promise;
+    let text = "";
+    for(let p=1; p<=doc.numPages; p++){
+      const page = await doc.getPage(p);
+      const content = await page.getTextContent();
+      text += content.items.map(it=>it.str).join(" ") + "\n";
+    }
+    return text;
+  }
+
+  async function processFile(file){
+    showError("");
+    resetSteps();
+    showFileChip(file.name);
+    setStep(1, "done"); progressTo(25);
+    await new Promise(r=>setTimeout(r,150));
+    setStep(2, "active");
+    let text;
+    try{
+      text = file.name.toLowerCase().endsWith(".pdf") ? await extractPdfText(file) : await file.text();
+    }catch(err){
+      setStep(2, null);
+      showError(`Extraction failed: ${err.message}`);
+      return;
+    }
+    setStep(2, "done"); progressTo(60);
+    await new Promise(r=>setTimeout(r,150));
+    setStep(3, "active");
+    const rows = parseSubmissionText(text);
+    setStep(3, "done"); progressTo(85);
+    await new Promise(r=>setTimeout(r,150));
+    setStep(4, "done"); progressTo(100);
+    renderCandidates(rows);
+  }
+
+  async function processSample(){
+    showError("");
+    resetSteps();
+    showFileChip("sample-nodal-agency-submission.txt (demo)");
+    setStep(1,"done"); progressTo(25); await new Promise(r=>setTimeout(r,120));
+    setStep(2,"done"); progressTo(60); await new Promise(r=>setTimeout(r,120));
+    setStep(3,"active");
+    const rows = parseSubmissionText(SAMPLE_SUBMISSION);
+    setStep(3,"done"); progressTo(85); await new Promise(r=>setTimeout(r,120));
+    setStep(4,"done"); progressTo(100);
+    renderCandidates(rows);
+  }
+
+  const dropzone = document.getElementById("dropzone");
+  const fileInput = document.getElementById("fileInput");
+  dropzone.addEventListener("click", ()=>fileInput.click());
+  fileInput.addEventListener("change", e=>{ if(e.target.files[0]) processFile(e.target.files[0]); });
+  ["dragenter","dragover"].forEach(evt=>dropzone.addEventListener(evt, e=>{ e.preventDefault(); dropzone.classList.add("drag-over"); }));
+  ["dragleave","drop"].forEach(evt=>dropzone.addEventListener(evt, e=>{ e.preventDefault(); dropzone.classList.remove("drag-over"); }));
+  dropzone.addEventListener("drop", e=>{ const f = e.dataTransfer.files[0]; if(f) processFile(f); });
+  document.getElementById("sampleBtn").addEventListener("click", processSample);
+
+  renderQueue();
+});
+</script>
+</body>
+</html>

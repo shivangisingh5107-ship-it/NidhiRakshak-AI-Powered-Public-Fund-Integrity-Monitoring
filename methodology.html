@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Model &amp; Accuracy — NidhiRakshak</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+<div id="app"></div>
+
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script>
+renderShell("methodology.html", function(main){
+  const M = D.metrics;
+  const cm = M.confusion_matrix;
+
+  main.innerHTML = `
+    <div class="topbar">
+      <div>
+        <div class="eyebrow">HOW THE DETECTOR WORKS</div>
+        <h1 class="page-title">Model &amp; Detection Accuracy</h1>
+      </div>
+    </div>
+
+    <div class="ledger">
+      <div class="ledger-cell">
+        <div class="ledger-label">ACCURACY</div>
+        <div class="ledger-value brass">${(M.accuracy*100).toFixed(1)}%</div>
+      </div>
+      <div class="ledger-cell">
+        <div class="ledger-label">RECALL (catch rate)</div>
+        <div class="ledger-value teal">${(M.recall*100).toFixed(1)}%</div>
+        <div class="ledger-sub">of true positives caught</div>
+      </div>
+      <div class="ledger-cell">
+        <div class="ledger-label">PRECISION</div>
+        <div class="ledger-value">${(M.precision*100).toFixed(1)}%</div>
+        <div class="ledger-sub">of flags are true positives</div>
+      </div>
+      <div class="ledger-cell">
+        <div class="ledger-label">F1 SCORE</div>
+        <div class="ledger-value">${M.f1.toFixed(3)}</div>
+      </div>
+      <div class="ledger-cell">
+        <div class="ledger-label">ROC-AUC</div>
+        <div class="ledger-value brass">${M.roc_auc.toFixed(3)}</div>
+      </div>
+    </div>
+
+    <div class="panel feedback-loop-panel">
+      <div class="panel-head">
+        <div>
+          <div class="panel-title">Human feedback loop</div>
+          <div class="panel-note">labelled signals for future retraining</div>
+        </div>
+        <span class="badge low">Active in demo</span>
+      </div>
+      <div class="feedback-overview">
+        <div><b>${feedbackStats().reviewed}</b><span>marked reviewed</span></div>
+        <div><b>${feedbackStats().falsePositive}</b><span>false positives</span></div>
+        <div><b>${feedbackStats().total}</b><span>total labels</span></div>
+      </div>
+      <div class="feedback-loop-copy">Every flagged project has <b>Mark Reviewed</b> and <b>False Positive</b> actions. False positives are removed from the active demo queue and stored as labelled examples. A production retraining job can use these labels to recalibrate thresholds and reduce repeat false positives without hiding unresolved work.</div>
+    </div>
+
+    <div class="grid2">
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">ROC Curve</div>
+          <div class="panel-note">tradeoff at every threshold</div>
+        </div>
+        <div id="rocChart"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">Confusion Matrix</div>
+          <div class="panel-note">at the operating threshold (risk ≥ 35)</div>
+        </div>
+        <table class="ledger-table">
+          <thead><tr><th></th><th class="center">Predicted: Not flagged</th><th class="center">Predicted: Flagged</th></tr></thead>
+          <tbody>
+            <tr><td><b>Actual: Clean</b></td><td class="center">${cm.tn}</td><td class="center" style="color:var(--brass-hi)">${cm.fp}</td></tr>
+            <tr><td><b>Actual: Simulated issue</b></td><td class="center" style="color:var(--crit)">${cm.fn}</td><td class="center" style="color:var(--teal)">${cm.tp}</td></tr>
+          </tbody>
+        </table>
+        <div class="panel-note" style="margin-top:12px;">
+          The detector is tuned toward <b style="color:var(--text-hi)">recall</b>: in a fraud-screening
+          setting, missing a real issue (false negative) is far costlier than sending a clean work to a
+          human reviewer (false positive). ${cm.fn===0 ? "Zero false negatives on this benchmark." : cm.fn+" false negatives on this benchmark."}
+        </div>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">Statistical Feature Importance</div>
+          <div class="panel-note">Isolation Forest layer</div>
+        </div>
+        <div id="featChart"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">Every Reason, By Frequency</div>
+          <div class="panel-note">across all flagged works</div>
+        </div>
+        <div id="reasonFreqChart"></div>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="panel">
+        <div class="panel-head"><div class="panel-title">Detection Pipeline</div></div>
+        <div class="reason-row"><div class="reason-check on">1</div><div><div class="reason-label">Feature engineering</div>
+          <div class="reason-detail">Utilisation ratio, completion lag, cost vs. category median, agency concentration,
+          sanction timing, round-number costs, and same-day batching are computed for every work.</div></div></div>
+        <div class="reason-row"><div class="reason-check on">2</div><div><div class="reason-label">Explainable rule engine</div>
+          <div class="reason-detail">${Object.keys(D.reasons.catalog).length - 1} hand-specified rules fire on clear threshold
+          breaches — each one human-readable, none a black box.</div></div></div>
+        <div class="reason-row"><div class="reason-check on">3</div><div><div class="reason-label">Text similarity check</div>
+          <div class="reason-detail">TF-IDF + cosine similarity within each district surfaces near-duplicate or
+          generically vague work descriptions that resist manual scanning at scale.</div></div></div>
+        <div class="reason-row"><div class="reason-check on">4</div><div><div class="reason-label">Isolation Forest</div>
+          <div class="reason-detail">An unsupervised anomaly model scores the full feature combination, catching
+          unusual work profiles that don't cross any single rule threshold on their own.</div></div></div>
+        <div class="reason-row"><div class="reason-check on">5</div><div><div class="reason-label">Composite risk score</div>
+          <div class="reason-detail">Rule weights + normalised anomaly score combine into a single 0–100 score, banded
+          into Low / Medium / High / Critical for triage.</div></div></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><div class="panel-title">Agencies With Highest Flag Rates</div></div>
+        <table class="ledger-table">
+          <thead><tr><th>Agency</th><th class="right">MPs served</th><th class="right">Works</th><th class="right">Flag rate</th></tr></thead>
+          <tbody>
+            ${M.top_agencies_flagged.map(a=>`
+              <tr><td>${a.implementing_agency}</td><td class="right">${a.n_mps}</td><td class="right">${a.n_works}</td>
+              <td class="right"><span class="badge ${a.flag_rate>0.5?'crit':'high'}">${(a.flag_rate*100).toFixed(0)}%</span></td></tr>
+            `).join("")}
+          </tbody>
+        </table>
+        <div class="panel-note" style="margin-top:10px;">An agency serving many different MPs with an unusually
+        high flag rate is a proxy for a favoured-vendor or shell-contractor pattern, not proof of one.</div>
+      </div>
+    </div>
+
+    <div class="panel" id="cross-scheme-scope">
+      <div class="panel-head"><div class="panel-title">Known Limitations &amp; Future Scope</div></div>
+      <div class="grid2" style="margin-bottom:0;">
+        <div>
+          <div class="panel-note" style="font-weight:700; color:var(--text-hi); margin-bottom:8px;">Be upfront about these</div>
+          <ul style="margin:0; padding-left:18px; color:var(--text-mid); font-size:13px; line-height:1.9;">
+            <li>Work-level data is synthetic; the pipeline is proven on real MP identity + allocation data but not yet on real per-work transaction records.</li>
+            <li>The accuracy metrics above are benchmarked against a <b style="color:var(--amber-soft)">simulated</b> ground truth built into the synthetic data — real deployment requires validation against confirmed audit outcomes.</li>
+            <li>Cross-scheme duplicate detection, satellite verification and PDF ingestion (right) all run against <b style="color:var(--amber-soft)">synthetic or client-side simulated</b> data/services, not live government feeds or an imagery contract.</li>
+            <li>Text similarity can be evaded by deliberate rewording.</li>
+            <li>A high risk score is a prioritisation signal for human review — never an automatic finding of fraud.</li>
+          </ul>
+        </div>
+        <div>
+          <div class="panel-note" style="font-weight:700; color:var(--text-hi); margin-bottom:8px;">Roadmap</div>
+          <ul style="margin:0; padding-left:18px; color:var(--text-mid); font-size:13px; line-height:1.9;">
+             <li><b style="color:var(--green)">Prototype enabled:</b> Geo-tagged asset registry surfaces location and verification layers per project.</li>
+             <li><b style="color:var(--green)">Prototype enabled:</b> Human feedback loop ("Mark Reviewed" / "False Positive") stores labels locally for future retraining.</li>
+             <li><b style="color:var(--green)">Prototype enabled:</b> Cross-scheme duplicate-funding matcher (district + category + cost-window) runs against a synthetic MGNREGS/state-scheme feed — see <a href="data.html#cross-scheme">Data Sources</a>. Needs API/data-sharing access from MGNREGS and state departments to go live.</li>
+             <li><b style="color:var(--green)">Prototype enabled:</b> Satellite/geo-tag verification workflow for large civil works (≥ ₹10L) — see <a href="geo.html">Geo Registry</a>. Runs on a deterministic demo overlay; needs a licensed imagery/change-detection provider to go live.</li>
+             <li><b style="color:var(--green)">Prototype enabled:</b> Automated PDF ingestion from state nodal agency submissions — see <a href="ingest.html">PDF Ingestion</a>. Runs entirely client-side (pdf.js); a production version would replace this with a server-side ingestion service with digital-signature validation and OCR for scanned filings.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  `;
+
+  rocChart(document.getElementById("rocChart"), M.roc_curve.fpr, M.roc_curve.tpr, M.roc_auc);
+
+  const feat = Object.entries(M.feature_importance).sort((a,b)=>b[1]-a[1]);
+  const featLabels = {
+    utilization_ratio: "Utilisation ratio", completion_lag_days: "Completion lag",
+    cost_ratio_to_category_median: "Cost vs. category median", lag_ratio_to_category_median: "Lag vs. category median",
+    agency_concentration: "Agency concentration",
+  };
+   hBarChart(document.getElementById("featChart"), feat.map(([k,v])=>({label:featLabels[k]||k, value:v, color:"#247454"})), {rowH:30, fmt:v=>v.toFixed(2)});
+
+  const freq = D.reasons.frequency;
+   hBarChart(document.getElementById("reasonFreqChart"), freq.map(r=>({label:r.label, value:r.count, color:"#c87917"})), {rowH:24, padL:190});
+});
+</script>
+</body>
+</html>

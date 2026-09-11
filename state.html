@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>State &amp; District — NidhiRakshak</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+<div id="app"></div>
+
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script>
+renderShell("state.html", function(main){
+
+  const params = new URLSearchParams(location.search);
+  let selectedState = params.get("state") || (D.states[0] && D.states[0].state);
+
+  main.innerHTML = `
+    <div class="topbar">
+      <div>
+        <div class="eyebrow">GEOGRAPHIC DRILL-DOWN</div>
+        <h1 class="page-title">State &amp; District Risk Map</h1>
+      </div>
+      <div class="topbar-right">
+        <select id="stateSelect" class="btn" style="padding:9px 12px;"></select>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">All States — Ranked by Flagged Works</div>
+          <div class="panel-note">click a row to drill in</div>
+        </div>
+        <table class="ledger-table" id="stateTable">
+          <thead><tr>
+            <th>State</th><th class="right">MPs</th><th class="right">Works</th>
+            <th class="right">Utilisation</th><th class="right">Flagged</th><th class="right">Avg Risk</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <div class="panel" id="stateDetailPanel"></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-title" id="districtTitle">Districts</div>
+        <div class="panel-note">within selected state</div>
+      </div>
+      <table class="ledger-table" id="districtTable">
+        <thead><tr>
+          <th>District</th><th class="right">MPs</th><th class="right">Works</th><th class="right">Flagged</th><th class="right">Avg Risk</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="panel" style="margin-top:18px;">
+      <div class="panel-head">
+        <div class="panel-title" id="mpListTitle">MPs in this state</div>
+        <div class="panel-note">sorted by average risk</div>
+      </div>
+      <table class="ledger-table" id="stateMpTable">
+        <thead><tr>
+          <th>MP</th><th>Constituency</th><th class="right">Allocated</th><th class="right">Utilisation</th>
+          <th class="right">Flagged Works</th><th class="right">Avg Risk</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  `;
+
+  const stateSel = document.getElementById("stateSelect");
+  const statesSorted = [...D.states].sort((a,b)=>a.state.localeCompare(b.state));
+  stateSel.innerHTML = statesSorted.map(s => `<option value="${s.state}">${s.state}</option>`).join("");
+  stateSel.value = selectedState;
+  stateSel.addEventListener("change", ()=> renderState(stateSel.value));
+
+  // full state ranking table
+  const ranked = [...D.states].sort((a,b)=>b.flagged-a.flagged);
+  document.querySelector("#stateTable tbody").innerHTML = ranked.map(s => `
+    <tr class="rowbar-${riskBand(s.avg_risk*1.6)}" onclick="document.getElementById('stateSelect').value='${s.state}'; document.getElementById('stateSelect').dispatchEvent(new Event('change')); window.scrollTo({top:0,behavior:'smooth'});">
+      <td>${s.state}</td>
+      <td class="right">${s.mps}</td>
+      <td class="right">${fmtNum(s.works)}</td>
+      <td class="right">${fmtPct(s.utilization_pct)}</td>
+      <td class="right"><b style="color:var(--brass-hi)">${s.flagged}</b></td>
+      <td class="right"><span class="badge ${riskBand(s.avg_risk*1.6)}">${s.avg_risk}</span></td>
+    </tr>
+  `).join("");
+
+  function renderState(stateName){
+    const s = D.states.find(x=>x.state===stateName);
+    if(!s) return;
+
+    document.getElementById("stateDetailPanel").innerHTML = `
+      <div class="panel-head">
+        <div class="panel-title">${s.state}</div>
+        <div class="panel-note">${s.mps} MPs</div>
+      </div>
+      <div class="kv"><span class="k">Works recorded</span><span class="v">${fmtNum(s.works)}</span></div>
+      <div class="kv"><span class="k">Total sanctioned</span><span class="v">₹${fmtCr(s.total_sanctioned)}</span></div>
+      <div class="kv"><span class="k">Total spent</span><span class="v">₹${fmtCr(s.total_expenditure)}</span></div>
+      <div class="kv"><span class="k">Fund utilisation</span><span class="v">${fmtPct(s.utilization_pct)}</span></div>
+      <div class="kv"><span class="k">Flagged works</span><span class="v" style="color:var(--brass-hi)">${s.flagged}</span></div>
+      <div class="kv"><span class="k">Critical-risk works</span><span class="v" style="color:var(--crit)">${s.critical}</span></div>
+      <div class="kv"><span class="k">Average risk score</span><span class="v">${s.avg_risk} / 100</span></div>
+    `;
+
+    document.getElementById("districtTitle").textContent = `Districts in ${s.state}`;
+    const districts = D.districts.filter(d=>d.state===stateName).sort((a,b)=>b.flagged-a.flagged);
+    document.querySelector("#districtTable tbody").innerHTML = districts.length ? districts.map(d => `
+      <tr class="rowbar-${riskBand(d.avg_risk*1.6)}">
+        <td>${d.district}</td>
+        <td class="right">${d.mps}</td>
+        <td class="right">${fmtNum(d.works)}</td>
+        <td class="right"><b style="color:var(--brass-hi)">${d.flagged}</b></td>
+        <td class="right"><span class="badge ${riskBand(d.avg_risk*1.6)}">${d.avg_risk}</span></td>
+      </tr>
+    `).join("") : `<tr><td colspan="5" class="empty-state">No district data</td></tr>`;
+
+    document.getElementById("mpListTitle").textContent = `MPs in ${s.state}`;
+    const mps = D.mps.filter(m=>m.state===stateName).sort((a,b)=>b.avg_risk-a.avg_risk);
+    document.querySelector("#stateMpTable tbody").innerHTML = mps.map(m => `
+      <tr class="rowbar-${riskBand(m.avg_risk)}" onclick="location.href='mp-detail.html?id=${m.mp_id}'">
+        <td>${m.mp_name}</td>
+        <td>${m.constituency}</td>
+        <td class="right nowrap">₹${fmtCr(m.allocated_limit)}</td>
+        <td class="right">${fmtPct(m.utilization_pct)}</td>
+        <td class="right">${m.flagged}</td>
+        <td class="right"><span class="badge ${riskBand(m.avg_risk)}">${m.avg_risk}</span></td>
+      </tr>
+    `).join("");
+  }
+
+  renderState(selectedState);
+});
+</script>
+</body>
+</html>

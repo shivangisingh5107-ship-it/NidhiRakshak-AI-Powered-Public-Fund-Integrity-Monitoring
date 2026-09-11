@@ -1,0 +1,13 @@
+{
+  "real_mp_count": 774,
+  "synthetic_work_count": 9648,
+  "states_covered": 36,
+  "generated_at": "2026-09-06T16:51:22.446682",
+  "real_lok_sabha_count": 543,
+  "real_rajya_sabha_count": 231,
+  "sources": [
+    "Allocated Limit for Honble MPs (3).pdf",
+    "Allocated Limit for Honble MPs (4).pdf",
+    "MPLADS eSAKSHI public dashboard"
+  ]
+}

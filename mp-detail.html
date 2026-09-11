@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MP Dashboard — NidhiRakshak</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+<div id="app"></div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script>
+renderShell("mp.html", function(main){
+  const params = new URLSearchParams(location.search);
+  const currentId = params.get("id");
+  main.innerHTML = `
+    <div class="topbar">
+      <div>
+        <div class="eyebrow">HON'BLE MEMBER OF PARLIAMENT</div>
+        <h1 class="page-title">MP Dashboard</h1>
+      </div>
+      <div class="topbar-right">
+        <a class="btn" href="mp.html">← MP Dashboard list</a>
+        <div class="typeahead">
+          <div class="search-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+            <input id="mpSearch" placeholder="Search another MP…" autocomplete="off">
+          </div>
+          <div class="typeahead-list" id="mpSearchList"></div>
+        </div>
+      </div>
+    </div>
+    <div id="mpContent"></div>
+  `;
+  attachMpTypeahead(document.getElementById("mpSearch"), document.getElementById("mpSearchList"), id=>{
+    location.href = "mp-detail.html?id=" + id;
+  });
+
+  const m = D.mps.find(x=>x.mp_id===currentId);
+  if(!m){
+    document.getElementById("mpContent").innerHTML = `<div class="panel empty-state" style="margin-top:20px;">
+      Choose an MP from the <a href="mp.html" style="color:var(--blue);font-weight:700;">MP Dashboard list</a> to open a dedicated profile page.
+    </div>`;
+    return;
+  }
+  document.getElementById("mpSearch").value = m.mp_name;
+  const works = D.worksAll.filter(w=>w.mp_id===currentId).sort((a,b)=>b.risk_score-a.risk_score);
+  const flagged = activeFlagged(works.filter(w=>w.risk_band==="High" || w.risk_band==="Critical"));
+  const band = riskBand(m.avg_risk);
+
+  document.getElementById("mpContent").innerHTML = `
+    <div class="hero-flex">
+      <div class="panel" style="flex:2; min-width:320px;">
+        <div class="eyebrow">${m.state} · ${m.constituency}</div>
+        <h2 style="font-size:22px; margin-bottom:14px;">${m.mp_name}</h2>
+        <div class="kv"><span class="k">MPLADS allocated limit</span><span class="v">₹${fmtCr(m.allocated_limit)}</span></div>
+        <div class="kv"><span class="k">Works recorded</span><span class="v">${m.works}</span></div>
+        <div class="kv"><span class="k">Total sanctioned</span><span class="v">₹${fmtCr(m.total_sanctioned)}</span></div>
+        <div class="kv"><span class="k">Total expenditure</span><span class="v">₹${fmtCr(m.total_expenditure)}</span></div>
+        <div class="kv"><span class="k">Fund utilisation</span><span class="v">${fmtPct(m.utilization_pct)}</span></div>
+        <div class="kv"><span class="k">Active flagged works</span><span class="v" style="color:var(--brass-hi)">${flagged.length} of ${m.works}</span></div>
+      </div>
+      <div class="panel" style="flex:1; min-width:220px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+        <div class="panel-note" style="margin-bottom:2px;">Composite Risk Profile</div>
+        <div id="mpGauge"></div>
+      </div>
+    </div>
+    ${flagged.length ? `
+    <div class="panel" style="margin-bottom:18px;">
+      <div class="panel-head"><div class="panel-title">Your Flagged Projects</div><div class="panel-note">${flagged.length} works need attention · feedback can remove a demo flag</div></div>
+      <div id="flaggedList"></div>
+    </div>` : `
+    <div class="panel" style="margin-bottom:18px;">
+      <div class="panel-head"><div class="panel-title">Your Flagged Projects</div></div>
+      <div class="empty-state">No works currently flagged for this MP. Clean record across ${m.works} works reviewed.</div>
+    </div>`}
+    <div class="panel">
+      <div class="panel-head"><div class="panel-title">All Works</div></div>
+      <div class="tabbar" id="workTabs">
+        <button class="active" data-f="all">All (${works.length})</button>
+        <button data-f="Completed">Completed (${works.filter(w=>w.status==='Completed').length})</button>
+        <button data-f="In Progress">In Progress (${works.filter(w=>w.status==='In Progress').length})</button>
+        <button data-f="Stalled">Stalled (${works.filter(w=>w.status==='Stalled').length})</button>
+        <button data-f="flagged">Flagged (${flagged.length})</button>
+      </div>
+      <table class="ledger-table" id="mpWorksTable">
+        <thead><tr><th>Work</th><th>Category</th><th>Agency</th><th class="right">Sanctioned</th><th class="right">Util.</th><th>Status</th><th class="right">Risk</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  `;
+  riskGauge(document.getElementById("mpGauge"), m.avg_risk, band);
+  if(document.getElementById("flaggedList")){
+    document.getElementById("flaggedList").innerHTML = flagged.slice(0,8).map(w=>`
+      <div class="reason-row flagged-work-row" style="cursor:pointer;" onclick="location.href='investigation.html?id=${w.work_id}'">
+        <div class="reason-check on">!</div>
+        <div style="flex:1;">
+          <div class="reason-label">${w.work_category} — ${w.work_id} <span class="badge ${riskBand(w.risk_score)}" style="margin-left:8px;">${w.risk_score}</span> ${feedbackBadge(w.work_id)}</div>
+          <div class="reason-detail">${w.work_description} · ${w.implementing_agency} · sanctioned ${fmtDate(w.sanction_date)}</div>
+          <div style="margin-top:6px;">${reasonChips(w.all_reason_codes)}</div>
+          <div class="project-meta-line"><span class="map-marker">⌖</span> Geo registry available · approximate location</div>
+        </div>
+        <div class="reason-weight">₹${fmtCr(w.cost_sanctioned)}<br><span class="muted">→ view</span>${feedbackActions(w.work_id)}</div>
+      </div>
+    `).join("");
+  }
+  function renderWorksTable(filter){
+    let rows = works;
+    if(filter==="flagged") rows = flagged;
+    else if(filter!=="all") rows = works.filter(w=>w.status===filter);
+    document.querySelector("#mpWorksTable tbody").innerHTML = rows.length ? rows.map(w=>`
+      <tr class="rowbar-${riskBand(w.risk_score)}" onclick="location.href='investigation.html?id=${w.work_id}'">
+        <td class="mono-id">${w.work_id}</td><td>${w.work_category}</td><td>${w.implementing_agency}</td>
+        <td class="right nowrap">${fmtRupee(w.cost_sanctioned)}</td><td class="right">${fmtPct(w.utilization_ratio*100)}</td>
+        <td>${w.status} ${feedbackBadge(w.work_id)}</td><td class="right"><span class="badge ${riskBand(w.risk_score)}">${w.risk_score}</span></td>
+      </tr>
+    `).join("") : `<tr><td colspan="7" class="empty-state">No works in this category</td></tr>`;
+  }
+  renderWorksTable("all");
+  document.getElementById("workTabs").addEventListener("click", e=>{
+    const btn = e.target.closest("button"); if(!btn) return;
+    [...document.querySelectorAll("#workTabs button")].forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active"); renderWorksTable(btn.dataset.f);
+  });
+});
+</script>
+</body>
+</html>

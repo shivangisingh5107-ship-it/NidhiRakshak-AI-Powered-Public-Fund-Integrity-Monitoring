@@ -1,0 +1,544 @@
+mp_id,mp_name,state,constituency,allocated_limit
+LS001,Aashtikar Patil Nagesh Bapurao,Maharashtra,Hingoli,190289442.0
+LS002,Abdul Rashid Sheikh,Jammu And Kashmir,Baramullah,154773472.11
+LS003,Abhay Kumar Sinha,Bihar,Aurangabad_Br,147000000.0
+LS004,Abhijit Gangopadhyay,West Bengal,Tamluk,147000000.0
+LS005,Abu Taher Khan,West Bengal,Murshidabad,147000000.0
+LS006,Adhikari Soumendu,West Bengal,Kanthi,147000000.0
+LS007,Aditya Yadav,Uttar Pradesh,Badaun,147000000.0
+LS008,Adv Adoor Prakash,Kerala,Attingal,147000000.0
+LS009,Adv Dean Kuriakose,Kerala,Idukki,147000000.0
+LS010,Adv Gowaal Kagada Padavi,Maharashtra,Nandurbar(St),147816309.11
+LS011,Adv K Francis George,Kerala,Kottayam,188722256.11
+LS012,Afzal Ansari,Uttar Pradesh,Ghazipur,220500000.0
+LS013,Aga Syed Ruhullah Mehdi,Jammu And Kashmir,Srinagar,147000000.0
+LS014,Ajay Bhatt,Uttarakhand,Nainital Udham Singh Nag.,147000000.0
+LS015,Ajay Kumar Mandal,Bihar,Bhagalpur,147000000.0
+LS016,Ajay Tamta,Uttarakhand,Almora(Sc),147000000.0
+LS017,Ajendra Singh Lodhi,Uttar Pradesh,Hamirpur_Up,147000000.0
+LS018,Akhilesh Yadav,Uttar Pradesh,Kannauj,147000000.0
+LS019,Akshaya Yadav,Uttar Pradesh,Firozabad,147000000.0
+LS020,Alfred Kanngam S Arthur,Manipur,Outer Manipur(St),147000000.0
+LS021,Alok Kumar Suman,Bihar,Gopalganj (Sc),147000000.0
+LS022,Alok Sharma,Madhya Pradesh,Bhopal,147000000.0
+LS023,Amar Sharadrao Kale,Maharashtra,Wardha,147000000.0
+LS024,Amarsing Tisso,Assam,Diphu (St),147000000.0
+LS025,Ambica G Lakshminarayana Valmiki,Andhra Pradesh,Anantapur,201899064.11
+LS026,Amol Ramsing Kolhe,Maharashtra,Shirur,147000000.0
+LS027,Amraram,Rajasthan,Sikar,165691544.11
+LS028,Amrinder Singh Raja Warring,Punjab,Ludhiana,147000000.0
+LS029,Anand Bhadauriya,Uttar Pradesh,Dhaurahra,147000000.0
+LS030,Anand Kumar,Uttar Pradesh,Bahraich(Sc),147000000.0
+LS031,Ananta Nayak,Odisha,Keonjhar(St),147000000.0
+LS032,Andimuthu Raja,Tamil Nadu,Nilgiris(Sc),147000000.0
+LS033,Andrew J. Syngkon,Meghalaya,Shillong,98000000.0
+LS034,Angomcha Bimol Akoijam,Manipur,Inner Manipur,147000000.0
+LS035,Anil Baluni,Uttarakhand,Garhwal,147000000.0
+LS036,Anil Yeshwant Desai,Maharashtra,Mumbai South Central,147000000.0
+LS037,Anita Nagarsingh Chouhan,Madhya Pradesh,Ratlam(St),147000000.0
+LS038,Anita Subhadarshini,Odisha,Aska,147000000.0
+LS039,Annpurna Devi,Jharkhand,Kodarma,166665931.8
+LS040,Anoop Pradhan Balmiki,Uttar Pradesh,Hathras (Sc),147000000.0
+LS041,Anto Antony,Kerala,Pathanamthitta,147000000.0
+LS042,Anup Sanjay Dhotre,Maharashtra,Akola,147000000.0
+LS043,Anurag Sharma,Uttar Pradesh,Jhansi,147000000.0
+LS044,Anurag Singh Thakur,Himachal Pradesh,Hamirpur_Hp,149570117.11
+LS045,Appalanaidu Kalisetti,Andhra Pradesh,Vizianagaram,147000000.0
+LS046,Arun Bharti,Bihar,Jamui(Sc),194924621.11
+LS047,Arun Govil,Uttar Pradesh,Meerut,147000000.0
+LS048,Arun Nehru,Tamil Nadu,Perambalur,147000000.0
+LS049,Aruna. D. K,Telangana,Mahabubnagar,147000000.0
+LS050,Arup Chakraborty,West Bengal,Bankura,147000000.0
+LS051,Arvind Dharmapuri,Telangana,Nizamabad,281396355.11
+LS052,Arvind Ganpat Sawant,Maharashtra,Mumbai South,147000000.0
+LS053,Asaduddin Owaisi,Telangana,Hyderabad,147000000.0
+LS054,Ashish Dubey,Madhya Pradesh,Jabalpur,147000000.0
+LS055,Ashok Kumar Rawat,Uttar Pradesh,Misrikh(Sc),147000000.0
+LS056,Ashok Kumar Yadav,Bihar,Madhubani,147000000.0
+LS057,Asit Kumar Mal,West Bengal,Bolpur(Sc),275694456.74
+LS058,Atul Garg,Uttar Pradesh,Ghaziabad,155336470.0
+LS059,Avimanyu Sethi,Odisha,Bhadrak(Sc),147000000.0
+LS060,Awadhesh Prasad,Uttar Pradesh,Faizabad,147000000.0
+LS061,Azad Kirti Jha,West Bengal,Bardhaman-Durgapur,179658399.98
+LS062,B K Parthasarathi,Andhra Pradesh,Hindupur,160491894.11
+LS063,Babu Singh Kushwaha,Uttar Pradesh,Jaunpur,147000000.0
+LS064,Bachhav Shobha Dinesh,Maharashtra,Dhule,147000000.0
+LS065,Bag Mitali,West Bengal,Arambag(Sc),147000000.0
+LS066,Baijayant Panda,Odisha,Kendrapara,147000000.0
+LS067,Bajrang Manohar Sonwane,Maharashtra,Beed,165899107.19
+LS068,Balabhadra Majhi,Odisha,Nabarangpur(St),147413962.11
+LS069,Balashowry Vallabbhaneni,Andhra Pradesh,Machilipatnam,147000000.0
+LS070,Balram Naik Porika,Telangana,Mahabubabad,147000000.0
+LS071,Balwant Baswant Wankhade,Maharashtra,Amravati(Sc),198293678.0
+LS072,Balya Mama Suresh Gopinath Mhatre,Maharashtra,Bhiwandi,147000000.0
+LS073,Bansuri Swaraj,Delhi,New Delhi,154306950.0
+LS074,Bapi Haldar,West Bengal,Mathurapur(Sc),147000000.0
+LS075,Basavaraj Bommai,Karnataka,Haveri,147000000.0
+LS076,Bastipati Nagaraju Panchalingala,Andhra Pradesh,Kurnool,159998515.11
+LS077,Bhagirath Chaudhary,Rajasthan,Ajmer,147000000.0
+LS078,Bhajan Lal Jatav,Rajasthan,Karauli-Dholpur(Sc),147000000.0
+LS079,Bharat Singh Kushwah,Madhya Pradesh,Gwalior,151455276.04
+LS080,Bharatbhai Manubhai Sutariya,Gujarat,Amreli,147000000.0
+LS081,Bharatsinhji Shankarji Dabhi,Gujarat,Patan,147000000.0
+LS082,Bharti Pardhi,Madhya Pradesh,Balaghat,154398389.01
+LS083,Bhaskar Murlidhar Bhagare,Maharashtra,Dindori(St),147000000.0
+LS084,Bhausaheb Rajaram Wakchaure,Maharashtra,Shirdi(Sc),147000000.0
+LS085,Bhojraj Nag,Chhattisgarh,Kanker(St),164672734.11
+LS086,Bhola Singh,Uttar Pradesh,Bulandshahr(Sc),147000000.0
+LS087,Bhumare Sandipanrao Asaram,Maharashtra,Aurangabad_Mh,147000000.0
+LS088,Bhupathiraju Srinivasa Varma,Andhra Pradesh,Narasapuram,147000000.0
+LS089,Bhupender Yadav,Rajasthan,Alwar,147000000.0
+LS090,Bibhu Prasad Tarai,Odisha,Jagatsinghpur(Sc),147000000.0
+LS091,Bidyut Baran Mahato,Jharkhand,Jamshedpur,147000000.0
+LS092,Bijuli Kalita Medhi,Assam,Guwahati,147000000.0
+LS093,Biplab Kumar Deb,Tripura,Tripura West,147000000.0
+LS094,Bishnu Pada Ray,Andaman And Nicobar Islands,Andaman And Nicobar Islands,147000000.0
+LS095,Brijendra Singh Ola,Rajasthan,Jhunjhunu,147000000.0
+LS096,Brijmohan Agrawal,Chhattisgarh,Raipur,153766451.11
+LS097,Bunty Vivek Sahu,Madhya Pradesh,Chhindwara,147000000.0
+LS098,C R Patil,Gujarat,Navsari,158532494.36
+LS099,C.M.Ramesh,Andhra Pradesh,Anakapalle,202531656.11
+LS100,Captain Brijesh Chowta,Karnataka,Dakshina Kannada,147000000.0
+LS101,Captain Viriato Fernandes,Goa,South Goa,147000000.0
+LS102,Chamala Kiran Kumar Reddy,Telangana,Bhongir,147000000.0
+LS103,Chandan Chauhan,Uttar Pradesh,Bijnor,147000000.0
+LS104,Chandra Prakash Joshi,Rajasthan,Chittorgarh,147000000.0
+LS105,Chandra Shekhar,Uttar Pradesh,Nagina(Sc),147000000.0
+LS106,Chandubhai Chhaganbhai Shihora,Gujarat,Surendranagar,147000000.0
+LS107,Charanjit Singh Channi,Punjab,Jalandhar(Sc),147000000.0
+LS108,Chavan Vasantrao Balwantrao,Maharashtra,,
+LS109,Chhatra Pal Singh Gangwar,Uttar Pradesh,Bareilly,147000000.0
+LS110,Chhatrapati Shahu Shahaji,Maharashtra,Kolhapur,147000000.0
+LS111,Chhotelal,Uttar Pradesh,Robertsganj(Sc),147000000.0
+LS112,Chintamani Maharaj,Chhattisgarh,Sarguja(St),147000000.0
+LS113,Chirag Paswan,Bihar,Hajipur(Sc),147000000.0
+LS114,Cn Annadurai,Tamil Nadu,Tiruvannamalai,148579509.11
+LS115,D M Kathir Anand,Tamil Nadu,Vellore,160196941.11
+LS116,D Ravikumar,Tamil Nadu,Viluppuram(Sc),197598306.11
+LS117,Daggubati Purandeshwari,Andhra Pradesh,Rajahmundry,147000000.0
+LS118,Daggumalla Prasada Rao,Andhra Pradesh,Chittoor,147000000.0
+LS119,Damodar Agarwal,Rajasthan,Bhilwara,147000000.0
+LS120,Daroga Prasad Saroj,Uttar Pradesh,Lalganj (Sc),147000000.0
+LS121,Darshan Singh Choudhary,Madhya Pradesh,Hoshangabad,147000000.0
+LS122,Deepender Singh Hooda,Haryana,Rohtak,147000000.0
+LS123,Devendra Alias Bhole Singh,Uttar Pradesh,Akbarpur,147000000.0
+LS124,Devesh Chandra Thakur,Bihar,Sitamarhi,163809205.11
+LS125,Devesh Shakya,Uttar Pradesh,Etah,147000000.0
+LS126,Devusinh Jesingbhai Chauhan,Gujarat,Kheda,147000000.0
+LS127,Dhairyasheel Sambhajirao Mane,Maharashtra,Hatkanangle,147000000.0
+LS128,Dhanorkar Pratibha Suresh Alias Balubhau,Maharashtra,Chandrapur,147000000.0
+LS129,Dharmendra Pradhan,Odisha,Sambalpur,147000000.0
+LS130,Dharmendra Yadav,Uttar Pradesh,Azamgarh,147000000.0
+LS131,Dhaval Laxmanbhai Patel,Gujarat,Valsad(St),147000000.0
+LS132,Dileshwar Kamait,Bihar,Supaul,150450930.89
+LS133,Dilip Saikia,Assam,Darrang-Udalguri,147000000.0
+LS134,Dinesh Chandra Yadav,Bihar,Madhepura,150070866.11
+LS135,Dineshbhai Makwana,Gujarat,Ahmedabad West(Sc),160434965.11
+LS136,Dr Byreddy Shabari,Andhra Pradesh,Nandyal,150675889.11
+LS137,Dr C N Manjunath,Karnataka,Bangalore Rural,147000000.0
+LS138,Dr Chandra Sekhar Pemmasani,Andhra Pradesh,Guntur,159774113.11
+LS139,Dr Dharamvira Gandhi,Punjab,Patiala,147000000.0
+LS140,Dr Jayanta Kumar Roy,West Bengal,Jalpaiguri(Sc),147000000.0
+LS141,Dr Kalge Shivaji Bandappa,Maharashtra,Latur(Sc),147000000.0
+LS142,Dr Mohammad Jawed,Bihar,Kishanganj,148669229.11
+LS143,Dr Rajkumar Sangwan,Uttar Pradesh,Baghpat,147000000.0
+LS144,Dr Rani Sri Kumar,Tamil Nadu,Tenkasi(Sc),153060922.82
+LS145,Dr Shashi Tharoor,Kerala,Thiruvananthapuram,147000000.0
+LS146,Dr Sukanta Majumdar,West Bengal,Balurghat,157085364.9
+LS147,Dr. Hemang Joshi,Gujarat,Vadodara,147000000.0
+LS148,Dr. Hemant Vishnu Savara,Maharashtra,Palghar(St),147000000.0
+LS149,Dr. Kirsan Namdeo,Maharashtra,Gadchiroli-Chimur(St),147000000.0
+LS150,Dr. Lata Wankhede,Madhya Pradesh,Sagar,147000000.0
+LS151,Dr. M.P Abdussamad Samadani,Kerala,Ponnani,170434031.11
+LS152,Dr. Mansukh Mandaviya,Gujarat,Porbandar,147000000.0
+LS153,Dr. Prabha Mallikarjun,Karnataka,Davanagere,147000000.0
+LS154,Dr. Pradeep Kumar Panigrahy,Odisha,Berhampur,147000000.0
+LS155,Dr. Prashant Yadaorao Padole,Maharashtra,Bhandara-Gondiya,159680283.39
+LS156,Dr. Raj Kumar Chabbewal,Punjab,Hoshiarpur(Sc),147000000.0
+LS157,Dr. Rajesh Mishra,Madhya Pradesh,Sidhi,262724510.35
+LS158,Dr. S P Singh,Uttar Pradesh,Pratapgarh,147000000.0
+LS159,Dr. Sharmila Sarkar,West Bengal,Bardhaman Purba(Sc),147000000.0
+LS160,Dr.K.Sudhakar,Karnataka,Chikballapur,147000000.0
+LS161,Dr.Mallu Ravi,Telangana,Nagarkurnool(Sc),147000000.0
+LS162,Dulu Mahato,Jharkhand,Dhanbad,147000000.0
+LS163,Durai Vaiko,Tamil Nadu,Tiruchirappalli,147000000.0
+LS164,Durga Das Uikey,Madhya Pradesh,Betul(St),151569502.91
+LS165,Dushyant Singh,Rajasthan,Jhalawar-Baran,147000000.0
+LS166,E. Tukaram,Karnataka,Bellary(St),147000000.0
+LS167,E.T. Mohammed Basheer,Kerala,Malappuram,163895872.11
+LS168,Eatala Rajender,Telangana,Malkajgiri,327477390.86
+LS169,Eswarasamy K,Tamil Nadu,Pollachi,162315106.11
+LS170,Faggan Singh Kulaste,Madhya Pradesh,Mandla(St),151861648.41
+LS171,G. Kumar Naik,Karnataka,Raichur(St),147000000.0
+LS172,Gaikwad Varsha Eknath,Maharashtra,Mumbai North-Central,147000000.0
+LS173,Gajendra Singh Patel,Madhya Pradesh,Khargone(St),147000000.0
+LS174,Gajendra Singh Shekhawat,Rajasthan,Jodhpur,147000000.0
+LS175,Ganapathy Rajkumar P,Tamil Nadu,Coimbatore,147370490.11
+LS176,Ganesan Selvam,Tamil Nadu,Kancheepuram(Sc),186508749.11
+LS177,Ganesh Singh,Madhya Pradesh,Satna,147000000.0
+LS178,Gaurav Gogoi,Assam,Jorhat,147000000.0
+LS179,Geniben Nagaji Thakor,Gujarat,Banaskantha,147000000.0
+LS180,Giridhari Yadav,Bihar,Banka,147000000.0
+LS181,Giriraj Singh,Bihar,Begusarai,147000000.0
+LS182,Gm Harish Balayogi,Andhra Pradesh,Amalapuram(Sc),147000000.0
+LS183,Godam Nagesh,Telangana,Adilabad(St),147000000.0
+LS184,Gopinath K,Tamil Nadu,Krishnagiri,147000000.0
+LS185,Govind Makthappa Karjol,Karnataka,Chitradurga(Sc),147000000.0
+LS186,Gumma Thanuja Rani,Andhra Pradesh,Araku(St),149458905.11
+LS187,Gurmeet Singh Meet Hayer,Punjab,Sangrur,147000000.0
+LS188,Gyaneshwar Patil,Madhya Pradesh,Khandwa,155690684.77
+LS189,H.D. Kumaraswamy,Karnataka,Mandya,147000000.0
+LS190,Harendra Singh Malik,Uttar Pradesh,Muzaffarnagar,147000000.0
+LS191,Haribhai Patel,Gujarat,Mahesana,147000000.0
+LS192,Harish Chandra Meena,Rajasthan,Tonk-Sawai Madhopur,147000000.0
+LS193,Harsh Malhotra,Delhi,East Delhi,147134131.0
+LS194,Hasmukh Bhai Soma Bhai Patel,Gujarat,Ahmedabad East,147000000.0
+LS195,Imran Masood,Uttar Pradesh,Saharanpur,147000000.0
+LS196,Indra Hang Subba,Sikkim,Sikkim,152003923.11
+LS197,Iqra Choudhary,Uttar Pradesh,Kairana,147000000.0
+LS198,Isha Khan Choudhury,West Bengal,Maldaha Dakshin,147000000.0
+LS199,Jagadish Chandra Barma Basunia,West Bengal,Coochbehar(Sc),168604641.11
+LS200,Jagadish Shettar,Karnataka,Belgaum,147000000.0
+LS201,Jagannath Sarkar,West Bengal,Ranaghat(Sc),147000000.0
+LS202,Jagdambika Pal,Uttar Pradesh,Domariyaganj,160643957.11
+LS203,Jai Parkash,Haryana,Hisar,147000000.0
+LS204,Jai Prakash,Uttar Pradesh,Hardoi (Sc),147000000.0
+LS205,Janardan Mishra,Madhya Pradesh,Rewa,147000000.0
+LS206,Jashubhai Bhilubhai Rathva,Gujarat,Chhota Udaipur(St),147000000.0
+LS207,Jaswantsinh Sumanbhai Bhabhor,Gujarat,Dahod(St),147000000.0
+LS208,Jitan Ram Manjhi,Bihar,Gaya (Sc),147000000.0
+LS209,Jitendra Kumar Dohare,Uttar Pradesh,Etawah(Sc),188747306.26
+LS210,Jitendra Singh,Jammu And Kashmir,Udhampur,147000000.0
+LS211,Jitin Prasada,Uttar Pradesh,Pilibhit,147000000.0
+LS212,Joba Majhi,Jharkhand,Singhbhum(St),147000000.0
+LS213,Joyanta Basumatary,Assam,Kokrajhar (St),147000000.0
+LS214,June Maliah,West Bengal,Medinipur,147000000.0
+LS215,Jyotiraditya M. Scindia,Madhya Pradesh,Guna,147000000.0
+LS216,Jyotsna Charandas Mahant,Chhattisgarh,Korba,155153738.11
+LS217,K E Prakash,Tamil Nadu,Erode,147000000.0
+LS218,K Radhakrishnan,Kerala,Alathur(Sc),147000000.0
+LS219,K Subbarayan,Tamil Nadu,Tiruppur,147000000.0
+LS220,K. C Venugopal,Kerala,Alappuzha,147000000.0
+LS221,K. Rajashekar Basavaraj Hitnal,Karnataka,Koppal,147000000.0
+LS222,Kadiyam Kavya,Telangana,Warangel(Sc),147000000.0
+LS223,Kakoli Ghosh Dastidar,West Bengal,Barasat,147000000.0
+LS224,Kalaben Mohanbhai Delkar,Dadra And Nagar Haveli And Daman And Diu,,269500000.0
+LS225,Kalanidhi Veeraswamy,Tamil Nadu,Chennai North,171500000.0
+LS226,Kali Charan Munda,Jharkhand,Khunti(St),147000000.0
+LS227,Kali Charan Singh,Jharkhand,Chatra,147000000.0
+LS228,Kalipada Saren,West Bengal,Jhargram(St),147000000.0
+LS229,Kalyan Banerjee,West Bengal,Sreerampur,147000000.0
+LS230,Kalyan Vaijinathrao Kale,Maharashtra,Jalna,147000000.0
+LS231,Kamakhya Prasad Tasa,Assam,Kaziranga,147000000.0
+LS232,Kamaljeet Sehrawat,Delhi,West Delhi,147000000.0
+LS233,Kamlesh Jangde,Chhattisgarh,Janjgir Champa(Sc),150384382.11
+LS234,Kamlesh Paswan,Uttar Pradesh,Bansgaon(Sc),147000000.0
+LS235,Kangana Ranaut,Himachal Pradesh,Mandi,147000000.0
+LS236,Kani K Navas,Tamil Nadu,Ramanathapuram,147000000.0
+LS237,Kanimozhi Karunanidhi,Tamil Nadu,Thoothukkudi,147000000.0
+LS238,Kanwar Singh Tanwar,Uttar Pradesh,Amroha,147000000.0
+LS239,Karan Bhushan Singh,Uttar Pradesh,Kaiserganj,147000000.0
+LS240,Kartick Chandra Paul,West Bengal,Raiganj,202677986.56
+LS241,Kaushalendra Kumar,Bihar,Nalanda,147000000.0
+LS242,Khagen Murmu,West Bengal,Maldaha Uttar,147000000.0
+LS243,Khalilur Rahaman,West Bengal,Jangipur,147000000.0
+LS244,Kinjarapu Ram Mohan Naidu,Andhra Pradesh,Srikakulam,171200630.11
+LS245,Kiren Rijiju,Arunachal Pradesh,Arunachal West,147000000.0
+LS246,Kirti Vardhan Singh,Uttar Pradesh,Gonda,147000000.0
+LS247,Kishan Reddy Gangapuram,Telangana,Secunderabad,147000000.0
+LS248,Kishori Lal,Uttar Pradesh,Amethi,171500000.0
+LS249,Konda Vishweshwar Reddy,Telangana,Chelvella,233721420.96
+LS250,Kota Srinivas Poojary,Karnataka,Udupi Chikmagalur,147000000.0
+LS251,Kripanath Mallah,Assam,Karimganj (Sc),147000000.0
+LS252,Krishan Pal Gurjar,Haryana,Faridabad,147000000.0
+LS253,Krishna Devi Shivshanker Patel,Uttar Pradesh,Banda,147000000.0
+LS254,Krishna Prasad Tenneti,Andhra Pradesh,Bapatla,167796849.11
+LS255,Kriti Devi Debbarman,Tripura,Tripura East(St),147000000.0
+LS256,Kuldeep Indora,Rajasthan,Ganganagar(Sc),147000000.0
+LS257,Kunduru Raghuveer,Telangana,Nalgonda,162952022.0
+LS258,Lalji Verma,Uttar Pradesh,Ambedkar Nagar,147000000.0
+LS259,Lavu Sri Krishna Devarayalu,Andhra Pradesh,Narasaraopet,174009663.11
+LS260,Laxmikant Pappu Nishad,Uttar Pradesh,Sant Kabir Nagar,147000000.0
+LS261,Lovely Anand,Bihar,Sheohar,147000000.0
+LS262,Lumbaram,Rajasthan,Jalore,147000000.0
+LS263,M. Mallesh Babu,Karnataka,Kolar(Sc),147065957.11
+LS264,M.K. Vishnuprasad,Tamil Nadu,Cuddalore,147000000.0
+LS265,Maddila Gurumoorthy,Andhra Pradesh,Tirupati(Sc),180399007.0
+LS266,Madhavaneni Raghunandan Rao,Telangana,Medak,147000000.0
+LS267,Magunta Sreenivasulu Reddy,Andhra Pradesh,Ongole,147000000.0
+LS268,Mahendra Singh Solanky,Madhya Pradesh,Dewas(Sc),147000000.0
+LS269,Mahesh Kashyap,Chhattisgarh,Bastar(St),147000000.0
+LS270,Mahesh Sharma,Uttar Pradesh,Gautam Buddha Nagar,148816284.11
+LS271,Mahima Kumari Mewar,Rajasthan,Rajsamand,183892143.0
+LS272,Mala Rajya Laxmi Shah,Uttarakhand,Tehri Garhwal,147000000.0
+LS273,Mala Roy,West Bengal,Kolkata Dakshin,147000000.0
+LS274,Malaiyarasan D,Tamil Nadu,Kallakurichi,201599593.0
+LS275,Malvika Devi,Odisha,Kalahandi,147000000.0
+LS276,Malvinder Singh Kang,Punjab,Anandpur Sahib,147000000.0
+LS277,Mani. A.,Tamil Nadu,Dharamapuri,164515071.11
+LS278,Manickam Tagore B,Tamil Nadu,Virudhunagar,147000000.0
+LS279,Manish Jaiswal,Jharkhand,Hazaribagh,147000000.0
+LS280,Manish Tewari,Chandigarh,Chandigarh,178351443.75
+LS281,Manju Sharma,Rajasthan,Jaipur,167082901.11
+LS282,Manna Lal Rawat,Rajasthan,Udaipur(St),147000000.0
+LS283,Manohar Lal,Haryana,Karnal,147000000.0
+LS284,Manoj Kumar,Bihar,Sasaram(Sc),147000000.0
+LS285,Manoj Tigga,West Bengal,Alipurduars(St),147000000.0
+LS286,Manoj Tiwari,Delhi,North East Delhi,225843858.0
+LS287,Mansukhbhai Dhanjibhai Vasava,Gujarat,Bharuch,147000000.0
+LS288,Mian Altaf Ahmad,Jammu And Kashmir,Anantnag,147000000.0
+LS289,Midhun Reddy,Andhra Pradesh,Rajampet,178951477.11
+LS290,Misha Bharti,Bihar,Pataliputra,147000000.0
+LS291,Mitesh Rameshbhai Bakabhai Patel,Gujarat,Anand,147000000.0
+LS292,Mohamed Haneefa,Ladakh,Ladakh,161114542.0
+LS293,Mohibbullah,Uttar Pradesh,Rampur,147000000.0
+LS294,Mohite Patil Dhairyasheel Rajsinh,Maharashtra,Madha,195613601.7
+LS295,Mr Gopal Jee Thakur,Bihar,Darbhanga,147000000.0
+LS296,Ms Mahua Moitra,West Bengal,Krishnanagar,159865046.0
+LS297,Muhammed Hamdullah Sayeed,Lakshadweep,Lakshadweep(St),153942460.41
+LS298,Mukesh Rajput,Uttar Pradesh,Farrukhabad,147000000.0
+LS299,Mukeshkumar Chandrakaant Dalal,Gujarat,Surat,147000000.0
+LS300,Murari Lal Meena,Rajasthan,Dausa(St),147000000.0
+LS301,Murasoli S,Tamil Nadu,Thanjavur,147000000.0
+LS302,Murlidhar Mohol,Maharashtra,Pune,147000000.0
+LS303,Naba Charan Majhi,Odisha,Mayurbhanj (St),147563957.11
+LS304,Nalin Soren,Jharkhand,Dumka(St),147364097.11
+LS305,Narayan Das Ahirwar,Uttar Pradesh,Jalaun(Sc),147000000.0
+LS306,Narayan Tatu Rane,Maharashtra,Ratnagiri-Sindhudurg,147000000.0
+LS307,Naresh Chandra Uttam Patel,Uttar Pradesh,Fatehpur,147000000.0
+LS308,Naresh Ganpat Mhaske,Maharashtra,Thane,147000000.0
+LS309,Naveen Jindal,Haryana,Kurukshetra,147000000.0
+LS310,Neeraj Maurya,Uttar Pradesh,Aonla,147000000.0
+LS311,Nilesh Dnyandev Lanke,Maharashtra,Ahmednagar,147000000.0
+LS312,Nimuben Jayantibhai Bambhaniya,Gujarat,Bhavnagar,147000000.0
+LS313,Nishikant Dubey,Jharkhand,Godda,147000000.0
+LS314,Nitin Jairam Gadkari,Maharashtra,Nagpur,168195086.11
+LS315,Nityanand Rai,Bihar,Ujjarpur,147000000.0
+LS316,Om Birla,Rajasthan,Kota,163906956.6
+LS317,Omprakash Bhupalsinh Alias Pawan Rajenimbalkar,Maharashtra,Osmanabad,184758519.11
+LS318,P C Mohan,Karnataka,Bangalore Central,159995711.11
+LS319,Pankaj Chowdhary,Uttar Pradesh,Maharajganj_Up,147000000.0
+LS320,Parimal Suklabaidya,Assam,Silchar,148300157.11
+LS321,Parshottambhai Rupala,Gujarat,Rajkot,147000000.0
+LS322,Partha Bhowmick,West Bengal,Barrackpur,147000000.0
+LS323,Parvatagouda Chandanagouda Gaddigoudar,Karnataka,Bagalkot,167541747.11
+LS324,Patel Umeshbhai Babubhai,Dadra And Nagar Haveli And Daman And Diu,,245063957.0
+LS325,Pathan Yusuf,West Bengal,Baharampur,147000000.0
+LS326,Phani Bhusan Choudhury,Assam,Barpeta,147000000.0
+LS327,Piyush Vedprakash Goyal,Maharashtra,Mumbai North,147000000.0
+LS328,Prabhakar Reddy Vemireddy,Andhra Pradesh,Nellore(Sc),147000000.0
+LS329,Prabhubhai Nagarbhai Vasava,Gujarat,Bardoli(St),147000000.0
+LS330,Pradan Baruah,Assam,Lakhimpur,147000000.0
+LS331,Pradeep Kumar Singh,Bihar,Araria,147000000.0
+LS332,Pradeep Purohit,Odisha,Bargarh,147000000.0
+LS333,Pradyut Bordoloi,Assam,Nowgong,98000000.0
+LS334,Pralhad Venkatesh Joshi,Karnataka,Dharwad,147000000.0
+LS335,Praniti Sushilkumar Shinde,Maharashtra,Solapur(Sc),147000000.0
+LS336,Prasun Banerjee,West Bengal,Howrah,147000000.0
+LS337,Pratap Chandra Sarangi,Odisha,Balasore,147064254.11
+LS338,Prataprao Jadhav,Maharashtra,Buldhana,147000000.0
+LS339,Pratima Mondal,West Bengal,Joynagar(Sc),147000000.0
+LS340,Praveen Khandelwal,Delhi,Chandini Chowk,147470276.0
+LS341,Praveen Patel,Uttar Pradesh,Phulpur,151559884.09
+LS342,Priya Saroj,Uttar Pradesh,Machhlishahr(Sc),147000000.0
+LS343,Priyanka Gandhi Vadra,Kerala,Wayanad,122500000.0
+LS344,Priyanka Satish Jarkiholi,Karnataka,Chikkodi,147000000.0
+LS345,Prof Sougata Ray,West Bengal,Dum Dum,147000000.0
+LS346,Prof Sp Singh Baghel,Uttar Pradesh,Agra(Sc),147000000.0
+LS347,Pushpendra Saroj,Uttar Pradesh,Kaushambi(Sc),147000000.0
+LS348,Putta Mahesh Kumar,Andhra Pradesh,Eluru,147000000.0
+LS349,R.K. Chaudhary,Uttar Pradesh,Mohanlalganj(Sc),147000000.0
+LS350,Rabindra Narayan Behera,Odisha,Jajpur(Sc),147064617.11
+LS351,Rachna Banerjee,West Bengal,Hooghly,147000000.0
+LS352,Radha Mohan Singh,Bihar,Purvi Champaran,147000000.0
+LS353,Radhakrishna,Karnataka,Gulbarga(Sc),147000000.0
+LS354,Radhe Shyam Rathiya,Chhattisgarh,Raigarh(St),159706972.09
+LS355,Rahul Gandhi,Uttar Pradesh,Rae Bareli,147000000.0
+LS356,Rahul Kaswan,Rajasthan,Churu,147000000.0
+LS357,Rahul Singh Lodhi,Madhya Pradesh,Damoh,163058785.37
+LS358,Raj Bhushan Choudhary,Bihar,Muzaffarpur,147000000.0
+LS359,Raj Kumar Roat,Rajasthan,Banswara(St),147000000.0
+LS360,Raja Ram Singh,Bihar,Karakat,147000000.0
+LS361,Rajabhau,Maharashtra,Nashik,152878682.11
+LS362,Rajeev Bhardwaj,Himachal Pradesh,Kangra,179388967.11
+LS363,Rajeev Rai,Uttar Pradesh,Ghosi,147000000.0
+LS364,Rajesh Ranjan Alias Pappu Yadav,Bihar,Purnea,147000000.0
+LS365,Rajesh Verma,Bihar,Khagaria,147000000.0
+LS366,Rajeshbhai Naranbhai Chudasama,Gujarat,Junagadh,147000000.0
+LS367,Rajiv Pratap Rudy,Bihar,Saran,147000000.0
+LS368,Rajiv Ranjan (Lalan) Singh,Bihar,Munger,147000000.0
+LS369,Rajkumar Chahar,Uttar Pradesh,Fatehpur Sikri,147000000.0
+LS370,Rajnath Singh,Uttar Pradesh,Lucknow,154808797.11
+LS371,Rajpalsinh Mahendrasinh Jadav,Gujarat,Panchmahal,147000000.0
+LS372,Raju Bista,West Bengal,Darjeeling,147000000.0
+LS373,Rakesh Rathor,Uttar Pradesh,Sitapur,147000000.0
+LS374,Rakibul Hussain,Assam,Dhubri,147000000.0
+LS375,Ram Prasad Chaudhary,Uttar Pradesh,Basti,204176957.11
+LS376,Ram Shiromani,Uttar Pradesh,Shrawasti,151746878.11
+LS377,Ramasahayam Raghuram Reddy,Telangana,Khammam,147000000.0
+LS378,Ramashankar Rajbhar,Uttar Pradesh,Salempur,160056927.07
+LS379,Rambhual Nishad,Uttar Pradesh,Sultanpur,151231957.11
+LS380,Ramesh Awasthi,Uttar Pradesh,Kanpur,147000000.0
+LS381,Ramesh Chandappa Jigajinagi,Karnataka,Bijapur(Sc),269500000.0
+LS382,Ramprit Mandal,Bihar,Jhanjharpur,147000000.0
+LS383,Ramvir Singh Bidhuri,Delhi,South Delhi,147559100.0
+LS384,Ranjit Dutta,Assam,Sonitpur,147000000.0
+LS385,Rao Inderjit Singh,Haryana,Gurgaon,147000000.0
+LS386,Rao Rajendra Singh,Rajasthan,Jaipur Rural,147000000.0
+LS387,Ravi Shankar Prasad,Bihar,Patna Sahib,147000000.0
+LS388,Ravindra Dattaram Waikar,Maharashtra,Mumbai North West,147000000.0
+LS389,Ravindra Shyamnarayan Alias Ravi Kishan Shukla,Uttar Pradesh,Gorakhpur,147000000.0
+LS390,Ravindra Vasantrao Chavan,Maharashtra,Nanded,147000000.0
+LS391,Richard Vanlalhmangaiha,Mizoram,Mizoram (St),147000000.0
+LS392,Robert Bruce C,Tamil Nadu,Tirunelveli,147475440.11
+LS393,Rodmal Nagar,Madhya Pradesh,Rajgarh,147000000.0
+LS394,Roop Kumari Choudhary,Chhattisgarh,Mahasamund,153035414.0
+LS395,Ruchi Vira,Uttar Pradesh,Moradabad,147000000.0
+LS396,Rudra Narayan Pany,Odisha,Dhenkanal,155013957.11
+LS397,S Supongmeren Jamir,Nagaland,Nagaland,147000000.0
+LS398,S Venkatesan,Tamil Nadu,Madurai,147000000.0
+LS399,S. Jagathrakshakan,Tamil Nadu,Arakkonam,180589332.34
+LS400,Sachithanantham R,Tamil Nadu,Dindigul,147000000.0
+LS401,Sagar Eshwar Khandre,Karnataka,Bidar,147000000.0
+LS402,Saleng A Sangma,Meghalaya,Tura,147000000.0
+LS403,Sambit Patra,Odisha,Puri,147000000.0
+LS404,Sanatan Pandey,Uttar Pradesh,Ballia,180420041.4
+LS405,Sanjay Dina Patil,Maharashtra,Mumbai North East,147000000.0
+LS406,Sanjay Haribhau Jadhav,Maharashtra,Parbhani,147000000.0
+LS407,Sanjay Jaiswal,Bihar,Paschim Champaran,147000000.0
+LS408,Sanjay Kumar Bandi,Telangana,Karimnagar,172775317.11
+LS409,Sanjay Seth,Jharkhand,Ranchi,147064357.11
+LS410,Sanjay Uttamrao Deshmukh,Maharashtra,Yavatmal-Washim,185640423.0
+LS411,Sanjna Jatav,Rajasthan,Bharatpur(Sc),147000000.0
+LS412,Santosh Pandey,Chhattisgarh,Rajnandgaon,147000000.0
+LS413,Saptagiri Sankar Ulaka,Odisha,Koraput(St),269500000.0
+LS414,Sarabjeet Singh Khalsa,Punjab,Faridkot(Sc),150850348.15
+LS415,Sasikanth Senthil,Tamil Nadu,Tiruvallur(Sc),171500000.0
+LS416,Satpal Brahamchari,Haryana,Sonepat,147000000.0
+LS417,Saumitra Khan,West Bengal,Bishnupur(Sc),147000000.0
+LS418,Savitri Thakur,Madhya Pradesh,Dhar(St),147000000.0
+LS419,Sayani Ghosh,West Bengal,Jadavpur,147000000.0
+LS420,Selja,Haryana,Sirsa(Sc),147000000.0
+LS421,Selvaganapathi T M,Tamil Nadu,Salem,147000000.0
+LS422,Selvaraj V,Tamil Nadu,Nagapattinam(Sc),147000000.0
+LS423,Shafi Parambil,Kerala,Vadakara,147000000.0
+LS424,Shambhavi,Bihar,Samastipur(Sc),147000000.0
+LS425,Shankar Lalwani,Madhya Pradesh,Indore,147000000.0
+LS426,Shashank Mani,Uttar Pradesh,Deoria,147000000.0
+LS427,Shatrughan Sinha,West Bengal,Asansol,147000000.0
+LS428,Sher Singh Ghubaya,Punjab,Firozpur,147000000.0
+LS429,Shivmangal Singh Tomar,Madhya Pradesh,Morena,147000000.0
+LS430,Shivraj Singh Chouhan,Madhya Pradesh,Vidisha,147000000.0
+LS431,Shobha Karandlaje,Karnataka,Bangalore North,147000000.0
+LS432,Shobhanaben Mahendrasinh Baraiya,Gujarat,Sabarkantha,147000000.0
+LS433,Shreyas. M. Patel,Karnataka,Hassan,147000000.0
+LS434,Shri Dharambir Singh,Haryana,Bhiwani Mahendragarh,147000000.0
+LS435,Shri Abhishek Banerjee,West Bengal,Diamond Harbour,147000000.0
+LS436,Shri Amar Singh,Punjab,Fatehgarh Sahib(Sc),147000000.0
+LS437,Shri Amit Shah,Gujarat,Gandhinagar,147000000.0
+LS438,Shri Anil Firojiya,Madhya Pradesh,Ujjain(Sc),147000000.0
+LS439,Shri Arjun Ram Meghwal,Rajasthan,Bikaner(Sc),147000000.0
+LS440,Shri Arun Kumar Sagar,Uttar Pradesh,Shahjahanpur(Sc),147000000.0
+LS441,Shri B Y Raghavendra,Karnataka,Shimoga,147000000.0
+LS442,Shri Benny Behanan,Kerala,Chalakudy,164674770.11
+LS443,Shri Bhartruhari Mahtab,Odisha,Cuttack,147000000.0
+LS444,Shri Chandra Prakash Choudhary,Jharkhand,Giridih,147000000.0
+LS445,Shri Deepak (Dev) Adhikari,West Bengal,Ghatal,200747364.0
+LS446,Shri Gurjeet Singh Aujla,Punjab,Amritsar,147000000.0
+LS447,Shri Hanuman Beniwal,Rajasthan,Nagaur,147000000.0
+LS448,Shri Hibi Eden,Kerala,Ernakulam,162177260.11
+LS449,Shri Janardan Singh Sigriwal,Bihar,Maharajganj_Br,147000000.0
+LS450,Shri Jual Oram,Odisha,Sundargarh (St),173096756.91
+LS451,Shri Jugal Kishore Sharma,Jammu And Kashmir,Jammu,147000000.0
+LS452,Shri Jyotirmay Singh Mahato,West Bengal,Purulia,147000000.0
+LS453,Shri Karti P Chidambaram,Tamil Nadu,Sivaganga,159049284.11
+LS454,Shri Kumbakudi Sudhakaran,Kerala,Kannur,147000000.0
+LS455,Shri Ls Tejasvi Surya,Karnataka,Bangalore South,147000000.0
+LS456,Shri M K Raghavan,Kerala,Kozhikode,147000000.0
+LS457,Shri Narendra Modi,Uttar Pradesh,Varanasi,162070276.11
+LS458,Shri Nk Premachandran,Kerala,Kollam,171477994.11
+LS459,Shri Pp Chaudhary,Rajasthan,Pali,147000000.0
+LS460,Shri Rajmohan Unnithan,Kerala,Kasaragod,156754633.11
+LS461,Shri Sarbananda Sonowal (18Ls),Assam,Dibrugarh,147000000.0
+LS462,Shri Satish Kumar Gautam,Uttar Pradesh,Aligarh,147000000.0
+LS463,Shri Shantanu Thakur,West Bengal,Bangaon(Sc),147000000.0
+LS464,Shri Sudheer Gupta,Madhya Pradesh,Mandsour,148988014.83
+LS465,Shri Suresh Kodikunnil,Kerala,Mavelikkara(Sc),172429519.11
+LS466,Shri Tapir Gao,Arunachal Pradesh,Arunachal East,147000000.0
+LS467,Shri Vijayakumar Vasanth,Tamil Nadu,Kanniyakumari,171500000.0
+LS468,Shrikant Eknath Shinde,Maharashtra,Kalyan,147000000.0
+LS469,Shrimant Chh Udayanraje Pratapsinhamaharaj Bhonsle,Maharashtra,Satara,147000000.0
+LS470,Shripad Yesso Naik,Goa,North Goa,147000000.0
+LS471,Shrirang Appa Barne,Maharashtra,Maval,147000000.0
+LS472,Shyamkumar,Maharashtra,Ramtek(Sc),147000000.0
+LS473,Sivanath Kesineni,Andhra Pradesh,Vijayawada,159864032.49
+LS474,Sk Nurul Islam,West Bengal,Basirhat,49000000.0
+LS475,Smita Uday Wagh,Maharashtra,Jalgaon,148107373.11
+LS476,Smt Anupriya Patel,Uttar Pradesh,Mirzapur,147000000.0
+LS477,Smt Aparajita Sarangi,Odisha,Bhubaneswar,147420861.41
+LS478,Smt Dimple Yadav,Uttar Pradesh,Mainpuri,192042469.11
+LS479,Smt Harsimrat Kaur Badal,Punjab,Bhatinda,159775982.39
+LS480,Smt Hema Malini,Uttar Pradesh,Mathura,147000000.0
+LS481,Smt Himadri Singh,Madhya Pradesh,Shahdol (St),150724861.11
+LS482,Smt Poonamben Hematbhai Maadam,Gujarat,Jamnagar,147000000.0
+LS483,Smt Raksha Nikhil Khadse,Maharashtra,Raver,153112586.11
+LS484,Smt S Jothimani,Tamil Nadu,Karur,147000000.0
+LS485,Smt Sajda Ahmed,West Bengal,Uluberia,147000000.0
+LS486,Smt Sandhya Ray,Madhya Pradesh,Bhind(Sc),147000000.0
+LS487,Smt Sangeeta Kumari Singh Deo,Odisha,Bolangir,147000000.0
+LS488,Smt Satabdi Roy (Banerjee),West Bengal,Birbhum,147000000.0
+LS489,Smt Supriya Sadanand Sule,Maharashtra,Baramati,147000000.0
+LS490,Smt Veena Devi,Bihar,Vaishali,147000000.0
+LS491,Sribharat Mathukumli,Andhra Pradesh,Visakhapatnam,164841922.0
+LS492,Sudama Prasad,Bihar,Arrah,147000000.0
+LS493,Sudha R,Tamil Nadu,Mayiladuthurai,147332315.11
+LS494,Sudhakar Singh,Bihar,Buxar,185211956.54
+LS495,Sudip Bandyopadhyay,West Bengal,Kolkata Uttar,147000000.0
+LS496,Sukanta Kumar Panigrahi,Odisha,Kandhamal,190712424.11
+LS497,Sukhdeo Bhagat,Jharkhand,Lohardaga(St),171821957.11
+LS498,Sukhjinder Singh Randhawa,Punjab,Gurdaspur,147000000.0
+LS499,Sunil Bose,Karnataka,Chamarajanagar(Sc),147000000.0
+LS500,Sunil Dattatray Tatkare,Maharashtra,Raigad,147000000.0
+LS501,Sunil Kumar,Bihar,Valmiki Nagar,147000000.0
+LS502,Surendra Prasad Yadav,Bihar,Jahanabad,155325714.0
+LS503,Suresh Gopi,Kerala,Thrissur,147000000.0
+LS504,Suresh Kumar Kashyap,Himachal Pradesh,Shimla (Sc),153563957.11
+LS505,Suresh Kumar Shetkar,Telangana,Zahirabad,147000000.0
+LS506,Swami Sachchidanandhari Sakshi Ji Maharaj,Uttar Pradesh,Unnao,147000000.0
+LS507,T Sumathy (A) Thamizhachi Thangapandian,Tamil Nadu,Chennai South,147000000.0
+LS508,Tangella Uday Srinivas,Andhra Pradesh,Kakinada,199417886.76
+LS509,Tanuj Punia,Uttar Pradesh,Barabanki(Sc),148198170.11
+LS510,Tariq Anwar,Bihar,Katihar,147000000.0
+LS511,Thalikkottai Rajuthevar Baalu,Tamil Nadu,Sriperumbudur,196905535.11
+LS512,Thanga Tamilselvan,Tamil Nadu,Theni,167755939.81
+LS513,Tharaniventhan M S,Tamil Nadu,Arani,168337124.35
+LS514,Thiru Dayanidhi Maran,Tamil Nadu,Chennai Central,147000000.0
+LS515,Thirumaa Valavan Thol,Tamil Nadu,Chidambaram(Sc),147000000.0
+LS516,Tokhan Sahu,Chhattisgarh,Bilaspur,147000000.0
+LS517,Trivendra Singh Rawat,Uttarakhand,Hardwar,147000000.0
+LS518,Ujjwal Raman Singh,Uttar Pradesh,Allahabad,147000000.0
+LS519,Ummeda Ram Beniwal,Rajasthan,Barmer,147000000.0
+LS520,Utkarsh Verma Madhur,Uttar Pradesh,Kheri,147000000.0
+LS521,V S Matheswaran,Tamil Nadu,Namakkal,162539930.11
+LS522,V. Somanna,Karnataka,Tumkur,147000000.0
+LS523,Vaithilingam Ve,Puducherry,Puducherry,209368972.11
+LS524,Vamsi Krishna Gaddam,Telangana,Peddapalle,148451721.11
+LS525,Varun Chaudhry,Haryana,Ambala (Sc),255454264.0
+LS526,Vellalath Kochukrishnan Nair Sreekandan,Kerala,Palakkad,167807990.11
+LS527,Vijay Baghel,Chhattisgarh,Durg,147000000.0
+LS528,Vijay Kumar Dubey,Uttar Pradesh,Kushi Nagar,148900000.0
+LS529,Vijay Kumar Hansdak,Jharkhand,Rajmahal(St),147223957.11
+LS530,Vijaylakshmi Devi,Bihar,Siwan,147000000.0
+LS531,Vinod Chavda,Gujarat,Kachchh(Sc),147000000.0
+LS532,Vinod Kumar Bind,Uttar Pradesh,Bhadohi,147000000.0
+LS533,Virendra Kumar,Madhya Pradesh,Tikamgarh(Sc),147000000.0
+LS534,Virendra Singh,Uttar Pradesh,Chandauli,147000000.0
+LS535,Vishal,Maharashtra,Sangli,147000000.0
+LS536,Vishnu Dayal Ram,Jharkhand,Palamu(Sc),158176083.11
+LS537,Vishnu Dutt Sharma,Madhya Pradesh,Khajuraho,147000000.0
+LS538,Vishweshwar Hegde Kageri,Karnataka,Uttara Kannada,147000000.0
+LS539,Vivek Thakur,Bihar,Nawada,147000000.0
+LS540,Y S Avinash Reddy,Andhra Pradesh,Kadapa,156430260.11
+LS541,Yaduveer Krishnadatta Chamaraja Wadiyar,Karnataka,Mysore,147000000.0
+LS542,Yogendra Chandoliya,Delhi,North West Delhi(Sc),147876307.0
+LS543,Zia Ur Rehman,Uttar Pradesh,Sambhal,147000000.0

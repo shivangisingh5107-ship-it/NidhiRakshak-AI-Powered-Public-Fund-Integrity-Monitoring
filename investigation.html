@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investigation Queue — NidhiRakshak</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+<div id="app"></div>
+
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script>
+renderShell("investigation.html", function(main){
+  const params = new URLSearchParams(location.search);
+  const id = params.get("id");
+  if(id) renderDetail(id); else renderQueue();
+
+  function renderQueue(){
+    const reviewQueue = activeFlagged(D.worksFlagged || []);
+    const criticalQueue = reviewQueue.filter(w=>w.risk_band==="Critical").length;
+    const feedback = feedbackStats();
+    main.innerHTML = `
+      <div class="topbar">
+        <div>
+          <div class="eyebrow">RISK-BASED ALERTS</div>
+          <h1 class="page-title">Investigation Queue</h1>
+          <div class="queue-subtitle">A focused review surface for works that warrant human attention.</div>
+        </div>
+        <div class="topbar-right">
+          <div class="live-pill"><span class="live-dot"></span> AI MONITORING ACTIVE · ${fmtNum(reviewQueue.length)} works awaiting review</div>
+        </div>
+      </div>
+
+      <div class="queue-summary">
+        <div class="queue-callout">
+          <div class="eyebrow">REVIEW PRIORITY</div>
+          <div class="queue-callout-title">Start with the highest-risk signals.</div>
+          <div class="queue-callout-copy">Each row combines explainable reason codes with a composite score. Open a work to inspect the evidence behind the alert.</div>
+          <a class="btn primary" href="#queueTable">Review flagged works <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="stat-tile"><div class="sv">${fmtNum(reviewQueue.length)}</div><div class="sl">Active flagged works</div><div class="stat-accent red"></div></div>
+        <div class="stat-tile"><div class="sv">${fmtNum(criticalQueue)}</div><div class="sl">Critical priority</div><div class="stat-accent saffron"></div></div>
+        <div class="stat-tile"><div class="sv">${fmtNum(feedback.total)}</div><div class="sl">Human feedback signals</div><div class="stat-accent green"></div></div>
+      </div>
+
+      <div class="panel queue-filters" style="margin-bottom:18px;">
+        <div class="filter-label">FILTER THE REVIEW SET</div>
+        <div class="filter-controls">
+          <select id="fBand" class="btn"><option value="">All risk bands</option><option>Critical</option><option>High</option></select>
+          <select id="fState" class="btn"><option value="">All states</option></select>
+          <select id="fCat" class="btn"><option value="">All categories</option></select>
+          <input id="fSearch" class="btn" placeholder="Search MP, work ID, agency…" style="min-width:220px; cursor:text;">
+          <span class="muted" id="fCount" style="margin-left:auto; font-size:12px;"></span>
+        </div>
+      </div>
+
+      <div class="panel">
+        <table class="ledger-table" id="queueTable">
+          <thead><tr>
+            <th data-k="risk_score">Risk ▾</th><th>Work</th><th>MP</th><th>State</th><th>Category</th>
+            <th class="right" data-k="cost_sanctioned">Sanctioned</th><th>Agency</th><th>Top Reasons</th><th>Human feedback</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    `;
+
+    const states = [...new Set(reviewQueue.map(w=>w.state))].sort();
+    document.getElementById("fState").innerHTML += states.map(s=>`<option>${s}</option>`).join("");
+    const cats = [...new Set(reviewQueue.map(w=>w.work_category))].sort();
+    document.getElementById("fCat").innerHTML += cats.map(c=>`<option>${c}</option>`).join("");
+
+    let sortKey = "risk_score", sortDir = -1;
+
+    function apply(){
+      const band = document.getElementById("fBand").value;
+      const state = document.getElementById("fState").value;
+      const cat = document.getElementById("fCat").value;
+      const q = document.getElementById("fSearch").value.trim().toLowerCase();
+
+      let rows = reviewQueue.filter(w=>{
+        if(band && w.risk_band !== band) return false;
+        if(state && w.state !== state) return false;
+        if(cat && w.work_category !== cat) return false;
+        if(q && !(w.mp_name.toLowerCase().includes(q) || w.work_id.toLowerCase().includes(q) || w.implementing_agency.toLowerCase().includes(q))) return false;
+        return true;
+      });
+      rows.sort((a,b)=> (a[sortKey]>b[sortKey]?1:-1) * sortDir);
+      document.getElementById("fCount").textContent = rows.length + " results";
+
+      document.querySelector("#queueTable tbody").innerHTML = rows.slice(0,300).map(w => `
+        <tr class="rowbar-${riskBand(w.risk_score)}" onclick="location.href='investigation.html?id=${w.work_id}'">
+          <td><span class="badge ${riskBand(w.risk_score)}">${w.risk_score}</span></td>
+          <td class="mono-id">${w.work_id}</td>
+          <td>${w.mp_name}</td>
+          <td>${w.state}</td>
+          <td>${w.work_category}</td>
+          <td class="right nowrap">${fmtRupee(w.cost_sanctioned)}</td>
+          <td>${w.implementing_agency}</td>
+           <td>${reasonChips(w.all_reason_codes, 2)}</td>
+           <td>${feedbackActions(w.work_id)}</td>
+        </tr>
+       `).join("") || `<tr><td colspan="9" class="empty-state">No works match these filters</td></tr>`;
+    }
+
+    ["fBand","fState","fCat"].forEach(id=>document.getElementById(id).addEventListener("change", apply));
+    document.getElementById("fSearch").addEventListener("input", apply);
+    document.querySelectorAll("#queueTable thead th[data-k]").forEach(th=>{
+      th.addEventListener("click", ()=>{
+        const k = th.dataset.k;
+        sortDir = (sortKey===k) ? -sortDir : -1;
+        sortKey = k;
+        apply();
+      });
+    });
+    apply();
+  }
+
+  function renderDetail(workId){
+    const w = D.worksAll.find(x=>x.work_id===workId) || D.worksFlagged.find(x=>x.work_id===workId);
+    if(!w){
+      main.innerHTML = `<div class="empty-state" style="margin-top:60px;">Work ${workId} not found. <a href="investigation.html" style="color:var(--brass-hi)">Back to queue</a></div>`;
+      return;
+    }
+    const band = riskBand(w.risk_score);
+    const catalog = D.reasons.catalog;
+    const triggered = new Set(w.all_reason_codes);
+    const isRealCase = w.record_source === "REAL_DOCUMENTED_CASE";
+
+    main.innerHTML = `
+      <div class="breadcrumb"><a href="investigation.html">Investigation Queue</a> / <span class="mono-id">${w.work_id}</span></div>
+      <div class="topbar">
+        <div>
+          <div class="eyebrow">${w.state} · ${w.district}</div>
+          <h1 class="page-title">${w.work_category}</h1>
+        </div>
+         <div class="topbar-right">${isRealCase
+            ? `<span class="badge high">${w.case_status_badge}</span>`
+             : `<a class="btn" href="mp-detail.html?id=${w.mp_id}">View MP Dashboard →</a><a class="btn primary" href="guardrail.html?work_id=${w.work_id}">Open Pre-Disbursement Guardrail →</a>${feedbackActions(w.work_id)}`}</div>
+      </div>
+
+      ${isRealCase ? `<div class="footnote" style="margin-top:0; margin-bottom:18px;">
+        <b>Real, publicly documented case</b> — sourced from ${w.case_source}. Shown here to validate the detection
+        logic against real precedent; this record was not processed by this prototype's ledger and this page does
+        not assert any finding of wrongdoing beyond what the cited source reports.
+        ${w.status.includes("sub judice") || w.status.includes("Under inquiry") ? " This matter remains under inquiry / sub judice — treat it as an allegation, not an established fact." : ""}
+      </div>` : ""}
+
+      <div class="hero-flex">
+        <div class="panel" style="flex:2; min-width:320px;">
+          <div class="kv"><span class="k">Work ID</span><span class="v mono-id">${w.work_id}</span></div>
+          <div class="kv"><span class="k">Description</span><span class="v" style="text-align:right; max-width:60%;">${w.work_description}</span></div>
+          <div class="kv"><span class="k">MP</span><span class="v">${w.mp_name}</span></div>
+          <div class="kv"><span class="k">Constituency</span><span class="v">${w.constituency}</span></div>
+          <div class="kv"><span class="k">Implementing agency</span><span class="v">${w.implementing_agency}</span></div>
+          <div class="kv"><span class="k">Sanctioned</span><span class="v">${fmtRupee(w.cost_sanctioned)}${w.sanction_date ? " on " + fmtDate(w.sanction_date) : ""}</span></div>
+          <div class="kv"><span class="k">Expenditure so far</span><span class="v">${w.expenditure!=null ? fmtRupee(w.expenditure) + " (" + fmtPct(w.utilization_ratio*100) + ")" : "Not disclosed in public reporting"}</span></div>
+          <div class="kv"><span class="k">Completion date</span><span class="v">${w.completion_date ? fmtDate(w.completion_date) + " (" + w.completion_lag_days + " days)" : "—"}</span></div>
+          <div class="kv"><span class="k">Status</span><span class="v">${w.status}</span></div>
+        </div>
+        <div class="panel" style="flex:1; min-width:220px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+          <div class="panel-note" style="margin-bottom:2px;">${isRealCase ? "Documented Severity (editorial, not model-computed)" : "Composite Risk Score"}</div>
+          <div id="workGauge"></div>
+        </div>
+      </div>
+
+       ${isRealCase ? "" : geoPanel(w)}
+
+       ${isRealCase ? "" : `<div class="guardrail-link-panel">
+         <div><div class="eyebrow">NEXT DECISION POINT</div><b>Evaluate the next milestone before disbursement.</b><p>Use the same work record to run peer-group, payment/progress, verification and anomaly checks.</p></div>
+         <a class="btn primary" href="guardrail.html?work_id=${w.work_id}">Run guardrail evaluation →</a>
+       </div>`}
+
+      <div class="grid2">
+        <div class="panel">
+          <div class="panel-head">
+            <div class="panel-title">All Possible Flagging Reasons</div>
+            <div class="panel-note">${triggered.size} of ${Object.keys(catalog).length} triggered</div>
+          </div>
+          <div id="reasonsList"></div>
+        </div>
+        ${isRealCase ? `<div class="panel">
+          <div class="panel-head"><div class="panel-title">Documented Case Evidence</div></div>
+          <p class="case-desc" style="font-size:12.5px; line-height:1.65; color:var(--navy-800);">${w.case_summary}</p>
+          <hr class="hr">
+          <div class="panel-note"><b>Source:</b> ${w.case_source}</div>
+        </div>` : `<div class="panel">
+          <div class="panel-head"><div class="panel-title">Feature Readout</div></div>
+          <div class="kv"><span class="k">Cost vs. category median</span><span class="v">${w.cost_ratio_to_category_median}×</span></div>
+          <div class="kv"><span class="k">Completion time vs. median</span><span class="v">${w.lag_ratio_to_category_median ?? "—"}×</span></div>
+          <div class="kv"><span class="k">Agency concentration (this MP)</span><span class="v">${fmtPct(w.agency_concentration*100)}</span></div>
+          <div class="kv"><span class="k">Isolation Forest anomaly score</span><span class="v">${w.anomaly_score_normalized}</span></div>
+          <div class="kv"><span class="k">Flagged as statistical outlier</span><span class="v">${w.is_statistical_anomaly ? "Yes" : "No"}</span></div>
+          <hr class="hr">
+          <div class="panel-note">Isolation Forest scores the combination of utilisation ratio, delay,
+          cost ratio, lag ratio and agency concentration together — it can catch unusual combinations
+          even when no single rule threshold is crossed.</div>
+        </div>`}
+      </div>
+
+      <div class="footnote">
+        ${isRealCase
+          ? `This is a <b>real, publicly documented case</b> (see source above), included to validate the detection
+             logic against known precedent. It is not a record processed by this prototype's ledger, and this page
+             asserts nothing beyond what the cited source reports.`
+          : `This work record is <b>synthetic demo data</b> generated on top of the real MP roster and allocation
+        limits, for prototype purposes. Risk scoring here is a decision-support signal for human review — not
+         a finding of fact or wrongdoing. Human feedback is stored locally in this demo and can later become
+         labelled training data for reducing false positives.`}
+      </div>
+    `;
+
+    riskGauge(document.getElementById("workGauge"), w.risk_score, band);
+
+    document.getElementById("reasonsList").innerHTML = Object.entries(catalog).map(([code,c]) => `
+      <div class="reason-row">
+        <div class="reason-check ${triggered.has(code)?'on':'off'}">${triggered.has(code)?'✓':'–'}</div>
+        <div style="flex:1;">
+          <div class="reason-label">${c.label}</div>
+          <div class="reason-detail">${c.detail}</div>
+        </div>
+        <div class="reason-weight">${triggered.has(code) ? '+'+c.weight+' pts' : c.weight+' pt max'}</div>
+      </div>
+    `).join("");
+  }
+});
+</script>
+</body>
+</html>

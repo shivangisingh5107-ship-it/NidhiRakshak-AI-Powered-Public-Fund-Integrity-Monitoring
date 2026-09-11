@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geo Registry — NidhiRakshak</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+<div id="app"></div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script>
+renderShell("geo.html", function(main){
+  const all = D.worksAll || [];
+  const flagged = activeFlagged(D.worksFlagged || []);
+  const initialRows = (flagged.length ? flagged : all).slice().sort((a,b)=>b.risk_score-a.risk_score);
+  main.innerHTML = `
+    <div class="topbar">
+      <div>
+        <div class="eyebrow">LOCATION INTELLIGENCE</div>
+        <h1 class="page-title">Geo-tagged Asset Registry</h1>
+        <div class="queue-subtitle">Layer project records with asset matches, boundaries and satellite verification signals.</div>
+      </div>
+      <a class="btn" href="data.html">Change data view →</a>
+    </div>
+    <div class="queue-summary wide">
+      <div class="queue-callout">
+        <div class="eyebrow">NEXT VERIFICATION LAYER</div>
+        <div class="queue-callout-title">Find the same physical asset across schemes.</div>
+        <div class="queue-callout-copy">The prototype shows deterministic demo coordinates plus simulated satellite verification and cross-scheme matching. Connect official imagery and MGNREGS/state APIs to make these live.</div>
+        <a class="btn primary" href="#geoGrid">Browse mapped projects ↓</a>
+      </div>
+      <div class="stat-tile"><div class="sv">${fmtNum(all.length)}</div><div class="sl">Projects in current view</div><div class="stat-accent green"></div></div>
+      <div class="stat-tile"><div class="sv">${fmtNum(flagged.length)}</div><div class="sl">Active flagged locations</div><div class="stat-accent red"></div></div>
+      <div class="stat-tile"><div class="sv">${fmtNum(all.filter(w=>satelliteVerificationFor(w)).length)}</div><div class="sl">Large works under satellite check</div><div class="stat-accent saffron"></div></div>
+      <div class="stat-tile"><div class="sv">${fmtNum(all.filter(w=>crossSchemeMatchFor(w.work_id)).length)}</div><div class="sl">Cross-scheme overlaps (this view)</div><div class="stat-accent red"></div></div>
+    </div>
+    <div class="panel geo-filters">
+      <div class="filter-label">FILTER THE GEO REGISTRY</div>
+      <div class="filter-controls">
+        <select id="geoScope" class="btn"><option value="flagged">Active flagged projects</option><option value="all">All projects</option></select>
+        <select id="geoState" class="btn"><option value="">All states</option></select>
+        <input id="geoSearch" class="btn" placeholder="Search work, MP, district or agency…" style="min-width:260px; cursor:text;">
+        <span class="muted" id="geoCount" style="margin-left:auto; font-size:12px;"></span>
+      </div>
+    </div>
+    <div class="geo-grid" id="geoGrid"></div>
+  `;
+  const states = [...new Set(all.map(w=>w.state))].sort();
+  document.getElementById("geoState").innerHTML += states.map(s=>`<option>${s}</option>`).join("");
+  function render(){
+    const scope = document.getElementById("geoScope").value;
+    const state = document.getElementById("geoState").value;
+    const q = document.getElementById("geoSearch").value.trim().toLowerCase();
+    const source = scope==="all" ? all : flagged;
+    const rows = source.filter(w => {
+      if(state && w.state!==state) return false;
+      if(q && ![w.work_id,w.mp_name,w.district,w.implementing_agency,w.work_category].join(" ").toLowerCase().includes(q)) return false;
+      return true;
+    }).sort((a,b)=>b.risk_score-a.risk_score);
+    document.getElementById("geoCount").textContent = `${rows.length} projects · showing ${Math.min(rows.length,24)}`;
+    document.getElementById("geoGrid").innerHTML = rows.slice(0,24).map(w=>`
+      <article class="geo-card">
+        <div class="geo-card-head">
+          <div><span class="mono-id">${w.work_id}</span><h2>${w.work_category}</h2><div class="geo-card-sub">${w.mp_name} · ${w.district}</div></div>
+          <span class="badge ${riskBand(w.risk_score)}">${w.risk_score}</span>
+        </div>
+        ${geoPanel(w, true)}
+        <div class="geo-card-foot">${feedbackBadge(w.work_id)}<a class="btn" href="investigation.html?id=${w.work_id}">Open project →</a></div>
+      </article>
+    `).join("") || `<div class="panel empty-state" style="grid-column:1/-1;">No mapped projects match this view. In Real data mode, connect an official work-level feed to populate the registry.</div>`;
+  }
+  ["geoScope","geoState"].forEach(id=>document.getElementById(id).addEventListener("change",render));
+  document.getElementById("geoSearch").addEventListener("input",render);
+  render();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pre-Disbursement Risk Guardrail — NidhiRakshak</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+<div id="app"></div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script>
+renderShell("index.html", function(main){
+  const allWorks = D.worksAll || [];
+  const activeWorks = activeFlagged(D.worksFlagged || []);
+  const highWorks = activeWorks.filter(w => w.risk_score >= 35);
+  const highestRiskWork = [...highWorks].sort((a,b)=>b.risk_score-a.risk_score)[0] || allWorks[0];
+
+  main.innerHTML = `
+    <div class="hero-guardrail">
+      <div class="hero-guardrail-copy">
+        <div class="eyebrow">MINISTRY OF STATISTICS &amp; PROGRAMME IMPLEMENTATION (MoSPI) · MPLADS MONITORING</div>
+        <h1>PRE-DISBURSEMENT<br><span>RISK GUARDRAIL</span></h1>
+        <div class="hero-tagline">India's First Pre-Disbursement Risk Prioritization &amp; Milestone Guardrail for MPLADS</div>
+        <p>Identify risky milestone payouts <b>before disbursement</b> using peer-group heuristics, rule-based checks and unsupervised anomaly scoring—enabling authorities to review high-risk cases before public funds are released.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="guardrail.html?work_id=${highestRiskWork ? highestRiskWork.work_id : ""}">Open pre-disbursement guardrail →</a>
+          <span class="prototype-label"><span class="source-dot demo"></span> Prototype / Representative Data</span>
+        </div>
+      </div>
+      <div class="hero-guardrail-flow" aria-label="Guardrail workflow">
+        <div class="flow-kicker">INTEGRATION-READY DEMO WORKFLOW</div>
+        <div class="flow-step"><b>01</b><span>Milestone submitted</span></div>
+        <div class="flow-line"></div>
+        <div class="flow-step"><b>02</b><span>Validate &amp; compare peers</span></div>
+        <div class="flow-line"></div>
+        <div class="flow-step"><b>03</b><span>Rules + anomaly score</span></div>
+        <div class="flow-line"></div>
+        <div class="flow-step result"><b>04</b><span>Review recommendation</span></div>
+        <small>Designed for integration with MPLADS/e-SAKSHI workflows. No live PFMS/e-SAKSHI connection is claimed.</small>
+      </div>
+    </div>
+    <div class="role-context">
+      <div><span class="eyebrow">CURRENT DASHBOARD</span><b id="roleTitle"></b><span id="roleDescription"></span></div>
+      <div class="role-context-actions">
+        <span class="badge med">${fmtNum(allWorks.length)} representative work records</span>
+        <a class="btn" href="data.html">View data provenance →</a>
+      </div>
+    </div>
+    <div id="roleDashboard"></div>
+  `;
+
+  function metric(label, value, sub, tone=""){
+    return `<div class="ledger-cell"><div class="ledger-label">${label}</div><div class="ledger-value ${tone}">${value}</div><div class="ledger-sub">${sub}</div></div>`;
+  }
+  function riskBadge(work){
+    return `<span class="badge ${riskBand(work.risk_score)}">${work.risk_score} · ${riskBandLabel(riskBand(work.risk_score))}</span>`;
+  }
+  function workAttentionRows(rows, empty="No works currently require attention."){
+    return rows.slice(0,10).map(w=>`
+      <tr class="rowbar-${riskBand(w.risk_score)}" onclick="location.href='investigation.html?id=${w.work_id}'">
+        <td class="mono-id">${w.work_id}</td>
+        <td><b>${w.work_category}</b><small class="table-sub">${w.district} · ${w.mp_name}</small></td>
+        <td>${fmtRupee(w.cost_sanctioned)}</td>
+        <td>${fmtPct(Number(w.utilization_ratio||0)*100)} / ${Math.round(operationalFields(w).physical_progress)}%</td>
+        <td>${reasonChips(w.all_reason_codes,2)}</td>
+        <td class="right">${riskBadge(w)}</td>
+        <td><a class="btn table-link" href="guardrail.html?work_id=${w.work_id}" onclick="event.stopPropagation()">Evaluate →</a></td>
+      </tr>`).join("") || `<tr><td colspan="7" class="empty-state">${empty}</td></tr>`;
+  }
+  function roleHeader(eyebrow, title, copy, control){
+    return `<div class="dashboard-heading"><div><div class="eyebrow">${eyebrow}</div><h2>${title}</h2><p>${copy}</p></div>${control||""}</div>`;
+  }
+  function updateRoleContext(role){
+    document.getElementById("roleTitle").textContent = ROLE_META[role].label;
+    document.getElementById("roleDescription").textContent = " · " + ROLE_META[role].description;
+  }
+
+  function renderMpDashboard(){
+    const candidates = D.mps.filter(m=>Number(m.works||0)>0).sort((a,b)=>b.avg_risk-a.avg_risk);
+    const requestedId = new URLSearchParams(location.search).get("mp_id");
+    const chosen = candidates.find(m=>m.mp_id===requestedId) || candidates[0] || D.mps[0];
+    const workRows = allWorks.filter(w=>w.mp_id===chosen?.mp_id).sort((a,b)=>b.risk_score-a.risk_score);
+    const delayed = workRows.filter(w=>operationalFields(w).delay_days>0).length;
+    const completed = workRows.filter(w=>w.status==="Completed").length;
+    const ongoing = workRows.length-completed;
+    main.querySelector("#roleDashboard").innerHTML = `
+      ${roleHeader("MP · CONSTITUENCY-LEVEL VIEW","Works requiring attention","A focused view of one constituency, using the same work ledger and risk engine as every authority dashboard.",`
+        <select id="mpRoleSelect" class="btn role-filter">${candidates.slice(0,120).map(m=>`<option value="${m.mp_id}">${m.mp_name} · ${m.constituency}</option>`).join("")}</select>`)}
+      <div class="ledger role-ledger">
+        ${metric("TOTAL WORKS",fmtNum(workRows.length),chosen?.constituency||"selected constituency")}
+        ${metric("COMPLETED",fmtNum(completed),"closed in current view","teal")}
+        ${metric("ONGOING",fmtNum(ongoing),"in progress / not started")}
+        ${metric("DELAYED",fmtNum(delayed),"milestone needs attention","brass")}
+        ${metric("HIGH-RISK WORKS",fmtNum(workRows.filter(w=>w.risk_score>=35).length),"review priority","crit")}
+        ${metric("FUND UTILISATION",fmtPct(chosen?.utilization_pct||0),"sanctioned vs. spent","teal")}
+      </div>
+      <div class="grid2">
+        <div class="panel">
+          <div class="panel-head"><div><div class="panel-title">${chosen?.mp_name||"Selected MP"}</div><div class="panel-note">${chosen?.state||""} · ${chosen?.constituency||""}</div></div><a class="btn" href="mp-detail.html?id=${chosen?.mp_id||""}">Open MP dashboard →</a></div>
+          <div class="kv"><span class="k">Works requiring attention</span><span class="v">${workRows.filter(w=>w.risk_score>=35).length}</span></div>
+          <div class="kv"><span class="k">Sanctioned amount</span><span class="v">${fmtCr(chosen?.total_sanctioned||0)}</span></div>
+          <div class="kv"><span class="k">Expenditure</span><span class="v">${fmtCr(chosen?.total_expenditure||0)}</span></div>
+          <div class="kv"><span class="k">Highest work risk</span><span class="v">${chosen?.max_risk||0} / 100</span></div>
+          <div class="mini-callout"><b>Decision support, not a finding.</b> Open a work to see the explainable reasons and proposed milestone review.</div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="panel-title">Work status</div><div class="panel-note">current constituency</div></div>
+          <div id="mpStatusChart"></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><div><div class="panel-title">Works requiring attention</div><div class="panel-note">High and critical signals, sorted by risk score</div></div><a class="btn primary" href="guardrail.html?work_id=${workRows[0]?.work_id||highestRiskWork?.work_id||""}">Run guardrail →</a></div>
+        <table class="ledger-table"><thead><tr><th>Work ID</th><th>Project</th><th>Cost</th><th>Expenditure / progress</th><th>Risk reasons</th><th class="right">Risk</th><th></th></tr></thead><tbody>${workAttentionRows(workRows.filter(w=>w.risk_score>=35),"This constituency has no high-risk works in the current representative view.")}</tbody></table>
+      </div>`;
+    document.getElementById("mpRoleSelect").value = chosen?.mp_id || "";
+    document.getElementById("mpRoleSelect").addEventListener("change", e=>{
+      location.href = "index.html?role=mp&mp_id=" + encodeURIComponent(e.target.value);
+    });
+    hBarChart(document.getElementById("mpStatusChart"),[
+      {label:"Completed",value:completed,color:"#247454"},
+      {label:"Ongoing",value:ongoing,color:"#2364bd"},
+      {label:"Delayed",value:delayed,color:"#c87917"},
+    ],{rowH:34,padL:90});
+  }
+
+  function renderStateDashboard(){
+    const states = [...D.states].sort((a,b)=>b.flagged-a.flagged);
+    const requestedState = new URLSearchParams(location.search).get("state");
+    const chosen = states.find(s=>s.state===requestedState) || states[0];
+    const districts = D.districts.filter(d=>d.state===chosen?.state).sort((a,b)=>b.flagged-a.flagged);
+    const stateWorks = allWorks.filter(w=>w.state===chosen?.state);
+    document.getElementById("roleDashboard").innerHTML = `
+      ${roleHeader("STATE NODAL AUTHORITY · STATE + DISTRICT COMPARISON","Which districts require intervention?","Compare completion, utilisation and high-risk work concentration before directing follow-up.",`
+        <select id="stateRoleSelect" class="btn role-filter">${states.map(s=>`<option>${s.state}</option>`).join("")}</select>`)}
+      <div class="ledger role-ledger">
+        ${metric("TOTAL WORKS",fmtNum(stateWorks.length),chosen?.state||"selected state")}
+        ${metric("DISTRICTS",fmtNum(districts.length),"with representative records")}
+        ${metric("COMPLETION",fmtPct(stateWorks.length ? stateWorks.filter(w=>w.status==="Completed").length/stateWorks.length*100 : 0),"works completed","teal")}
+        ${metric("UTILISATION",fmtPct(chosen?.utilization_pct||0),"funds spent","teal")}
+        ${metric("DELAYED",fmtNum(stateWorks.filter(w=>operationalFields(w).delay_days>0).length),"milestones needing follow-up","brass")}
+        ${metric("HIGH-RISK",fmtNum(stateWorks.filter(w=>w.risk_score>=35).length),"review priority","crit")}
+      </div>
+      <div class="grid2">
+        <div class="panel"><div class="panel-head"><div class="panel-title">State risk overview</div><div class="panel-note">${chosen?.state||""}</div></div><div id="stateRiskChart"></div></div>
+        <div class="panel"><div class="panel-head"><div class="panel-title">Recommended intervention</div></div><div class="mini-callout"><b>${districts[0]?.district||"Selected district"}</b> has the highest flagged-work count in this state view.</div><div class="kv"><span class="k">Districts with high-risk works</span><span class="v">${districts.filter(d=>d.flagged>0).length}</span></div><div class="kv"><span class="k">Highest district average risk</span><span class="v">${districts[0]?.avg_risk||0} / 100</span></div><a class="btn primary" href="state.html?state=${encodeURIComponent(chosen?.state||"")}">Open full state comparison →</a></div>
+      </div>
+      <div class="panel"><div class="panel-head"><div class="panel-title">District performance</div><div class="panel-note">sorted by high-risk work count</div></div>
+        <table class="ledger-table"><thead><tr><th>District</th><th class="right">Works</th><th class="right">Completion</th><th class="right">Utilisation</th><th class="right">Delayed</th><th class="right">High risk</th><th class="right">Avg risk</th></tr></thead><tbody>
+        ${districts.slice(0,24).map(d=>{const rows=allWorks.filter(w=>w.state===d.state&&w.district===d.district);return `<tr onclick="location.href='investigation.html?id=${rows.sort((a,b)=>b.risk_score-a.risk_score)[0]?.work_id||""}'"><td><b>${d.district}</b></td><td class="right">${fmtNum(d.works)}</td><td class="right">${fmtPct(rows.length?rows.filter(w=>w.status==="Completed").length/rows.length*100:0)}</td><td class="right">—</td><td class="right">${rows.filter(w=>operationalFields(w).delay_days>0).length}</td><td class="right"><b class="text-risk">${d.flagged}</b></td><td class="right"><span class="badge ${riskBand(d.avg_risk*1.6)}">${d.avg_risk}</span></td></tr>`}).join("")||`<tr><td colspan="7" class="empty-state">No district records in this view.</td></tr>`}
+        </tbody></table>
+      </div>`;
+    document.getElementById("stateRoleSelect").value = chosen?.state || "";
+    document.getElementById("stateRoleSelect").addEventListener("change", e=>{
+      const url = new URL(location.href); url.searchParams.set("state",e.target.value); history.replaceState({}, "", url);
+      renderStateDashboard();
+    });
+    hBarChart(document.getElementById("stateRiskChart"),districts.slice(0,8).map(d=>({label:d.district.replace(" District",""),value:d.flagged,color:"#c87917"})),{rowH:27,padL:155});
+  }
+
+  function renderDistrictDashboard(){
+    const districts = [...D.districts].sort((a,b)=>b.flagged-a.flagged);
+    const params = new URLSearchParams(location.search);
+    const requestedDistrict = params.get("district");
+    const requestedState = params.get("state");
+    const chosen = districts.find(d=>d.district===requestedDistrict && d.state===requestedState) || districts[0];
+    const rows = allWorks.filter(w=>w.state===chosen?.state&&w.district===chosen?.district).sort((a,b)=>b.risk_score-a.risk_score);
+    document.getElementById("roleDashboard").innerHTML = `
+      ${roleHeader("DISTRICT AUTHORITY · WORK-LEVEL OPERATIONS","Operational risk queue","Open a work, inspect the explainable risk analysis, then run the milestone guardrail before a proposed payout.",`
+        <select id="districtRoleSelect" class="btn role-filter">${districts.slice(0,180).map(d=>`<option value="${d.state}|||${d.district}">${d.district} · ${d.state}</option>`).join("")}</select>`)}
+      <div class="ledger role-ledger">
+        ${metric("TOTAL WORKS",fmtNum(rows.length),chosen?.district||"selected district")}
+        ${metric("ONGOING",fmtNum(rows.filter(w=>w.status!=="Completed").length),"not marked complete")}
+        ${metric("DELAYED",fmtNum(rows.filter(w=>operationalFields(w).delay_days>0).length),"milestone follow-up","brass")}
+        ${metric("HIGH-RISK",fmtNum(rows.filter(w=>w.risk_score>=35).length),"review priority","crit")}
+      </div>
+      <div class="panel">
+        <div class="panel-head"><div><div class="panel-title">Work-level queue · ${chosen?.district||""}</div><div class="panel-note">Click any row for Work Details + AI Risk Analysis + Pre-Disbursement Guardrail</div></div><a class="btn primary" href="guardrail.html?work_id=${rows[0]?.work_id||""}">Evaluate selected milestone →</a></div>
+        <table class="ledger-table operational-table"><thead><tr><th>Work ID</th><th>Project</th><th>Cost</th><th>Expenditure</th><th>Physical progress</th><th>Delay</th><th>Risk score</th><th>Status</th></tr></thead><tbody>
+        ${rows.slice(0,60).map(w=>`<tr class="rowbar-${riskBand(w.risk_score)}" onclick="location.href='investigation.html?id=${w.work_id}'"><td class="mono-id">${w.work_id}</td><td><b>${w.work_category}</b><small class="table-sub">${w.work_description}</small></td><td>${fmtRupee(w.cost_sanctioned)}</td><td>${fmtRupee(w.expenditure)}</td><td>${Math.round(operationalFields(w).physical_progress)}%</td><td>${operationalFields(w).delay_days ? operationalFields(w).delay_days+" days" : "On track"}</td><td>${riskBadge(w)}</td><td>${w.status}</td></tr>`).join("")||`<tr><td colspan="8" class="empty-state">No work-level records in this district.</td></tr>`}
+        </tbody></table>
+      </div>
+      <div class="panel guardrail-callout"><div class="eyebrow">PRE-DISBURSEMENT GUARDRAIL</div><h3>Milestone review is the next action</h3><p>Select a work above or start with the highest-risk record. The demo evaluates the request against peer works, rule checks, verification status and the existing anomaly layer.</p><a class="btn primary" href="guardrail.html?work_id=${rows[0]?.work_id||""}">Open guardrail workflow →</a></div>`;
+    document.getElementById("districtRoleSelect").value = `${chosen?.state}|||${chosen?.district}`;
+    document.getElementById("districtRoleSelect").addEventListener("change", e=>{
+      const [state,district] = e.target.value.split("|||");
+      const next = new URL(location.href); next.searchParams.set("state",state); next.searchParams.set("district",district); history.replaceState({}, "", next);
+      renderDistrictDashboard();
+    });
+  }
+
+  function renderMospiDashboard(){
+    const N = D.national;
+    const stateRows = [...D.states].sort((a,b)=>b.flagged-a.flagged);
+    document.getElementById("roleDashboard").innerHTML = `
+      ${roleHeader("MoSPI · NATIONAL MONITORING VIEW","National MPLADS risk overview","See where systemic risks are concentrated across states, work categories and the national review queue.",`<a class="btn primary" href="investigation.html">Open national high-risk queue →</a>`)}
+      <div class="ledger role-ledger">
+        ${metric("MPs",fmtNum(N.total_mps),"identity layer tracked")}
+        ${metric("STATES / UTs",fmtNum(N.total_states),"coverage")}
+        ${metric("TOTAL WORKS",fmtNum(N.total_works),"representative ledger")}
+        ${metric("TOTAL FUNDS","₹"+fmtCr(N.total_sanctioned),"sanctioned")}
+        ${metric("UTILISATION",fmtPct(N.overall_utilization_pct),"expenditure / sanctioned","teal")}
+        ${metric("HIGH-RISK WORKS",fmtNum(highWorks.length),"national review queue","crit")}
+      </div>
+      <div class="grid2">
+        <div class="panel"><div class="panel-head"><div class="panel-title">Risk concentration by state</div><div class="panel-note">high + critical works</div></div><div id="nationalStateChart"></div></div>
+        <div class="panel"><div class="panel-head"><div class="panel-title">Risk distribution</div><div class="panel-note">all representative works</div></div><div class="risk-distribution"><div class="distribution-ring"><b>${Math.round((highWorks.length/(allWorks.length||1))*100)}%</b><span>high-risk</span></div><div class="distribution-rows"><div><span class="badge crit">High / Critical</span><b>${fmtNum(highWorks.length)}</b></div><div><span class="badge med">Medium</span><b>${fmtNum(allWorks.filter(w=>w.risk_band==="Medium").length)}</b></div><div><span class="badge low">Low</span><b>${fmtNum(allWorks.filter(w=>w.risk_band==="Low").length)}</b></div></div></div></div>
+      </div>
+      <div class="panel"><div class="panel-head"><div><div class="panel-title">National high-risk queue</div><div class="panel-note">top records to route for authority review</div></div><a class="btn" href="methodology.html">View model logic →</a></div><table class="ledger-table"><thead><tr><th>Work ID</th><th>Project</th><th>State / District</th><th>Expenditure / progress</th><th>Top reasons</th><th class="right">Risk</th><th></th></tr></thead><tbody>${workAttentionRows(highWorks,"No high-risk works are active in this view.")}</tbody></table></div>
+      <div class="footnote"><b>Integration-ready architecture:</b> Demo / representative work data flows through the existing risk engine into role-based dashboards and a pre-disbursement recommendation. A future authorized MPLADS/e-SAKSHI source and PFMS workflow can replace the input layer; this prototype does not claim live government access or payment blocking.</div>`;
+    hBarChart(document.getElementById("nationalStateChart"),stateRows.slice(0,10).map(s=>({label:s.state,value:s.flagged,color:"#c87917"})),{rowH:28,padL:155});
+  }
+
+  function renderRoleDashboard(){
+    const role = getActiveRole();
+    updateRoleContext(role);
+    if(role==="mp") renderMpDashboard();
+    else if(role==="state") renderStateDashboard();
+    else if(role==="district") renderDistrictDashboard();
+    else renderMospiDashboard();
+  }
+  renderRoleDashboard();
+});
+</script>
+</body>
+</html>

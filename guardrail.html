@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pre-Disbursement Guardrail — NidhiRakshak</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+<div id="app"></div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script>
+renderShell("guardrail.html", function(main){
+  const params = new URLSearchParams(location.search);
+  const options = guardrailWorkOptions();
+  const requestedWork = (D.worksAll || []).find(w=>w.work_id===params.get("work_id"));
+  const initial = requestedWork || options[0] || D.worksAll[0];
+  if(initial && !options.some(w=>w.work_id===initial.work_id)) options.push(initial);
+
+  main.innerHTML = `
+    <div class="breadcrumb"><a href="index.html?role=district">District Authority</a> / Pre-Disbursement Guardrail</div>
+    <div class="topbar">
+      <div>
+        <div class="eyebrow">AI-ASSISTED PRE-DISBURSEMENT REVIEW</div>
+        <h1 class="page-title">Pre-Disbursement Guardrail</h1>
+        <div class="queue-subtitle">Evaluate a proposed milestone against the work record, peer group, rule checks and existing anomaly signals.</div>
+      </div>
+      <div class="topbar-right"><span class="badge med">Prototype / Representative Data</span></div>
+    </div>
+
+    <div class="guardrail-workflow">
+      <div class="workflow-node done"><b>1</b><span>Milestone submitted</span></div><i></i>
+      <div class="workflow-node done"><b>2</b><span>Data validation</span></div><i></i>
+      <div class="workflow-node active"><b>3</b><span>Peer + rule checks</span></div><i></i>
+      <div class="workflow-node"><b>4</b><span>Risk recommendation</span></div>
+    </div>
+
+    <div class="grid2 guardrail-layout">
+      <div>
+        <div class="panel">
+          <div class="panel-head"><div><div class="panel-title">1 · Select work and milestone</div><div class="panel-note">Same underlying MPLADS work ledger</div></div></div>
+          <form id="guardrailForm">
+            <label class="guardrail-field"><span>Work under review</span><select id="guardrailWork" class="btn">${options.map(w=>`<option value="${w.work_id}">${w.work_id} · ${w.work_category} · ${w.state}</option>`).join("")}</select></label>
+            <div id="selectedWorkSummary" class="selected-work-summary"></div>
+            <div class="guardrail-form-grid">
+              <label class="guardrail-field"><span>Milestone type</span><select id="milestoneType" class="btn"><option>Interim progress payment</option><option>First release</option><option>Completion claim</option><option>Final settlement</option></select></label>
+              <label class="guardrail-field"><span>Amount requested</span><input id="requestedAmount" class="btn" type="number" min="0" step="1000"></label>
+              <label class="guardrail-field"><span>Physical progress (%)</span><input id="physicalProgress" class="btn" type="number" min="0" max="100" step="1"></label>
+              <label class="guardrail-field"><span>Expected milestone date</span><input id="dueDate" class="btn" type="date"></label>
+              <label class="guardrail-field"><span>Verification evidence</span><select id="verificationStatus" class="btn"><option value="pending">Pending field verification</option><option value="clarification">Submitted · clarification needed</option><option value="verified">Verified evidence attached</option></select></label>
+            </div>
+            <div class="guardrail-demo-note"><b>Demo boundary:</b> this evaluator recommends normal processing, additional review or hold for authority review. It does not legally block or reject a government payment.</div>
+            <button class="btn primary" type="submit">Run risk evaluation →</button>
+          </form>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="panel-title">What the evaluator checks</div><div class="panel-note">explainable signals</div></div>
+          <div class="guardrail-checks">
+            <div><b>Peer-group comparison</b><span>State + work type + comparable cost range</span></div>
+            <div><b>Payment / progress mismatch</b><span>Projected expenditure against physical progress</span></div>
+            <div><b>Milestone timing</b><span>Overdue dates and stalled work status</span></div>
+            <div><b>Evidence + anomaly layer</b><span>Verification status, duplicate signals and existing anomaly score</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="guardrailResult"></div>
+    </div>
+
+    <div class="footnote"><b>Future integration point:</b> In a production architecture, an authorized MPLADS/e-SAKSHI data source would feed this guardrail and a PFMS/payment workflow would receive the recommendation. This demo uses representative records and makes no live government integration claim.</div>
+  `;
+
+  const workSelect = document.getElementById("guardrailWork");
+  workSelect.value = initial?.work_id || "";
+  workSelect.addEventListener("change", ()=>fillWork(workSelect.value));
+  document.getElementById("guardrailForm").addEventListener("submit", e=>{
+    e.preventDefault();
+    const work = D.worksAll.find(w=>w.work_id===workSelect.value) || initial;
+    const result = evaluateGuardrail(work, {
+      requested_amount: document.getElementById("requestedAmount").value,
+      physical_progress: document.getElementById("physicalProgress").value,
+      due_date: document.getElementById("dueDate").value,
+      verification_status: document.getElementById("verificationStatus").value,
+    });
+    renderResult(work, result);
+  });
+
+  function fillWork(workId){
+    const work = D.worksAll.find(w=>w.work_id===workId) || initial;
+    if(!work) return;
+    const fields = operationalFields(work);
+    const requestRatio = work.risk_band === "Low" ? .05 : .2;
+    const amount = Math.max(1000, Math.round(Number(work.cost_sanctioned||0) * requestRatio / 1000) * 1000);
+    const defaultDueDate = work.risk_band === "Low" ? isoDate(datePlusDays(new Date(), 45)) : fields.expected_completion;
+    document.getElementById("requestedAmount").value = amount;
+    document.getElementById("requestedAmount").max = Number(work.cost_sanctioned||0);
+    document.getElementById("physicalProgress").value = Math.round(fields.physical_progress);
+    document.getElementById("dueDate").value = defaultDueDate;
+    document.getElementById("verificationStatus").value = work.status==="Completed" ? "clarification" : "pending";
+    document.getElementById("selectedWorkSummary").innerHTML = `
+      <div><span>Work</span><b>${work.work_id} · ${work.work_category}</b></div>
+      <div><span>District / state</span><b>${work.district} · ${work.state}</b></div>
+      <div><span>Sanctioned cost</span><b>${fmtRupee(work.cost_sanctioned)}</b></div>
+      <div><span>Current status</span><b>${work.status}</b></div>`;
+    renderResult(work, evaluateGuardrail(work, {
+      requested_amount: amount,
+      physical_progress: Math.round(fields.physical_progress),
+      due_date: defaultDueDate,
+      verification_status: document.getElementById("verificationStatus").value,
+    }));
+  }
+
+  function renderResult(work, result){
+    const resultClass = result.band==="high" ? "crit" : result.band==="medium" ? "med" : "low";
+    document.getElementById("guardrailResult").innerHTML = `
+      <div class="panel guardrail-result ${resultClass}">
+        <div class="panel-head"><div><div class="eyebrow">2 · RISK RECOMMENDATION</div><div class="panel-title">Guardrail decision support</div></div><span class="badge ${resultClass}">${result.bandLabel}</span></div>
+        <div class="guardrail-score-row"><div class="guardrail-score">${result.score}<small>/100</small></div><div><b>${result.recommendation}</b><span>Recommendation for authority review</span></div></div>
+        <div class="guardrail-recommendation ${resultClass}">${result.recommendation}</div>
+        <div class="guardrail-input-strip">
+          <div><span>Requested</span><b>${fmtRupee(result.inputs.requested_amount)}</b></div>
+          <div><span>Projected utilisation</span><b>${result.inputs.projected_utilization}%</b></div>
+          <div><span>Physical progress</span><b>${result.inputs.physical_progress}%</b></div>
+          <div><span>Overdue</span><b>${result.inputs.overdue_days ? result.inputs.overdue_days+" days" : "No"}</b></div>
+        </div>
+        <div class="panel-title guardrail-reasons-title">Why this case was flagged</div>
+        <div class="guardrail-reasons">${result.reasons.map(r=>`<div class="guardrail-reason"><span class="reason-points">+${r.points}</span><div><b>${r.title}</b><p>${r.detail}</p></div></div>`).join("")}</div>
+        <div class="guardrail-small-note">AI-assisted risk prioritization · human authority review remains required · possible duplicate signals require verification.</div>
+      </div>
+      <a class="btn" href="investigation.html?id=${work.work_id}">Open full work details and model explanation →</a>`;
+  }
+
+  fillWork(initial?.work_id);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Sources — NidhiRakshak</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+.source-image-card{border:1px solid var(--line);border-radius:10px;padding:10px;background:#fbfcfe;}
+.source-image-card img{display:block;width:100%;height:auto;border-radius:7px;}
+.case-card{border:1px solid var(--line);border-radius:12px;padding:16px 18px;background:#fbfcfe;margin-bottom:14px;}
+.case-card:last-child{margin-bottom:0;}
+.case-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:6px;}
+.case-title{font-weight:700;color:var(--navy-950);font-size:14px;}
+.case-source{font-size:11px;color:var(--quiet);margin:2px 0 10px;font-style:italic;}
+.case-desc{font-size:12.5px;line-height:1.6;color:var(--navy-800);margin-bottom:12px;}
+.case-flags{border-top:1px dashed var(--line-soft);padding-top:10px;}
+.case-flag-row{display:flex;align-items:flex-start;gap:10px;padding:6px 0;}
+.case-flag-check{flex-shrink:0;width:20px;height:20px;border-radius:6px;background:var(--green-soft);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;margin-top:1px;}
+.case-flag-check.gap{background:var(--saffron-soft);color:#9b5c0e;}
+.case-flag-name{font-weight:700;font-size:12px;color:var(--navy-950);}
+.case-flag-why{font-size:11.5px;color:var(--quiet);line-height:1.5;}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script>
+renderShell("data.html", function(main){
+  const stats = feedbackStats();
+  const meta = dataModeMeta();
+  main.innerHTML = `
+    <div class="topbar">
+      <div>
+        <div class="eyebrow">DATA GOVERNANCE</div>
+        <h1 class="page-title">Data Sources &amp; Merge Workspace</h1>
+        <div class="queue-subtitle">Choose which evidence layer powers every dashboard page. The selection is saved for this browser.</div>
+      </div>
+      <div class="topbar-right"><span class="badge ${ACTIVE_DATA_MODE==="real" ? "low" : ACTIVE_DATA_MODE==="demo" ? "high" : "med"}">${meta.label}</span></div>
+    </div>
+
+    <div class="data-mode-hero">
+      <div>
+        <div class="eyebrow">CURRENT DATA VIEW</div>
+        <h2>${meta.label}</h2>
+        <p>${meta.description}. Use the controls below to switch without changing the source files.</p>
+      </div>
+      <div class="data-mode-hero-mark">${meta.short}</div>
+    </div>
+
+    <div class="data-mode-grid">
+      <article class="data-mode-card ${ACTIVE_DATA_MODE==="demo" ? "selected" : ""}">
+        <div class="mode-card-kicker">01 · SIMULATION</div>
+        <h2>Demo data</h2>
+        <p>Explore the synthetic work-level ledger, explainable risk scores, flagged projects and review workflow.</p>
+        <div class="mode-stat"><b>${fmtNum(RAW_DATA.worksAll.length)}</b><span>synthetic work records</span></div>
+        <button class="btn ${ACTIVE_DATA_MODE==="demo" ? "primary" : ""}" onclick="setDataMode('demo','data.html')">${ACTIVE_DATA_MODE==="demo" ? "Using demo data" : "Switch to demo data"}</button>
+      </article>
+      <article class="data-mode-card ${ACTIVE_DATA_MODE==="real" ? "selected" : ""}">
+        <div class="mode-card-kicker real">02 · PUBLISHED ROSTER</div>
+        <h2>Real data</h2>
+        <p>Show the two supplied Government allocation datasets as real records, plus a small set of real, documented fraud cases — without synthetic work claims.</p>
+        <div class="mode-stat"><b>${fmtNum(RAW_DATA.realMps.length)}</b><span>official allocation records · 543 LS + 231 RS</span></div>
+        <div class="mode-stat"><b>3</b><span>real documented case studies (see Investigation Queue)</span></div>
+        <button class="btn ${ACTIVE_DATA_MODE==="real" ? "primary" : ""}" onclick="setDataMode('real','data.html')">${ACTIVE_DATA_MODE==="real" ? "Using real data" : "Switch to real data"}</button>
+      </article>
+      <article class="data-mode-card ${ACTIVE_DATA_MODE==="combined" ? "selected" : ""}">
+        <div class="mode-card-kicker combined">03 · JOINED VIEW</div>
+        <h2>Combined view</h2>
+        <p>Join real MP identity and allocation fields to the synthetic work ledger. This is the recommended prototype review mode.</p>
+        <div class="mode-stat"><b>${fmtNum(RAW_DATA.worksAll.length)}</b><span>joined demo work records</span></div>
+        <button class="btn ${ACTIVE_DATA_MODE==="combined" ? "primary" : ""}" onclick="setDataMode('combined','data.html')">${ACTIVE_DATA_MODE==="combined" ? "Using combined view" : "Switch to combined view"}</button>
+      </article>
+    </div>
+
+    <div class="grid2">
+      <div class="panel">
+        <div class="panel-head"><div class="panel-title">What is available today?</div><div class="panel-note">source transparency</div></div>
+        <div class="source-row"><span class="source-dot real"></span><div><b>Real Government allocation data</b><p>543 Lok Sabha + 231 Rajya Sabha allocation records parsed from the two supplied MPLADS PDFs. Constituencies are shown where the supplied roster contains them; Rajya Sabha representation is state-based.</p></div><span class="badge low">Source PDFs</span></div>
+        <div class="source-row"><span class="source-dot demo"></span><div><b>Demo work ledger</b><p>Costs, dates, agencies, statuses, geotags and risk signals are synthetic prototype records (Demo &amp; Combined views).</p></div><span class="badge high">Synthetic</span></div>
+        <div class="source-row"><span class="source-dot real"></span><div><b>Real case studies</b><p>3 documented fraud/misuse cases sourced from CAG audit reports and court/news coverage, shown only in Real data view.</p></div><span class="badge low">Real, cited</span></div>
+        <div class="source-row"><span class="source-dot joined"></span><div><b>Join key</b><p>The combined view matches work records to the MP roster using the stable MP ID.</p></div><span class="badge med">MP ID</span></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><div class="panel-title">Human feedback loop</div><div class="panel-note">browser demo memory</div></div>
+        <div class="feedback-overview">
+          <div><b>${stats.reviewed}</b><span>reviewed</span></div>
+          <div><b>${stats.falsePositive}</b><span>false positives</span></div>
+          <div><b>${stats.total}</b><span>learning signals</span></div>
+        </div>
+        <p class="panel-note feedback-copy">“Mark Reviewed” and “False Positive” are stored locally for this demo. False positives leave the active flagged queue; the signals are ready to become labelled training examples when a real model pipeline is connected.</p>
+        <button class="btn" onclick="location.href='investigation.html'">Open review queue →</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div id="esakshi-snapshot" class="panel-head"><div class="panel-title">eSAKSHI public dashboard snapshot</div><div class="panel-note">aggregate public data · no login</div></div>
+      <p class="panel-note" style="line-height:1.6; margin-bottom:14px;">The public eSAKSHI dashboard exposes aggregate works and expenditure figures, while work-level transaction details are updated by authorised stakeholders. This prototype stores the public aggregate snapshot separately and never turns those totals into invented work rows.</p>
+      <div class="source-image-card">
+        <img src="assets/sources/eSAKSHI_Lok_Sabha_dashboard_screenshot.png" alt="Supplied eSAKSHI Lok Sabha dashboard screenshot showing allocation, calamity, recommended, sanctioned, completed and expenditure figures">
+        <div class="panel-note" style="margin-top:8px;"><b>Supplied source screenshot:</b> Lok Sabha eSAKSHI dashboard snapshot used for the aggregate values shown below.</div>
+      </div>
+      <div class="esakshi-grid six" style="margin-top:14px;">
+        <div class="stat-tile"><div class="sv">₹ 8,333.67 Crore</div><div class="sl">Allocated Limit for Hon'ble MPs</div></div>
+        <div class="stat-tile"><div class="sv">₹ 4.06 Crore</div><div class="sl">Amount consented for Calamity</div></div>
+        <div class="stat-tile"><div class="sv">107130</div><div class="sl">Works Recommended · No.</div></div>
+        <div class="stat-tile"><div class="sv">₹ 5,735.65 Crore</div><div class="sl">Works Recommended · Amount</div></div>
+        <div class="stat-tile"><div class="sv">79225</div><div class="sl">Works Sanctioned · No.</div></div>
+        <div class="stat-tile"><div class="sv">₹ 4,176.80 Crore</div><div class="sl">Works Sanctioned · Amount</div></div>
+        <div class="stat-tile"><div class="sv">34450</div><div class="sl">Works Completed · No.</div></div>
+        <div class="stat-tile"><div class="sv">₹ 1,686.57 Crore</div><div class="sl">Works Completed · Amount</div></div>
+        <div class="stat-tile"><div class="sv">₹ 2,778.82 Crore</div><div class="sl">Expenditure on Completed &amp; On-going Works</div></div>
+      </div>
+      <div class="queue-summary">
+        <div class="stat-tile"><div class="sv">${fmtNum(D.esakshi?.supplied_screenshot_snapshots?.lok_sabha?.works_recommended_count || 0)}</div><div class="sl">Lok Sabha works recommended · supplied portal snapshot</div><div class="stat-accent green"></div></div>
+        <div class="stat-tile"><div class="sv">${fmtNum(D.esakshi?.supplied_screenshot_snapshots?.lok_sabha?.works_completed_count || 0)}</div><div class="sl">Lok Sabha works completed · supplied portal snapshot</div><div class="stat-accent saffron"></div></div>
+        <div class="stat-tile"><div class="sv">${fmtNum(D.esakshi?.supplied_screenshot_snapshots?.rajya_sabha?.works_recommended_count || 0)}</div><div class="sl">Rajya Sabha works recommended · supplied portal snapshot</div><div class="stat-accent green"></div></div>
+        <div class="stat-tile"><div class="sv">${fmtNum(D.esakshi?.supplied_screenshot_snapshots?.rajya_sabha?.works_completed_count || 0)}</div><div class="sl">Rajya Sabha works completed · supplied portal snapshot</div><div class="stat-accent saffron"></div></div>
+      </div>
+    </div>
+
+    <div class="panel" id="cross-scheme">
+      <div class="panel-head">
+        <div>
+          <div class="panel-title">Cross-scheme data integration</div>
+          <div class="panel-note">MGNREGS &amp; state schemes · <b style="color:var(--green)">prototype enabled</b> on a synthetic feed</div>
+        </div>
+        <a class="btn" href="methodology.html#cross-scheme-scope">How this works →</a>
+      </div>
+      <p class="panel-note" style="line-height:1.6; margin-bottom:14px;">
+        The matcher already runs end-to-end — it just runs today against a <b>synthetic demo feed</b> standing in for
+        real MGNREGS and state-scheme submissions, since NidhiRakshak doesn't yet have API/data-sharing access to those
+        systems. Once that access is granted, the same district + asset-category + cost-window matcher can be pointed
+        at the live feeds without any change to the detection logic below.
+      </p>
+      <div class="queue-summary" style="margin-bottom:16px;">
+        <div class="stat-tile"><div class="sv">${fmtNum(D.crossScheme.summary.total_scheme_records)}</div><div class="sl">Synthetic scheme records loaded</div><div class="stat-accent saffron"></div></div>
+        <div class="stat-tile"><div class="sv">${fmtNum(D.crossScheme.summary.matched_records)}</div><div class="sl">Cross-scheme overlaps found</div><div class="stat-accent red"></div></div>
+        <div class="stat-tile"><div class="sv">${D.crossScheme.summary.schemes_covered.length}</div><div class="sl">Schemes represented</div><div class="stat-accent green"></div></div>
+      </div>
+      <div class="roster-table-wrap">
+        <table class="ledger-table">
+          <thead><tr><th>Scheme record</th><th>Scheme</th><th>State / District</th><th>Asset</th><th class="right">Cost</th><th>Matched MPLADS work</th><th class="right">Confidence</th></tr></thead>
+          <tbody>
+            ${D.crossScheme.records.filter(r=>r.matched_mplads_work_id).sort((a,b)=>b.match_confidence-a.match_confidence).slice(0,15).map(r=>`
+              <tr>
+                <td class="mono-id">${r.scheme_record_id}</td>
+                <td>${r.scheme}</td>
+                <td>${r.state} · ${r.district}</td>
+                <td>${r.asset_category}</td>
+                <td class="right">${fmtRupee(r.cost)}</td>
+                <td><a href="investigation.html?id=${r.matched_mplads_work_id}">${r.matched_mplads_work_id} →</a></td>
+                <td class="right"><span class="badge crit">${(r.match_confidence*100).toFixed(0)}%</span></td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      </div>
+      <div class="panel-note" style="margin-top:10px;">${D.crossScheme.summary.note}</div>
+    </div>
+
+    <div class="panel" id="real-world-cases">
+      <div class="panel-head">
+        <div>
+          <div class="panel-title">Real-world validation: documented MPLADS fraud cases</div>
+          <div class="panel-note">external, sourced &amp; cited · not part of the synthetic demo ledger</div>
+        </div>
+        <span class="badge med">3 documented cases</span>
+      </div>
+      <p class="panel-note" style="line-height:1.6; margin-bottom:16px;">
+        Named, per-work MPLADS records aren't public (see Data Sources above), so these cases could never have run through
+        this prototype's ledger. Instead, each one is a <b>publicly documented case</b> — from CAG audit reports and court/news
+        coverage — mapped against NidhiRakshak's actual rule catalog to show which flags would have fired, and why. This is
+        a validation-by-precedent exercise, not a claim that the system processed these specific records.
+      </p>
+
+      <div class="case-card">
+        <div class="case-head">
+          <div class="case-title">Anand district, Gujarat — implementing-agency &amp; billing irregularities</div>
+          <span class="badge crit">3 officials chargesheeted</span>
+        </div>
+        <div class="case-source">Source: CAG Report No. 4 of 2018; state government affidavit reported by Deccan Herald &amp; National Herald India</div>
+        <div class="case-desc">
+          A cooperative society was engaged to execute constituency works reportedly on instruction from the MP's office,
+          bypassing the competitive tendering process district authorities are required to follow. Audit checks also found
+          the same panchayat-building renovation billed a second time a year later, and payments released for several
+          works that field inspection showed had never actually started. Three district officials were chargesheeted and
+          bank accounts holding close to ₹86 lakh were attached.
+        </div>
+        <div class="case-flags">
+          <div class="case-flag-row">
+            <div class="case-flag-check">✓</div>
+            <div><div class="case-flag-name">SHELL_AGENCY_PATTERN</div><div class="case-flag-why">Agency assigned outside the normal district process, tied to one MP's office rather than competitive selection.</div></div>
+          </div>
+          <div class="case-flag-row">
+            <div class="case-flag-check">✓</div>
+            <div><div class="case-flag-name">DUPLICATE_DESCRIPTION</div><div class="case-flag-why">The identical renovation work was claimed and billed in two separate years.</div></div>
+          </div>
+          <div class="case-flag-row">
+            <div class="case-flag-check">✓</div>
+            <div><div class="case-flag-name">STALLED_STATUS</div><div class="case-flag-why">Funds released and marked paid for work that on-site inspection found was never executed.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div class="case-head">
+          <div class="case-title">Ernakulam, Kerala — MPLADS-credited temple pond renovation</div>
+          <span class="badge high">Sub judice · Kerala HC, 2025</span>
+        </div>
+        <div class="case-source">Source: The Print, March 2025, reporting on a pending Kerala High Court petition</div>
+        <div class="case-desc">
+          A public-interest petition alleges a temple pond renovation was actually funded by devotee donations, yet a
+          stone plaque at the site credited roughly ₹30 lakh and ₹20 lakh to MPLADS and municipal-corporation funds —
+          spending that would itself breach scheme rules, since MPLADS guidelines bar funding religious structures. A
+          CBI and district-vigilance review is reported to have found prima facie irregularities, though no formal
+          sanction for prosecution had been granted as of the reporting date.
+        </div>
+        <div class="case-flags">
+          <div class="case-flag-row">
+            <div class="case-flag-check">✓</div>
+            <div><div class="case-flag-name">ROUND_NUMBER_COST</div><div class="case-flag-why">The ₹30 lakh / ₹20 lakh figures displayed on-site are atypically round for itemised construction estimates.</div></div>
+          </div>
+          <div class="case-flag-row">
+            <div class="case-flag-check gap">!</div>
+            <div><div class="case-flag-name">Catalog gap: no INELIGIBLE_WORK_CATEGORY flag yet</div><div class="case-flag-why">This case is really about funding a category the scheme guidelines prohibit outright (religious structures) — a rule your current 12-flag catalog doesn't check for yet. Worth adding.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div class="case-head">
+          <div class="case-title">Multi-state — CAG performance-audit field samples</div>
+          <span class="badge med">CAG Report No. 31 of 2010 &amp; 2001 audit</span>
+        </div>
+        <div class="case-source">Source: CAG performance audits of MPLADS, as summarised in Factly's 2018 analysis of the scheme</div>
+        <div class="case-desc">
+          Field-verification samples across West Bengal, Jharkhand, Bihar and Mizoram found assets recorded as completed
+          that surveyors could not physically locate, community halls built inside religious complexes in violation of
+          guidelines, school computers diverted to private commercial use, and at least one stretch of road billed
+          under both MPLADS and a similarly-purposed state legislator scheme in the same period.
+        </div>
+        <div class="case-flags">
+          <div class="case-flag-row">
+            <div class="case-flag-check">✓</div>
+            <div><div class="case-flag-name">STALLED_STATUS + Geo Registry mismatch</div><div class="case-flag-why">Asset marked completed but not physically locatable — exactly the failure mode this prototype's satellite/geo-tag verification check is designed to catch.</div></div>
+          </div>
+          <div class="case-flag-row">
+            <div class="case-flag-check">✓</div>
+            <div><div class="case-flag-name">CROSS_SCHEME_DUPLICATE</div><div class="case-flag-why">Same road segment billed under two different schemes in an overlapping window.</div></div>
+          </div>
+          <div class="case-flag-row">
+            <div class="case-flag-check">✓</div>
+            <div><div class="case-flag-name">DUPLICATE_DESCRIPTION</div><div class="case-flag-why">Near-identical work descriptions across the duplicate-billed instances.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-note" style="margin-top:4px;">
+        These summaries are paraphrased from the cited public reporting and audit reports; they are illustrative
+        precedent for the detection logic, not records ingested into this prototype's ledger.
+      </div>
+    </div>
+
+    <div class="footnote"><b>Important:</b> Real mode contains the two supplied allocation datasets plus a separately labelled eSAKSHI aggregate snapshot. It intentionally does not fabricate work-level transactions from aggregate totals. Combined mode adds the prototype's synthetic work ledger for testing the risk engine.</div>
+  `;
+});
+</script>
+</body>
+</html>
